@@ -144,6 +144,14 @@ img,svg{display:block}
 .box.hi{border-color:#7FE0AE;background:rgba(34,184,102,.12)}
 .tog{width:30px;height:17px;border-radius:9px;background:#22B866;position:relative;flex:none}
 .tog::after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.mfil{display:flex;gap:4px;padding:0 10px 6px;flex-wrap:nowrap}
+.mfil span{font:500 8.5px Poppins,sans-serif;padding:4px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.35);white-space:nowrap}
+.mfil span.a{background:#fff;color:#1F4F9C;font-weight:700;border-color:#fff}
+.mtags{display:flex;gap:3px;padding:0 10px 8px;overflow:hidden}
+.mtags em{font:500 8.5px Poppins,sans-serif;font-style:normal;padding:2px 7px;border-radius:7px;background:rgba(255,255,255,.12);white-space:nowrap}
+.mtags em.on{background:#22B866;color:#fff}
+.box .tot{font-size:22px;font-weight:700;letter-spacing:.01em;margin:0 0 4px}
+.scan{margin-top:8px;background:#fff;color:#1F4F9C;border-radius:10px;text-align:center;padding:8px;font:700 11px Poppins,sans-serif}
 .bellbtn{border:1.5px solid #FF8A8F;border-radius:10px;text-align:center;padding:8px;font-size:11.5px}
 .ah .lv{display:flex;align-items:center;gap:6px;font:500 9px Poppins,sans-serif;opacity:.9;margin-top:4px}
 .ah .lv i{width:6px;height:6px;border-radius:50%;background:#22B866;box-shadow:0 0 0 3px rgba(34,184,102,.3)}
@@ -390,12 +398,12 @@ footer .contact a:hover{text-decoration:underline}
       <div class="story-copy">
         <p class="eyebrow">Así funciona la app</p>
         <div class="steps">
-          <div class="step on"><h3><span class="k" style="color:var(--green);background:var(--green)"></span>Mapa</h3><p class="lead">Tu provincia o «Cerca de mí», con un semáforo en cada gasolinera: verde, amarillo o rojo frente a las de su zona. Toca cualquiera para ver su ficha y cómo llegar.</p></div>
+          <div class="step on"><h3><span class="k" style="color:var(--green);background:var(--green)"></span>Mapa</h3><p class="lead">Filtra por ciudad, provincia, servicios (hotel, bar, tienda, lavado…) o por tu marca de siempre, y mira el semáforo de cada gasolinera frente a las de su zona.</p></div>
           <div class="step"><h3><span class="k" style="color:var(--yellow);background:var(--yellow)"></span>Planea tu viaje</h3><p class="lead">De un sitio a otro: todas las gasolineras de tu ruta en el mapa, listas para compartir en Google Maps o Waze.</p></div>
           <div class="step"><h3><span class="k" style="color:var(--red);background:var(--red)"></span>Ranking</h3><p class="lead">Las gasolineras de tu zona, en orden y con todo el contexto: horario, cómo está frente a la media y qué hará mañana. Marca tus favoritas con ★.</p></div>
           <div class="step"><h3><span class="k" style="color:var(--green);background:var(--green)"></span>Previsiones</h3><p class="lead">Los próximos 7 días y los próximos meses de cada gasolinera, su mejor día de la semana y el momento ideal para repostar.</p></div>
           <div class="step"><h3><span class="k" style="color:var(--red);background:var(--red)"></span>Estadísticas</h3><p class="lead">Todo el mercado en una pantalla: el precio medio de cada combustible, el mapa de las <span class="js-st">11.000</span> gasolineras de España y el ranking de provincias. Datos oficiales cada 30 minutos.</p><a class="more" href="estadisticas.html">Ver todas las estadísticas →</a></div>
-          <div class="step"><h3><span class="k" style="color:var(--yellow);background:var(--yellow)"></span>Tu cuenta</h3><p class="lead">Tu vehículo, tus gasolineras favoritas y tus alertas. GasolCitys te avisa cuando toca, sin que tengas que mirar.</p></div>
+          <div class="step"><h3><span class="k" style="color:var(--yellow);background:var(--yellow)"></span>Tu cuenta</h3><p class="lead">Escanea el ticket de cada repostaje y guárdalo como una factura más. Tu gasto del mes, tu vehículo y tus favoritas, en el mismo sitio.</p></div>
         </div>
         <div class="dots"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
       </div>
@@ -406,6 +414,8 @@ footer .contact a:hover{text-decoration:underline}
 
             <div class="scr on" data-tab="0">
               <div class="ah"><div class="sb2"><span>9:41</span><span>5G ▮</span></div><small>Comunidad de Madrid · Hoy</small><h5>Mapa de precios</h5></div>
+              <div class="mfil"><span class="a">Madrid ▾</span><span>Provincia ▾</span><span class="a">Servicios · 2 ▾</span><span>Marca ▾</span></div>
+              <div class="mtags"><em class="on">✓ Lavado</em><em class="on">✓ Tienda</em><em>Bar</em><em>Hotel</em><em>Repsol</em></div>
               <img class="fill" src="img/mapa.jpg" alt="Mapa de gasolineras de Madrid con precios y colores de semáforo" loading="lazy">
             </div>
 
@@ -434,10 +444,11 @@ footer .contact a:hover{text-decoration:underline}
             <div class="scr" data-tab="4">
               <div class="ah"><div class="sb2"><span>9:41</span><span>5G ▮</span></div><small>Tu espacio</small><h5>Cuenta</h5></div>
               <div class="acc">
-                <div class="box"><h6>Tu vehículo</h6><div class="r">Diésel <span>favorito</span></div><div class="r">Turismo · 50 litros <span>editar</span></div></div>
+                <div class="box"><h6>Tu vehículo</h6><div class="r">Diésel · 50 litros <span>editar</span></div></div>
+                <div class="box hi"><h6>Tus gastos</h6><div class="r">Octubre <span>3 repostajes</span></div><div class="tot">187,40 €</div>
+                  <div class="r">24/10 · Noroil · 42,1 L <span>71,99 €</span></div><div class="r">15/10 · Repsol · 38,0 L <span>67,26 €</span></div>
+                  <div class="scan">📷 Escanear ticket</div></div>
                 <div class="box"><h6>Tus favoritas</h6><div class="r">Noroil <span>1,710 <b class="st">★</b></span></div><div class="r">Cooperativa Olivarera <span>1,720 <b class="st">★</b></span></div></div>
-                <div class="box hi"><h6>Alertas</h6><div class="r">Avísame si baja de 1,700 <i class="tog"></i></div><div class="r">Mejor día de la semana <i class="tog"></i></div></div>
-                <div class="bellbtn">🔔 Crear alerta</div>
               </div>
             </div>
 
