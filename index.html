@@ -41,7 +41,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#1F4F9C; --bg2:#1A4589; --ink:#FFFFFF; --mute:#C9D8F2; --line:rgba(255,255,255,.16); --accent:#CFE0FA;
@@ -114,23 +114,82 @@ img,svg{display:block}
 /* manifesto words */
 .manifesto{position:relative;height:260vh}
 .manifesto-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;perspective:1100px}
-.manifesto p{font-size:clamp(1.8rem,min(3.9vw,6.6vh),3.5rem);font-weight:600;line-height:1.14;letter-spacing:-.025em;max-width:1050px}
-.manifesto .w{opacity:.14;transition:opacity .15s linear}
-.manifesto .w.on{opacity:1}
-.manifesto .w.hl{color:#2F6FD6}
-.manifesto .w.pain{color:#E5404A}
-.q{position:absolute;padding:10px 18px;border-radius:999px;background:#EEF4FD;border:1px solid var(--line);box-shadow:0 10px 30px rgba(31,79,156,.12);font-size:clamp(.8rem,1.3vw,1rem);color:#1F4F9C;font-weight:500;white-space:nowrap;will-change:transform,opacity;opacity:0}
-.q{transition:opacity .35s,color .4s,background-color .4s,border-color .4s;transform-style:preserve-3d}
-.q.g{color:#138A4B;background:#ECF8F1;border-color:rgba(34,184,102,.25)}
-.q.o{color:#C9650A;background:#FFF4E8;border-color:rgba(242,140,40,.28)}
-/* aparece con un «pop» justo cuando se ilumina su parte del texto */
-.q.show{animation:qpop .6s cubic-bezier(.2,1.5,.4,1) both}
-@keyframes qpop{0%{scale:.5;box-shadow:0 0 0 0 rgba(47,111,214,.45)}55%{scale:1.1}100%{scale:1;box-shadow:0 10px 30px rgba(31,79,156,.12),0 0 0 14px rgba(47,111,214,0)}}
+.manifesto p{font-size:clamp(1.8rem,min(3.9vw,6.6vh),3.5rem);font-weight:600;line-height:1.18;letter-spacing:-.025em;max-width:1050px;perspective:900px}
+/* cada palabra entra girando en 3D desde abajo mientras se lee */
+.manifesto .w{display:inline-block;opacity:.12;transform:rotateX(70deg) translateY(.18em);transform-origin:50% 100%;transition:opacity .3s,transform .55s cubic-bezier(.2,1.4,.4,1),background-size .5s ease .1s,color .3s}
+.manifesto .w.on{opacity:1;transform:none}
+/* dolor: serif cursiva con subrayador rojo que se pinta */
+.manifesto .w.m{font-family:Lora,Georgia,serif;font-style:italic;font-weight:700;color:#E5404A;padding:0 .08em;margin:0 -.04em;background:linear-gradient(transparent 62%,rgba(255,81,91,.22) 62%) no-repeat 0 0/0% 100%}
+.manifesto .w.m.on{background-size:100% 100%}
+/* la gasolinera equivocada: se tacha */
+.manifesto .w.s{color:#E5404A;background:linear-gradient(#E5404A,#E5404A) no-repeat 0 56%/0% .09em}
+.manifesto .w.s.on{background-size:100% .09em}
+/* el día equivocado: subrayado ondulado */
+.manifesto .w.wv{color:#E5404A;text-decoration:underline wavy rgba(229,64,74,0);text-decoration-thickness:.06em;text-underline-offset:.16em}
+.manifesto .w.wv.on{text-decoration-color:rgba(229,64,74,.85)}
+/* lo que te pierdes: verde con subrayador */
+.manifesto .w.gr{font-family:Lora,Georgia,serif;font-style:italic;font-weight:700;color:#16A05A;padding:0 .08em;margin:0 -.04em;background:linear-gradient(transparent 62%,rgba(34,184,102,.22) 62%) no-repeat 0 0/0% 100%}
+.manifesto .w.gr.on{background-size:100% 100%}
+/* «Hoy eso cambia»: más grande, cursiva y con brillo en movimiento */
+.manifesto .w.hl{font-family:Lora,Georgia,serif;font-style:italic;font-weight:700;font-size:1.22em;background:linear-gradient(100deg,#1F4F9C,#2F6FD6 35%,#22B866 60%,#2F6FD6 85%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.manifesto .w.hl.on{animation:shine 3s linear infinite,hoy .7s cubic-bezier(.2,1.6,.4,1)}
+@keyframes shine{to{background-position:-250% 0}}
+@keyframes hoy{0%{scale:.6}60%{scale:1.15}100%{scale:1}}
+/* recompensa: contador de dudas resueltas que invita a seguir bajando */
+.solved{display:inline-flex;align-items:center;gap:8px;margin-top:26px;padding:10px 18px;border-radius:999px;background:#0B2350;color:#fff;font-weight:600;font-size:clamp(.85rem,1.2vw,1rem);opacity:0;translate:0 14px;scale:.9;transition:opacity .4s,translate .5s cubic-bezier(.2,1.5,.4,1),scale .5s cubic-bezier(.2,1.5,.4,1);pointer-events:none}
+.solved b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#22B866}
+.solved.on{opacity:1;translate:0 0;scale:1;pointer-events:auto}
+.solved:hover{background:#1F4F9C}
+
+/* burbujas de dudas: cada una con su estilo */
+.q{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:#EEF4FD;border:1px solid var(--line);box-shadow:0 10px 30px rgba(31,79,156,.14);font-size:clamp(.8rem,1.3vw,1rem);color:#1F4F9C;font-weight:500;white-space:nowrap;will-change:transform,opacity;opacity:0;transition:opacity .35s,color .4s,background .4s,border-color .4s;transform-style:preserve-3d}
+.q .ic{display:grid;place-items:center;flex:none;width:1.7em;height:1.7em;border-radius:50%;background:rgba(255,255,255,.7);font-size:.95em;font-weight:700}
+.q.chat{background:#fff;border-radius:20px 20px 20px 5px}
+.q.chat-r{background:#1F4F9C;color:#fff;border-color:transparent;border-radius:20px 20px 5px 20px}
+.q.notif{border-radius:16px;background:rgba(255,255,255,.95);padding:9px 16px 9px 10px;box-shadow:0 16px 40px rgba(11,35,80,.18)}
+.q.notif .ic{border-radius:10px;background:#1F4F9C;color:#fff;width:2.2em;height:2.2em}
+.q.notif small{display:block;font-size:.68em;color:#5B6B88;font-weight:500;line-height:1.2}
+.q.notif > span{line-height:1.25;color:#0B2350;font-weight:600}
+.q.sticker{rotate:-7deg;background:#FFC531;color:#0B2350;border:2px solid #0B2350;border-radius:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;box-shadow:4px 4px 0 #0B2350}
+.q.hand{background:#fff;font-family:Lora,Georgia,serif;font-style:italic;font-weight:700;font-size:clamp(.95rem,1.5vw,1.2rem);color:#C9650A;border-radius:6px 22px 6px 22px;text-decoration:underline wavy rgba(242,140,40,.6);text-underline-offset:5px}
+.q.dash{background:#fff;border:2px dashed #2F6FD6;font-weight:600}
+.q.dash .ic{background:#EEF4FD}
+.q.grad{background:linear-gradient(120deg,#FF8A3D,#FF515B);color:#fff;border-color:transparent;font-weight:700;box-shadow:0 12px 30px rgba(255,81,91,.35)}
+.q.trend{background:#ECF8F1;color:#138A4B;border-color:rgba(34,184,102,.3);font-weight:600}
+.q.trend .ic{background:#22B866;color:#fff}
+.q.search{border-radius:12px;background:#fff;color:#5B6B88;padding-right:26px}
+.q.search .ic{background:none;font-size:1.25em;color:#2F6FD6}
+.q.tag{background:#22B866;color:#fff;border-color:transparent;border-radius:6px 20px 20px 6px;padding-left:28px;font-weight:600}
+.q.tag::after{content:"";position:absolute;left:11px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:#fff}
+.q.volt{background:#0B2350;color:#FFC531;border-color:transparent;font-weight:700}
+.q.volt .ic{background:#FFC531;color:#0B2350}
+.q.typing{background:#fff;border-radius:20px 20px 20px 5px}
+.q.typing .tdots{display:inline-flex;gap:4px}
+.q.typing .tdots i{width:6px;height:6px;border-radius:50%;background:#9DB2D4;animation:dot 1s infinite}
+.q.typing .tdots i:nth-child(2){animation-delay:.15s}.q.typing .tdots i:nth-child(3){animation-delay:.3s}
+@keyframes dot{40%{translate:0 -4px;background:#2F6FD6}}
+/* «escribiendo…» y luego aparece la pregunta */
+.q.typing .tx{opacity:0;margin-left:-8px}
+.q.typing.show .tdots{animation:hideDots .2s .8s forwards}
+.q.typing.show .tx{animation:showTx .3s .9s forwards}
+@keyframes hideDots{to{opacity:0;width:0;overflow:hidden}}
+@keyframes showTx{from{opacity:0;translate:0 4px}to{opacity:1;translate:0 0}}
+/* entradas distintas, cuando su palabra se ilumina */
+.q.show.a-pop{animation:qpop .6s cubic-bezier(.2,1.5,.4,1) both}
+.q.show.a-drop{animation:qdrop .7s cubic-bezier(.2,1.6,.4,1) both}
+.q.show.a-flip{animation:qflip .7s cubic-bezier(.2,1.3,.4,1) both}
+.q.show.a-slide{animation:qslide .6s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes qpop{0%{scale:.4}55%{scale:1.12}100%{scale:1}}
+@keyframes qdrop{0%{translate:0 -26px;scale:.8}60%{translate:0 4px}100%{translate:0 0;scale:1}}
+@keyframes qflip{0%{rotate:x 90deg}100%{rotate:x 0deg}}
+@keyframes qslide{0%{translate:-22px 0;scale:.85}100%{translate:0 0;scale:1}}
 /* «Hoy eso cambia»: todas las dudas quedan resueltas, una tras otra */
-.q.ok{color:#138A4B;background:#ECF8F1;border-color:rgba(34,184,102,.35);animation:qok .55s cubic-bezier(.2,1.5,.4,1) both;animation-delay:var(--d,0s)}
-.q.ok::before{content:"✓";display:inline-block;margin-right:7px;font-weight:700}
-@keyframes qok{0%{scale:1}45%{scale:1.14;box-shadow:0 0 0 0 rgba(34,184,102,.5)}100%{scale:1;box-shadow:0 10px 30px rgba(31,79,156,.12),0 0 0 16px rgba(34,184,102,0)}}
-@media (max-width:760px){.q{display:none}}
+.q.ok{color:#138A4B!important;background:#ECF8F1!important;border:1px solid rgba(34,184,102,.4)!important;box-shadow:0 10px 30px rgba(34,184,102,.18)!important;text-decoration:none;animation:qok .55s cubic-bezier(.2,1.5,.4,1) both!important;animation-delay:var(--d,0s)!important}
+.q.ok::before{content:"✓";display:grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:#22B866;color:#fff;font-weight:700;font-size:.85em;font-family:Poppins,sans-serif;font-style:normal}
+.q.ok .ic,.q.ok::after,.q.ok .tdots,.q.ok small{display:none}
+.q.ok .tx{display:inline}
+@keyframes qok{0%{scale:1}45%{scale:1.16}100%{scale:1}}
+@media (max-width:760px){.q{font-size:.72rem;padding:7px 12px;gap:6px}.q.notif{padding:6px 12px 6px 7px}.q.hand{font-size:.85rem}.q.sticker{box-shadow:3px 3px 0 #0B2350}}
 
 /* story / phone */
 .story{position:relative;height:660vh;background:radial-gradient(80% 60% at 75% 50%,#2F6FD6,var(--bg) 70%)}
@@ -443,20 +502,22 @@ footer .contact a:hover{text-decoration:underline}
   <!-- MANIFESTO -->
   <section class="manifesto light" id="manifesto">
     <div class="manifesto-sticky">
-      <!-- !palabra = dolor (rojo) · *palabra = solución (azul) -->
-      <div class="wrap"><p id="words">Cada día, millones de conductores !pagan !de !más por repostar a ciegas: en !la !gasolinera !equivocada, !el !día !equivocado y sin saber que !la !más !barata estaba a la vuelta de la esquina. *Hoy *eso *cambia.</p></div>
-      <span class="q" data-x="8" data-y="19" data-at="11">¿95 o 98?</span>
-      <span class="q" data-x="70" data-y="18" data-at="6">¿Habrá una más barata?</span>
-      <span class="q" data-x="78" data-y="86" data-at="17">¿Lleno hoy o mañana?</span>
-      <span class="q" data-x="4" data-y="86" data-at="16">¿Aquí hay AdBlue?</span>
-      <span class="q" data-x="42" data-y="16" data-at="14">¿Estará abierta?</span>
-      <span class="q" data-x="44" data-y="89" data-at="24">¿Me compensa desviarme?</span>
-      <span class="q g" data-x="22" data-y="26" data-at="19">¿Subirá mañana?</span>
-      <span class="q o" data-x="58" data-y="26" data-at="15">¿Abre 24 horas?</span>
-      <span class="q g" data-x="74" data-y="48" data-at="8">¿Cuánto me cuesta llenar?</span>
-      <span class="q o" data-x="4" data-y="52" data-at="29">¿Y mi descuento de marca?</span>
-      <span class="q o" data-x="26" data-y="78" data-at="26">¿La más barata de mi ruta?</span>
-      <span class="q g" data-x="60" data-y="76" data-at="32">¿Y para mi eléctrico?</span>
+      <!-- Estilo por palabra: !m dolor marcado · !s tachado · !w subrayado ondulado · +g lo que te pierdes (verde) · * «Hoy eso cambia» -->
+      <div class="wrap"><p id="words">Cada día, millones de conductores !mpagan !mde !mmás por repostar a ciegas: en !sla !sgasolinera !sequivocada, !wel !wdía !wequivocado y sin saber que +gla +gmás +gbarata estaba a la vuelta de la esquina. *Hoy *eso *cambia.</p>
+        <a class="solved" id="solved" href="#app"><b>✓</b> <span id="solvedN">12</span> dudas resueltas · Mira cómo ↓</a></div>
+      <!-- Cada burbuja tiene su estilo y su entrada. data-at = palabra del texto que la hace salir · data-mx/my = posición en móvil -->
+      <span class="q chat a-pop" data-x="70" data-y="18" data-mx="6" data-my="9" data-at="6">¿Habrá una más barata?</span>
+      <span class="q notif a-drop" data-x="74" data-y="48" data-mx="6" data-my="17" data-at="8"><b class="ic">⛽</b><span><small>GasolCitys · ahora</small>¿Cuánto me cuesta llenar?</span></span>
+      <span class="q sticker a-pop" data-x="8" data-y="19" data-mx="62" data-my="9" data-at="11">¿95 o 98?</span>
+      <span class="q hand a-slide" data-x="42" data-y="16" data-mx="56" data-my="18" data-at="14">¿Estará abierta?</span>
+      <span class="q dash a-flip" data-x="58" data-y="26" data-mx="8" data-my="26" data-at="15"><b class="ic">🕒</b>¿Abre 24 horas?</span>
+      <span class="q typing a-pop" data-x="4" data-y="86" data-mx="6" data-my="73" data-at="16"><i class="tdots"><i></i><i></i><i></i></i><span class="tx">¿Aquí hay AdBlue?</span></span>
+      <span class="q grad a-drop" data-x="78" data-y="86" data-mx="52" data-my="73" data-at="17">¿Lleno hoy o mañana?</span>
+      <span class="q trend a-flip" data-x="22" data-y="26" data-mx="6" data-my="81" data-at="19"><b class="ic">↗</b>¿Subirá mañana?</span>
+      <span class="q chat-r a-slide" data-x="44" data-y="89" data-mx="46" data-my="81" data-at="24">¿Me compensa desviarme?</span>
+      <span class="q search a-pop" data-x="26" data-y="78" data-mx="6" data-my="89" data-at="26"><b class="ic">⌕</b>¿La más barata de mi ruta?</span>
+      <span class="q tag a-drop" data-x="4" data-y="52" data-mx="50" data-my="89" data-at="29">¿Y mi descuento de marca?</span>
+      <span class="q volt a-flip" data-x="60" data-y="76" data-mx="54" data-my="26" data-at="32"><b class="ic">⚡</b>¿Y para mi eléctrico?</span>
     </div>
   </section>
 
@@ -673,12 +734,28 @@ document.querySelectorAll('.rv, .trio-row').forEach(el => io.observe(el));
 
 /* manifesto words */
 const wordsEl = document.getElementById('words');
-wordsEl.innerHTML = wordsEl.textContent.split(' ').map(w => w.startsWith('*') ? `<span class="w hl">${w.slice(1)}</span>` : w.startsWith('!') ? `<span class="w pain">${w.slice(1)}</span>` : `<span class="w">${w}</span>`).join(' ');
+const wordStyles = { '!m': 'm', '!s': 's', '!w': 'wv', '+g': 'gr' };
+wordsEl.innerHTML = wordsEl.textContent.trim().split(/\s+/).map(w => {
+  if (w.startsWith('*')) return `<span class="w hl">${w.slice(1)}</span>`;
+  const st = wordStyles[w.slice(0, 2)];
+  return st ? `<span class="w ${st}">${w.slice(2)}</span>` : `<span class="w">${w}</span>`;
+}).join(' ');
 const words = [...wordsEl.querySelectorAll('.w')];
 // burbujas en el orden en que aparecen (data-at = palabra del texto que las hace salir)
 const qs = [...document.querySelectorAll('.q')].sort((a, b) => a.dataset.at - b.dataset.at);
 const manifestoSticky = document.querySelector('.manifesto-sticky');
-qs.forEach((q, i) => { q.style.left = q.dataset.x + '%'; q.style.top = q.dataset.y + '%'; q.style.setProperty('--d', (i * .07) + 's'); });
+const solvedEl = document.getElementById('solved'), solvedN = document.getElementById('solvedN');
+const isNarrow = () => innerWidth <= 760;
+let qZ = 50, qR = 1; // profundidad y giro 3D (menos en móvil para no salirse de la pantalla)
+function placeBubbles() {
+  const m = isNarrow(); qZ = m ? 12 : 18; qR = m ? .5 : 1;
+  qs.forEach((q, i) => {
+    q.style.left = (m ? q.dataset.mx : q.dataset.x) + '%';
+    q.style.top = (m ? q.dataset.my : q.dataset.y) + '%';
+    q.style.setProperty('--d', (i * .07) + 's');
+  });
+}
+placeBubbles(); addEventListener('resize', placeBubbles);
 const SOLVED_AT = words.findIndex(w => w.classList.contains('hl')); // «Hoy eso cambia»
 
 /* burbujas flotando en 3D con el mismo balanceo que el logo de la portada */
@@ -695,7 +772,7 @@ function floatBubbles(now) {
     const d = qDepth[i];
     const bob = reduce ? 0 : Math.sin(t * 1.1 + i * 1.7) * 6 * d;
     const drift = reduce ? 0 : Math.cos(t * .7 + i) * 4 * d;
-    q.style.transform = `translate3d(${drift - qfx * 18 * d}px,${qTy[i] + bob - qfy * 10 * d}px,${d * 50}px) rotateX(${-qfy * 16}deg) rotateY(${(qfx * .9 + sway) * 57}deg)`;
+    q.style.transform = `translate3d(${drift - qfx * 18 * d}px,${qTy[i] + bob - qfy * 10 * d}px,${d * qZ}px) rotateX(${-qfy * 16}deg) rotateY(${(qfx * .9 + sway) * 57 * qR}deg)`;
   });
 }
 requestAnimationFrame(floatBubbles);
@@ -729,27 +806,43 @@ function onScroll() {
   words.forEach((w, i) => w.classList.toggle('on', i < lit));
   const stickyTop = manifestoSticky.getBoundingClientRect().top;
   // línea que se está leyendo ahora: ninguna burbuja puede taparla
-  const reading = lit > 0 && lit < words.length ? words[lit].getBoundingClientRect() : null;
+  // (la palabra ya iluminada está plana; la siguiente aún está girada en 3D, por eso se usa la anterior)
+  let reading = null;
+  if (lit > 0 && lit < words.length) {
+    // protege la línea actual y, si la siguiente palabra salta de línea, también esa
+    const a = words[lit - 1].getBoundingClientRect(), b = words[lit].getBoundingClientRect();
+    reading = { top: Math.min(a.top, b.top - a.height * .4), bottom: Math.max(a.bottom, b.bottom + a.height * .4) };
+  }
   const para = reading && wordsEl.getBoundingClientRect();
-  const shown = []; // burbujas ya visibles: las siguientes no pueden chocar con ellas
+  const whole = lit >= words.length ? wordsEl.getBoundingClientRect() : null;
+  const narrow = isNarrow();
+  const edge = narrow ? 14 : 64, gapX = narrow ? 12 : 34, gapY = narrow ? 12 : 28, readPad = narrow ? 22 : 28;
   qActive = mp > 0 && mp < 1;
   const out = clamp((mp - .85) / .15);
   const solved = SOLVED_AT >= 0 && lit > SOLVED_AT;
+  solvedEl.classList.toggle('on', solved && out < .5);
+  // burbujas ya visibles (y el contador final): las siguientes no pueden chocar con ellas
+  const sv = solvedEl.getBoundingClientRect();
+  const shown = solved ? [{ top: sv.top - 16, bottom: sv.bottom + 16, left: sv.left, right: sv.right }] : [];
+  // primero el estado (el ✓ ensancha la burbuja) y después se mide
+  qs.forEach(q => { const due = lit > +q.dataset.at; q.classList.toggle('show', due); q.classList.toggle('ok', due && solved); });
   qs.forEach((q, i) => {
     const ty = -mp * 60; // suben despacio mientras se lee
-    const top = stickyTop + q.offsetTop + ty, left = q.offsetLeft;
-    const bottom = top + q.offsetHeight, right = left + q.offsetWidth;
+    // tamaño con holgura para las animaciones de entrada (crecen hasta un 16 %)
+    const w = q.offsetWidth, h = q.offsetHeight, sx = w * .1, sy = h * .1;
+    const top = stickyTop + q.offsetTop + ty - sy, left = q.offsetLeft - sx;
+    const bottom = top + h + 2 * sy, right = left + w + 2 * sx;
     // cada burbuja sale cuando el texto llega a su palabra
     const due = lit > +q.dataset.at;
     // se desvanecen antes de llegar al menú fijo de arriba
     const underNav = clamp((top - 92) / 30);
     // márgenes holgados: la burbuja flota y se mueve con el ratón unos píxeles
-    const onReading = reading && top < reading.bottom + 28 && bottom > reading.top - 28 && left < para.right && right > para.left;
-    const clash = right > innerWidth - 64 || left < 30 || shown.some(s => left < s.right + 34 && right > s.left - 34 && top < s.bottom + 28 && bottom > s.top - 28);
+    const onReading = reading && top < reading.bottom + readPad && bottom > reading.top - readPad && left < para.right && right > para.left
+      // con la frase completa, ninguna burbuja tapa el texto
+      || (whole && top < whole.bottom + 6 && bottom > whole.top - 6 && left < whole.right && right > whole.left);
+    const clash = right - sx > innerWidth - edge || left + sx < (narrow ? 6 : 30) || shown.some(s => left < s.right + gapX && right > s.left - gapX && top < s.bottom + gapY && bottom > s.top - gapY);
     const op = due ? (1 - out) * underNav * (onReading || clash ? 0 : 1) : 0;
     if (op > .05) shown.push({ top, bottom, left, right });
-    q.classList.toggle('show', due);
-    q.classList.toggle('ok', due && solved);
     q.style.opacity = op;
     q.style.filter = out ? `blur(${out * 8}px)` : '';
     qTy[i] = ty;
