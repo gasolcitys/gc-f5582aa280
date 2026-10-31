@@ -113,12 +113,23 @@ img,svg{display:block}
 
 /* manifesto words */
 .manifesto{position:relative;height:260vh}
-.manifesto-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
-.manifesto p{font-size:clamp(1.8rem,4.6vw,4rem);font-weight:600;line-height:1.14;letter-spacing:-.025em;max-width:1050px}
+.manifesto-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;perspective:1100px}
+.manifesto p{font-size:clamp(1.8rem,min(3.9vw,6.6vh),3.5rem);font-weight:600;line-height:1.14;letter-spacing:-.025em;max-width:1050px}
 .manifesto .w{opacity:.14;transition:opacity .15s linear}
 .manifesto .w.on{opacity:1}
 .manifesto .w.hl{color:#2F6FD6}
+.manifesto .w.pain{color:#E5404A}
 .q{position:absolute;padding:10px 18px;border-radius:999px;background:#EEF4FD;border:1px solid var(--line);box-shadow:0 10px 30px rgba(31,79,156,.12);font-size:clamp(.8rem,1.3vw,1rem);color:#1F4F9C;font-weight:500;white-space:nowrap;will-change:transform,opacity;opacity:0}
+.q{transition:opacity .35s,color .4s,background-color .4s,border-color .4s;transform-style:preserve-3d}
+.q.g{color:#138A4B;background:#ECF8F1;border-color:rgba(34,184,102,.25)}
+.q.o{color:#C9650A;background:#FFF4E8;border-color:rgba(242,140,40,.28)}
+/* aparece con un «pop» justo cuando se ilumina su parte del texto */
+.q.show{animation:qpop .6s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes qpop{0%{scale:.5;box-shadow:0 0 0 0 rgba(47,111,214,.45)}55%{scale:1.1}100%{scale:1;box-shadow:0 10px 30px rgba(31,79,156,.12),0 0 0 14px rgba(47,111,214,0)}}
+/* «Hoy eso cambia»: todas las dudas quedan resueltas, una tras otra */
+.q.ok{color:#138A4B;background:#ECF8F1;border-color:rgba(34,184,102,.35);animation:qok .55s cubic-bezier(.2,1.5,.4,1) both;animation-delay:var(--d,0s)}
+.q.ok::before{content:"✓";display:inline-block;margin-right:7px;font-weight:700}
+@keyframes qok{0%{scale:1}45%{scale:1.14;box-shadow:0 0 0 0 rgba(34,184,102,.5)}100%{scale:1;box-shadow:0 10px 30px rgba(31,79,156,.12),0 0 0 16px rgba(34,184,102,0)}}
 @media (max-width:760px){.q{display:none}}
 
 /* story / phone */
@@ -432,11 +443,20 @@ footer .contact a:hover{text-decoration:underline}
   <!-- MANIFESTO -->
   <section class="manifesto light" id="manifesto">
     <div class="manifesto-sticky">
-      <div class="wrap"><p id="words">Cada día, millones de conductores repostan a ciegas. Sin saber si es el combustible que su coche necesita, si la gasolinera es de fiar o si podrán entrar al centro. *Hoy *eso *cambia.</p></div>
-      <span class="q" data-x="8" data-y="18">¿95 o 98?</span>
-      <span class="q" data-x="72" data-y="14">¿Es de fiar esta gasolinera?</span>
-      <span class="q" data-x="76" data-y="80">¿Puedo entrar al centro?</span>
-      <span class="q" data-x="10" data-y="82">¿Aquí hay AdBlue?</span>
+      <!-- !palabra = dolor (rojo) · *palabra = solución (azul) -->
+      <div class="wrap"><p id="words">Cada día, millones de conductores !pagan !de !más por repostar a ciegas: en !la !gasolinera !equivocada, !el !día !equivocado y sin saber que !la !más !barata estaba a la vuelta de la esquina. *Hoy *eso *cambia.</p></div>
+      <span class="q" data-x="8" data-y="19" data-at="11">¿95 o 98?</span>
+      <span class="q" data-x="70" data-y="18" data-at="6">¿Habrá una más barata?</span>
+      <span class="q" data-x="78" data-y="86" data-at="17">¿Lleno hoy o mañana?</span>
+      <span class="q" data-x="4" data-y="86" data-at="16">¿Aquí hay AdBlue?</span>
+      <span class="q" data-x="42" data-y="16" data-at="14">¿Estará abierta?</span>
+      <span class="q" data-x="44" data-y="89" data-at="24">¿Me compensa desviarme?</span>
+      <span class="q g" data-x="22" data-y="26" data-at="19">¿Subirá mañana?</span>
+      <span class="q o" data-x="58" data-y="26" data-at="15">¿Abre 24 horas?</span>
+      <span class="q g" data-x="74" data-y="48" data-at="8">¿Cuánto me cuesta llenar?</span>
+      <span class="q o" data-x="4" data-y="52" data-at="29">¿Y mi descuento de marca?</span>
+      <span class="q o" data-x="26" data-y="78" data-at="26">¿La más barata de mi ruta?</span>
+      <span class="q g" data-x="60" data-y="76" data-at="32">¿Y para mi eléctrico?</span>
     </div>
   </section>
 
@@ -531,8 +551,8 @@ footer .contact a:hover{text-decoration:underline}
       <article class="card w4 blue rv tilt"><div class="in3d">
         <span class="live"><i></i>En tiempo real</span>
         <div class="big-n">Datos oficiales</div>
-        <h3 style="margin-top:18px">Directamente de la fuente</h3>
-        <p>Cada gasolinera, cada combustible y cada horario salen de registros oficiales. Nada de valoraciones inventadas.</p>
+        <h3 style="margin-top:18px">Precios en los que confiar</h3>
+        <p>Cada gasolinera, cada combustible y cada horario, con datos oficiales. Nada de valoraciones inventadas.</p>
       </div></article>
       <article class="card w2 rv d1 tilt"><div class="in3d">
         <div class="ico" style="background:rgba(34,184,102,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#22B866" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7 5.6 11a7 7 0 1 0 12.8 0z"/><path d="m9 14 2 2 4-4"/></svg></div>
@@ -573,7 +593,7 @@ footer .contact a:hover{text-decoration:underline}
   <!-- STATS -->
   <section class="light"><div class="wrap stats">
     <div class="stat rv"><div class="n"><span class="count" id="liveStations" data-to="11000">0</span></div><p>gasolineras en toda España</p></div>
-    <div class="stat rv d1"><div class="n"><span class="count" data-to="100">0</span>%</div><p>datos de fuentes oficiales</p></div>
+    <div class="stat rv d1"><div class="n"><span class="count" data-to="100">0</span>%</div><p>datos oficiales</p></div>
     <div class="stat rv d2"><div class="n"><span class="count" data-to="30">0</span> min</div><p>entre cada actualización</p></div>
     <div class="stats-more rv"><a class="btn btn-blue" href="estadisticas.html">Ver todas las estadísticas en directo →</a></div>
   </div></section>
@@ -653,10 +673,32 @@ document.querySelectorAll('.rv, .trio-row').forEach(el => io.observe(el));
 
 /* manifesto words */
 const wordsEl = document.getElementById('words');
-wordsEl.innerHTML = wordsEl.textContent.split(' ').map(w => w.startsWith('*') ? `<span class="w hl">${w.slice(1)}</span>` : `<span class="w">${w}</span>`).join(' ');
+wordsEl.innerHTML = wordsEl.textContent.split(' ').map(w => w.startsWith('*') ? `<span class="w hl">${w.slice(1)}</span>` : w.startsWith('!') ? `<span class="w pain">${w.slice(1)}</span>` : `<span class="w">${w}</span>`).join(' ');
 const words = [...wordsEl.querySelectorAll('.w')];
-const qs = [...document.querySelectorAll('.q')];
-qs.forEach(q => { q.style.left = q.dataset.x + '%'; q.style.top = q.dataset.y + '%'; });
+// burbujas en el orden en que aparecen (data-at = palabra del texto que las hace salir)
+const qs = [...document.querySelectorAll('.q')].sort((a, b) => a.dataset.at - b.dataset.at);
+const manifestoSticky = document.querySelector('.manifesto-sticky');
+qs.forEach((q, i) => { q.style.left = q.dataset.x + '%'; q.style.top = q.dataset.y + '%'; q.style.setProperty('--d', (i * .07) + 's'); });
+const SOLVED_AT = words.findIndex(w => w.classList.contains('hl')); // «Hoy eso cambia»
+
+/* burbujas flotando en 3D con el mismo balanceo que el logo de la portada */
+const qTy = qs.map(() => 0), qDepth = qs.map((q, i) => .45 + ((i * 7) % 10) / 12);
+let qActive = false, qpx = 0, qpy = 0, qfx = 0, qfy = 0;
+addEventListener('pointermove', e => { qpx = e.clientX / innerWidth - .5; qpy = e.clientY / innerHeight - .5; });
+function floatBubbles(now) {
+  requestAnimationFrame(floatBubbles);
+  if (!qActive) return;
+  const t = now / 1000;
+  qfx += (qpx - qfx) * .06; qfy += (qpy - qfy) * .06;
+  const sway = reduce ? 0 : Math.sin(t * .6) * .18; // igual que el giro suave del logo
+  qs.forEach((q, i) => {
+    const d = qDepth[i];
+    const bob = reduce ? 0 : Math.sin(t * 1.1 + i * 1.7) * 6 * d;
+    const drift = reduce ? 0 : Math.cos(t * .7 + i) * 4 * d;
+    q.style.transform = `translate3d(${drift - qfx * 18 * d}px,${qTy[i] + bob - qfy * 10 * d}px,${d * 50}px) rotateX(${-qfy * 16}deg) rotateY(${(qfx * .9 + sway) * 57}deg)`;
+  });
+}
+requestAnimationFrame(floatBubbles);
 
 /* story */
 const story = document.getElementById('app');
@@ -685,12 +727,32 @@ function onScroll() {
   const mp = sectionProgress(manifesto);
   const lit = Math.floor(clamp((mp - .05) / .7) * words.length);
   words.forEach((w, i) => w.classList.toggle('on', i < lit));
+  const stickyTop = manifestoSticky.getBoundingClientRect().top;
+  // línea que se está leyendo ahora: ninguna burbuja puede taparla
+  const reading = lit > 0 && lit < words.length ? words[lit].getBoundingClientRect() : null;
+  const para = reading && wordsEl.getBoundingClientRect();
+  const shown = []; // burbujas ya visibles: las siguientes no pueden chocar con ellas
+  qActive = mp > 0 && mp < 1;
+  const out = clamp((mp - .85) / .15);
+  const solved = SOLVED_AT >= 0 && lit > SOLVED_AT;
   qs.forEach((q, i) => {
-    const t = clamp((mp - i * .08) / .35);
-    const out = clamp((mp - .7) / .2);
-    q.style.opacity = Math.sin(t * Math.PI / 2) * (1 - out);
-    q.style.transform = `translate3d(0,${(1 - t) * 60 - mp * 80}px,0) scale(${.9 + t * .1})`;
-    q.style.filter = `blur(${out * 8}px)`;
+    const ty = -mp * 60; // suben despacio mientras se lee
+    const top = stickyTop + q.offsetTop + ty, left = q.offsetLeft;
+    const bottom = top + q.offsetHeight, right = left + q.offsetWidth;
+    // cada burbuja sale cuando el texto llega a su palabra
+    const due = lit > +q.dataset.at;
+    // se desvanecen antes de llegar al menú fijo de arriba
+    const underNav = clamp((top - 92) / 30);
+    // márgenes holgados: la burbuja flota y se mueve con el ratón unos píxeles
+    const onReading = reading && top < reading.bottom + 28 && bottom > reading.top - 28 && left < para.right && right > para.left;
+    const clash = right > innerWidth - 64 || left < 30 || shown.some(s => left < s.right + 34 && right > s.left - 34 && top < s.bottom + 28 && bottom > s.top - 28);
+    const op = due ? (1 - out) * underNav * (onReading || clash ? 0 : 1) : 0;
+    if (op > .05) shown.push({ top, bottom, left, right });
+    q.classList.toggle('show', due);
+    q.classList.toggle('ok', due && solved);
+    q.style.opacity = op;
+    q.style.filter = out ? `blur(${out * 8}px)` : '';
+    qTy[i] = ty;
   });
 
   const sp = sectionProgress(story);
