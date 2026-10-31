@@ -335,6 +335,30 @@ footer .contact a:hover{text-decoration:underline}
 .qrbox{background:#fff;border-radius:18px;padding:12px 12px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 20px 40px -20px rgba(10,35,80,.5)}
 .qrbox span{font-size:.75rem;font-weight:600;color:#5B6B88}
 @media (max-width:760px){.qrbox{display:none}.stores{gap:10px;margin-top:22px}.stores .appstore{min-width:0}.hero-cta .btn-ghost{display:none}}
+
+/* servicios: fotos unificadas en tono naranja */
+.serv{padding:12vh 0 4vh}
+.serv-head{max-width:640px;margin-bottom:34px}
+.serv-head .lead{margin-top:12px}
+.serv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sv{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:4/5;max-width:100%;background:#7A2E0E;isolation:isolate}
+.sv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(1.05);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.sv::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,#FFB067 0%,#F06A1D 55%,#9A3412 100%);mix-blend-mode:multiply}
+.sv::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 45%,rgba(60,18,4,.78) 100%)}
+.sv:hover img{transform:scale(1.06)}
+.sv-tx{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:22px;color:#fff}
+.sv-tx h3{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.sv-tx p{font-size:.92rem;color:#FFE4CC;margin-top:6px;max-width:30ch}
+.serv-credit{font-size:.72rem;color:var(--mute);margin-top:14px;text-align:right}
+@media (max-width:900px){.serv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .serv{padding:6vh 0 2vh}
+  .serv-head{margin-bottom:18px}
+  .serv-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -16px;padding:0 16px 6px;scrollbar-width:none}
+  .serv-grid::-webkit-scrollbar{display:none}
+  .sv{flex:0 0 72%;scroll-snap-align:start;border-radius:20px}
+  .sv-tx{padding:16px}.sv-tx h3{font-size:1.25rem}.sv-tx p{font-size:.84rem}
+}
 </style>
 </head>
 <body>
@@ -461,6 +485,27 @@ footer .contact a:hover{text-decoration:underline}
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- SERVICIOS -->
+  <section class="serv light" id="servicios">
+    <div class="wrap">
+      <div class="serv-head">
+        <p class="eyebrow rv">Filtra el mapa por servicios</p>
+        <h2 class="h-l rv d1">Mucho más que gasolina</h2>
+        <p class="lead rv d2">Busca la gasolinera que tiene justo lo que necesitas en tu ruta.</p>
+      </div>
+      <div class="serv-grid">
+        <article class="sv rv"><img src="img/servicios/lavado.jpg" alt="Lavado" loading="lazy"><div class="sv-tx"><h3>Lavado</h3><p>Túnel, boxes o a mano: deja el coche como nuevo.</p></div></article>
+        <article class="sv rv"><img src="img/servicios/restaurante.jpg" alt="Restaurante" loading="lazy"><div class="sv-tx"><h3>Restaurante</h3><p>Para comer bien sin desviarte de la ruta.</p></div></article>
+        <article class="sv rv"><img src="img/servicios/cafeteria.jpg" alt="Cafetería" loading="lazy"><div class="sv-tx"><h3>Cafetería</h3><p>Un café y a seguir conduciendo.</p></div></article>
+        <article class="sv rv"><img src="img/servicios/tienda.jpg" alt="Tienda" loading="lazy"><div class="sv-tx"><h3>Tienda</h3><p>Bebida, algo de comer y lo que se te haya olvidado.</p></div></article>
+        <article class="sv rv"><img src="img/servicios/hotel.jpg" alt="Hotel" loading="lazy"><div class="sv-tx"><h3>Hotel</h3><p>Para descansar en los viajes largos.</p></div></article>
+        <article class="sv rv"><img src="img/servicios/abierta24h.jpg" alt="Abierta 24 h" loading="lazy"><div class="sv-tx"><h3>Abierta 24 h</h3><p><span class="js-24h">Más de 5.000</span> gasolineras que nunca cierran.</p></div></article>
+      </div>
+      <p class="serv-credit">Fotos: Unsplash</p>
     </div>
   </section>
 
@@ -672,6 +717,7 @@ fetch('data/stats.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
 /* pantalla Estadísticas del móvil, con los datos oficiales */
 function renderPhoneStats(d) {
   const f3 = v => v.toLocaleString('es-ES', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+  document.querySelectorAll('.js-24h').forEach(e => e.textContent = d.totals.open24.toLocaleString('es-ES', { useGrouping: 'always' }));
   document.querySelectorAll('.js-st').forEach(e => e.textContent = d.totals.stations.toLocaleString('es-ES'));
   const m = d.official.match(/(\d+:\d+)/);
   document.getElementById('phLive').textContent = 'Actualizado ' + (m ? 'a las ' + m[1] : '') + ' · cada 30 min';
