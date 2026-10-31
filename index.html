@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>gasolcitys</title>
+<meta name="description" content="GasolCitys: gasolineras, combustibles, servicios y normativa ZBE para tu coche. Mediante datos oficiales. Gratis en el App Store.">
+<meta name="theme-color" content="#1F4F9C">
+<meta property="og:title" content="GasolCitys · Tu coche merece saberlo todo">
+<meta property="og:description" content="Gasolineras, combustibles y normativa ZBE. Mediante datos oficiales. Gratis en el App Store.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="application-name" content="gasolcitys">
+<meta name="apple-mobile-web-app-title" content="gasolcitys">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1F4F9C; --bg2:#1A4589; --ink:#FFFFFF; --mute:#C9D8F2; --line:rgba(255,255,255,.16); --accent:#CFE0FA;
+  --blue:#1F4F9C; --blue2:#2F6FD6; --green:#22B866; --yellow:#FFC531; --red:#FF515B;
+  --card:rgba(255,255,255,.08); --radius:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:Poppins,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.light{background:#fff;color:#0B2350;--ink:#0B2350;--mute:#5B6B88;--line:rgba(31,79,156,.12);--card:#F3F7FD;--accent:#2F6FD6}
+.light .grad{background-image:linear-gradient(100deg,#1F4F9C,#2F6FD6 60%,#5C8FE6)}
+.h-xl{font-size:clamp(2.6rem,7.2vw,6.4rem);font-weight:700;line-height:1.02;letter-spacing:-.035em}
+.h-l{font-size:clamp(2rem,5vw,4.2rem);font-weight:700;line-height:1.05;letter-spacing:-.03em}
+.lead{font-size:clamp(1.05rem,1.6vw,1.35rem);color:var(--mute);font-weight:400}
+.grad{background:linear-gradient(100deg,#fff 20%,#CFE0FA 60%,#A9C6F5 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(31,79,156,.78);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-size:1.12rem;letter-spacing:-.01em}
+.brand b{font-weight:700}.brand span{font-weight:400}
+.brand svg{width:26px;height:30px}
+.nav-links{display:flex;gap:30px;font-size:.86rem;color:#DCE7F8}
+.nav-links a{transition:color .2s}.nav-links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;font-weight:600;font-size:.92rem;padding:12px 22px;transition:transform .25s cubic-bezier(.2,.8,.2,1),background .25s,box-shadow .25s;cursor:pointer;border:0;font-family:inherit}
+.btn:hover{transform:translateY(-2px) scale(1.02)}
+.btn-primary{background:#fff;color:#1F4F9C}
+.btn-primary:hover{box-shadow:0 10px 40px rgba(255,255,255,.35)}
+.btn-ghost{color:#fff;border:1px solid rgba(255,255,255,.22)}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-sm{padding:8px 16px;font-size:.82rem}
+@media (max-width:760px){.nav-links{display:none}}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;background:radial-gradient(120% 90% at 70% 60%,#2F6FD6,#1F4F9C 55%,#1A4589)}
+.hero::before{content:"";position:absolute;inset:-20%;background:
+  radial-gradient(40% 35% at 50% 62%,rgba(160,200,255,.35),transparent 70%),
+  radial-gradient(30% 25% at 30% 80%,rgba(34,184,102,.12),transparent 70%),
+  radial-gradient(30% 25% at 72% 78%,rgba(255,81,91,.10),transparent 70%);animation:breathe 9s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.08);opacity:.8}}
+#gl{position:absolute;inset:0;width:100%;height:100%}
+.hero-copy{position:relative;z-index:2;text-align:center;padding-top:clamp(92px,13vh,140px);pointer-events:none}
+@media (min-aspect-ratio:11/10) and (min-width:900px){.hero-copy{text-align:left;height:100%;display:flex;flex-direction:column;justify-content:center;padding-top:0}.hero-copy>*{max-width:52%}.hero-copy .lead{margin-left:0}.hero-cta{justify-content:flex-start}}
+.hero-copy .eyebrow{margin-bottom:18px}
+.hero-copy .lead{margin:18px auto 0;max-width:560px}
+.hero-cta{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap;pointer-events:auto}
+.hero-foot{position:absolute;z-index:2;left:0;right:0;bottom:26px;display:flex;justify-content:center}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.scroll-hint i{width:22px;height:36px;border:1.5px solid rgba(255,255,255,.3);border-radius:12px;position:relative}
+.scroll-hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;background:#fff;transform:translateX(-50%);animation:wheel 1.8s infinite}
+@keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+
+/* manifesto words */
+.manifesto{position:relative;height:260vh}
+.manifesto-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
+.manifesto p{font-size:clamp(1.8rem,4.6vw,4rem);font-weight:600;line-height:1.14;letter-spacing:-.025em;max-width:1050px}
+.manifesto .w{opacity:.14;transition:opacity .15s linear}
+.manifesto .w.on{opacity:1}
+.manifesto .w.hl{color:#2F6FD6}
+.q{position:absolute;padding:10px 18px;border-radius:999px;background:#EEF4FD;border:1px solid var(--line);box-shadow:0 10px 30px rgba(31,79,156,.12);font-size:clamp(.8rem,1.3vw,1rem);color:#1F4F9C;font-weight:500;white-space:nowrap;will-change:transform,opacity;opacity:0}
+@media (max-width:760px){.q{display:none}}
+
+/* story / phone */
+.story{position:relative;height:660vh;background:radial-gradient(80% 60% at 75% 50%,#2F6FD6,var(--bg) 70%)}
+.story-sticky{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;width:min(1180px,100% - 32px);margin-inline:auto}
+.story-copy{position:relative}
+.steps{position:relative;height:300px;margin-top:20px}
+.step{position:absolute;inset:0;opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.step.on{opacity:1;transform:none}
+.step h3{font-size:clamp(2.2rem,4.4vw,4rem);font-weight:700;letter-spacing:-.03em;line-height:1.04}
+.step p{margin-top:16px;max-width:430px}
+.step .k{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:12px;vertical-align:middle;box-shadow:0 0 20px currentColor}
+.dots{display:flex;gap:10px}
+.dots i{height:4px;width:24px;border-radius:4px;background:rgba(255,255,255,.25);overflow:hidden;position:relative}
+.dots i b{position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(0)}
+.phone-stage{perspective:1600px;display:flex;justify-content:center}
+.phone{--ry:-24deg;--rx:8deg;width:310px;height:640px;border-radius:52px;position:relative;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));
+  background:linear-gradient(145deg,#F4F7FC,#C3CEDF 45%,#E9EEF6);padding:12px;
+  box-shadow:0 60px 120px -30px rgba(10,35,80,.6),0 0 0 1px rgba(255,255,255,.6) inset,0 0 90px rgba(207,224,250,.35)}
+.phone::after{content:"";position:absolute;inset:0;border-radius:52px;pointer-events:none;background:linear-gradient(calc(110deg + var(--ry)),transparent 35%,rgba(255,255,255,.14) 50%,transparent 62%);mix-blend-mode:screen}
+.screen{width:100%;height:100%;border-radius:41px;overflow:hidden;background:#1F4F9C;color:#fff;position:relative;font-family:Lora,Georgia,serif;font-size:12px}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:92px;height:26px;background:#0B2350;border-radius:20px;z-index:8}
+.scr{position:absolute;inset:0 0 56px;display:flex;flex-direction:column;opacity:0;transform:translateX(40px) scale(.97);transition:opacity .55s,transform .7s cubic-bezier(.2,.8,.2,1);background:#1F4F9C}
+.scr.on{opacity:1;transform:none}
+.scr.out{transform:translateX(-40px) scale(.97)}
+.scr>img{width:100%;display:block}
+.scr .fill{flex:1;min-height:0;object-fit:cover;object-position:top}
+.ah{padding:46px 16px 12px;background:#1F4F9C}
+.ah .sb2{position:absolute;top:14px;left:26px;right:24px;display:flex;justify-content:space-between;font:600 11.5px Poppins,sans-serif}
+.ah small{display:block;color:#FF8A8F;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase}
+.ah h5{font-size:18px;font-weight:700;letter-spacing:.01em;text-transform:uppercase;line-height:1.15;margin-top:3px}
+.ah p{font-size:9.5px;opacity:.8;margin-top:2px}
+.pills{display:flex;gap:6px;padding:0 16px 10px}
+.pills span{font-size:10px;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.35)}
+.pills span.a{background:#fff;color:#1F4F9C;font-weight:700;border-color:#fff}
+.rk{display:flex;justify-content:space-between;gap:8px;padding:10px 12px 9px 12px;border-top:1px solid rgba(255,255,255,.18)}
+.rk b{font-size:12.5px;text-decoration:underline;text-decoration-color:#FF6B73;text-underline-offset:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;max-width:150px}
+.rk em{font-style:normal;font-size:9px;opacity:.75;display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.rk .h24{display:inline-block;margin-top:6px;font-size:9px;color:#9FF0C4;border:1px solid #6FD3A0;background:rgba(34,184,102,.15);border-radius:999px;padding:1px 8px}
+.rk .pr{text-align:right;flex:none}
+.rk .pr strong{font-size:22px;font-weight:700;letter-spacing:.02em;display:block;line-height:1.1}
+.rk .pr i{font-style:normal;font-size:9px;color:#9FF0C4;display:block}
+.rk .pr u{text-decoration:none;font-size:9px;opacity:.85}
+.acc{padding:0 14px;display:grid;gap:9px}
+.box{border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:11px 12px;background:rgba(255,255,255,.05)}
+.box h6{font:600 8.5px Poppins,sans-serif;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-bottom:7px}
+.box .r{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11.5px;padding:3px 0}
+.box .r span{opacity:.75;font-size:10px}
+.box .r .st{color:#FFC531;font-size:13px}
+.box.hi{border-color:#7FE0AE;background:rgba(34,184,102,.12)}
+.tog{width:30px;height:17px;border-radius:9px;background:#22B866;position:relative;flex:none}
+.tog::after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.bellbtn{border:1.5px solid #FF8A8F;border-radius:10px;text-align:center;padding:8px;font-size:11.5px}
+.ah .lv{display:flex;align-items:center;gap:6px;font:500 9px Poppins,sans-serif;opacity:.9;margin-top:4px}
+.ah .lv i{width:6px;height:6px;border-radius:50%;background:#22B866;box-shadow:0 0 0 3px rgba(34,184,102,.3)}
+.ph-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 12px}
+.ph-tiles div{border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:6px 7px;background:rgba(255,255,255,.06)}
+.ph-tiles small{display:block;font-size:8px;opacity:.75;white-space:nowrap}
+.ph-tiles b{font-size:14px;letter-spacing:.02em}
+.ph-map{margin:8px 12px 0;border-radius:12px;background:#F3F7FD;height:200px;padding:6px}
+.ph-map canvas{width:100%;height:100%;display:block}
+.ph-top{padding:8px 14px 0}
+.ph-top h6{font:600 8px Poppins,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin-bottom:3px}
+.ph-top .r{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-top:1px solid rgba(255,255,255,.15)}
+.ph-top .r span{opacity:.7;margin-right:6px}
+.step .more{display:inline-block;margin-top:16px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.5);pointer-events:auto}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:56px;background:#fff;display:flex;justify-content:space-around;align-items:center;z-index:6;padding-bottom:4px}
+.tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9.5px;color:#1F4F9C;transition:color .3s}
+.tabbar svg{width:19px;height:19px}
+.tabbar a.on{color:#D33A43}
+.tabbar::before{content:"";position:absolute;top:0;left:var(--tl,0%);width:20%;height:2px;background:#D33A43;transition:left .5s cubic-bezier(.2,.8,.2,1)}
+@media (max-width:860px){
+  .story-sticky{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:0;align-content:start;padding-top:84px}
+  .story-copy{text-align:center}
+  .steps{height:150px;margin-top:6px}
+  .step p{margin-inline:auto}
+  .step h3{font-size:1.9rem}.step p{margin-top:8px;font-size:.9rem}
+  .dots{justify-content:center}
+  .step .more{display:none}
+  .phone{transform:rotateX(var(--rx)) rotateY(var(--ry)) scale(.72);transform-origin:top center;margin-top:10px}
+}
+@media (max-width:860px) and (max-height:740px){.phone{transform:rotateX(var(--rx)) rotateY(var(--ry)) scale(.6)}}
+
+/* three words */
+.trio{padding:22vh 0}
+.trio-row{display:flex;align-items:center;gap:clamp(18px,3vw,40px);padding:3vh 0}
+.trio-row .lamp{flex:none;width:clamp(44px,7vw,90px);aspect-ratio:1;border-radius:50%;background:#E6EDF7;transition:background .6s,box-shadow .6s;border:1px solid var(--line)}
+.trio-row.in .lamp{background:var(--c);box-shadow:0 0 60px var(--c),0 0 140px color-mix(in srgb,var(--c) 40%,transparent)}
+.trio-row h3{font-size:clamp(2.8rem,9vw,8rem);font-weight:700;letter-spacing:-.045em;line-height:1;color:#DCE5F2;transition:color .8s}
+.trio-row.in h3{color:#1F4F9C}
+.trio-row p{color:var(--mute);max-width:330px;margin-left:auto;font-size:1rem;opacity:0;transition:opacity .8s .3s}
+.trio-row.in p{opacity:1}
+@media (max-width:760px){.trio-row{flex-wrap:wrap}.trio-row p{margin-left:calc(clamp(44px,7vw,90px) + 18px)}}
+
+/* bento */
+.bento-sec{padding:4vh 0 14vh}
+.bento-head{text-align:center;margin-bottom:56px}
+.bento-head .lead{margin:16px auto 0;max-width:600px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.card{grid-column:span 2;position:relative;border-radius:var(--radius);background:var(--card);border:1px solid var(--line);padding:30px;min-height:280px;overflow:hidden;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .3s;will-change:transform}
+.card:hover{border-color:rgba(47,111,214,.3);box-shadow:0 30px 60px -20px rgba(31,79,156,.25)}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(47,111,214,.10),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover::before{opacity:1}
+.card.w3{grid-column:span 3}.card.w4{grid-column:span 4}
+.card h3{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-top:auto}
+.card p{color:var(--mute);margin-top:8px;font-size:.95rem;max-width:420px}
+.card .in3d{transform:translateZ(40px);display:flex;flex-direction:column;height:100%}
+.card h3{color:var(--ink)}
+.card .ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;margin-bottom:22px}
+.card .ico svg{width:26px;height:26px}
+.card.blue{background:linear-gradient(150deg,#2F6FD6,#1F4F9C);border-color:transparent;color:#fff}
+.card.blue h3{color:#fff}
+.card.blue p{color:#C5D6F3}
+.fuels{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 22px}
+.fuels span{padding:8px 14px;border-radius:12px;background:#fff;color:#1F4F9C;border:1px solid var(--line);font-weight:600;font-size:.88rem}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;color:#9FF0C4;margin-bottom:20px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:ping 1.6s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(34,184,102,.7)}100%{box-shadow:0 0 0 12px rgba(34,184,102,0)}}
+.big-n{font-size:clamp(3rem,6vw,5rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+@media (max-width:900px){.bento{grid-template-columns:1fr 1fr}.card,.card.w3,.card.w4{grid-column:span 2}.card.half{grid-column:span 1}}
+@media (max-width:560px){.card.half{grid-column:span 2}.card{min-height:220px;padding:24px}}
+
+/* checker */
+.check-sec{padding:14vh 0;background:radial-gradient(70% 60% at 30% 40%,#2F6FD6,var(--bg) 75%)}
+.checker{margin-top:48px;display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+.panel{border-radius:var(--radius);background:var(--card);border:1px solid var(--line);padding:32px}
+.panel h4{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:600;margin-bottom:14px}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.seg button{font-family:inherit;font-size:.92rem;font-weight:500;color:#fff;background:rgba(255,255,255,.08);border:1px solid var(--line);padding:11px 18px;border-radius:999px;cursor:pointer;transition:all .25s}
+.seg button:hover{background:rgba(255,255,255,.1)}
+.seg button[aria-pressed="true"]{background:#fff;color:#1F4F9C;border-color:#fff}
+.year{display:flex;align-items:baseline;justify-content:space-between}
+.year output{font-size:3rem;font-weight:700;letter-spacing:-.03em}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:linear-gradient(90deg,#fff var(--p,50%),rgba(255,255,255,.22) var(--p,50%));outline:none;margin-top:10px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(10,35,80,.4);cursor:grab}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:#fff;cursor:grab}
+.year[hidden]+input{display:none}
+.result{display:flex;flex-direction:column;gap:22px;position:relative;overflow:hidden}
+.badge-wrap{display:flex;align-items:center;gap:22px}
+.badge{width:118px;height:118px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800;font-size:1.7rem;letter-spacing:-.02em;color:#fff;border:5px solid #fff;box-shadow:0 20px 50px rgba(10,35,80,.35);transition:background .5s,transform .6s cubic-bezier(.2,1.4,.4,1);position:relative;overflow:hidden}
+.badge.pop{animation:pop .6s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{0%{transform:scale(.7) rotate(-20deg)}100%{transform:none}}
+.badge.cero{background:#0E3E8C}
+.badge.eco{background:linear-gradient(90deg,#0E3E8C 50%,#22B866 50%)}
+.badge.c{background:#22B866}
+.badge.b{background:#FFC531;color:#0B1A33}
+.badge.none{background:#7D8CA6;font-size:1rem;text-align:center;line-height:1.1}
+.res-t{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.res-s{color:var(--mute);font-size:.92rem}
+.facts{display:grid;gap:10px}
+.fact{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.08)}
+.fact i{width:10px;height:10px;border-radius:50%;margin-top:7px;flex:none}
+.fact b{display:block;font-size:.95rem}.fact span{color:var(--mute);font-size:.88rem}
+.disc{font-size:.76rem;color:#B7CBEC}
+@media (max-width:860px){.checker{grid-template-columns:1fr}.panel{padding:24px}.badge{width:96px;height:96px;font-size:1.4rem}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:12vh 0}
+.stat .n{color:#1F4F9C}
+.stats-more{grid-column:1/-1;text-align:center;margin-top:10px}
+.btn-blue{background:#1F4F9C;color:#fff}
+.btn-blue:hover{box-shadow:0 10px 30px rgba(31,79,156,.35)}
+.stat{text-align:center;padding:30px 10px;border-top:1px solid var(--line)}
+.stat .n{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+.stat p{color:var(--mute);margin-top:10px}
+@media (max-width:640px){.stats{grid-template-columns:1fr}}
+
+/* final cta */
+.final{position:relative;overflow:hidden;background:radial-gradient(80% 70% at 50% 100%,#4A86E8,#2F6FD6 40%,#1F4F9C 100%);padding:18vh 0 16vh;text-align:center}
+.final .logo-xl{width:clamp(110px,14vw,170px);margin:0 auto 34px;filter:drop-shadow(0 20px 40px rgba(10,35,80,.35));animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px) rotate(-2deg)}}
+.final .lead{color:#D2E0F7;margin:20px auto 0;max-width:560px}
+.final .h-xl{max-width:900px;margin-inline:auto}
+.appstore{display:inline-flex;align-items:center;gap:12px;background:#fff;color:#1F4F9C;border-radius:14px;padding:11px 22px 11px 18px;margin-top:38px;border:0;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.appstore:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 20px 50px rgba(10,35,80,.35)}
+.appstore svg{width:28px;height:28px}
+.appstore small{display:block;font-size:.68rem;line-height:1;opacity:.85}
+.appstore b{display:block;font-size:1.3rem;font-weight:600;line-height:1.1;letter-spacing:-.01em}
+.free{display:block;margin-top:16px;font-weight:600;color:#fff;opacity:.8;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase}
+.final .bar{display:flex;justify-content:center;gap:6px;margin-top:60px}
+.final .bar i{width:44px;height:8px;border-radius:8px}
+
+footer{padding:40px 0 50px;background:#1A4589;color:#C9D8F2;font-size:.82rem}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer .brand{color:#fff}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* móvil compacto: menos scroll, los contenidos van saliendo seguidos */
+@media (max-width:760px){
+  .rv{transform:translateY(18px);transition-duration:.6s}
+  .rv.d1,.rv.d2,.rv.d3{transition-delay:0s}
+  .manifesto{height:150vh}
+  .manifesto p{font-size:1.65rem}
+  .story{height:270vh}
+  .trio{padding:6vh 0}
+  .trio-row{padding:1.2vh 0;gap:14px}
+  .trio-row h3{font-size:2.6rem}
+  .trio-row .lamp{width:38px}
+  .trio-row p{font-size:.88rem;margin-left:52px;margin-top:-4px}
+  .bento-sec{padding:2vh 0 6vh}
+  .bento-head{margin-bottom:22px}
+  .bento-head .lead{margin-top:10px}
+  .bento{gap:10px}
+  .card{min-height:0;padding:20px;border-radius:22px}
+  .card.half{grid-column:span 1}
+  .card.half p{font-size:.82rem}
+  .card .ico{width:40px;height:40px;border-radius:12px;margin-bottom:12px}
+  .card h3{font-size:1.2rem}
+  .big-n{font-size:2.4rem}
+  .fuels{margin:2px 0 12px}.fuels span{padding:6px 10px;font-size:.78rem}
+  .check-sec{padding:6vh 0}
+  .checker{margin-top:22px;gap:10px}
+  .panel{padding:18px}
+  .seg{margin-bottom:16px}.seg button{padding:9px 14px;font-size:.85rem}
+  .stats{grid-template-columns:repeat(3,1fr);gap:6px;padding:5vh 0}
+  .stat{padding:16px 2px}.stat .n{font-size:1.7rem}.stat p{font-size:.72rem;margin-top:4px;line-height:1.3}
+  .stats-more{margin-top:4px}
+  .final{padding:9vh 0 8vh}
+  .final .logo-xl{width:90px;margin-bottom:20px}
+  .appstore{margin-top:24px}
+  .final .bar{margin-top:30px}
+}
+
+footer .contact{display:flex;gap:18px;flex-wrap:wrap}
+footer .contact a{color:#fff;font-weight:500}
+footer .contact a:hover{text-decoration:underline}
+
+.stores{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:34px}
+.store{display:flex;flex-direction:column;align-items:center;gap:16px}
+.stores .appstore{margin-top:0;min-width:210px}
+.appstore svg{color:#1F4F9C}
+.qrbox{background:#fff;border-radius:18px;padding:12px 12px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 20px 40px -20px rgba(10,35,80,.5)}
+.qrbox span{font-size:.75rem;font-weight:600;color:#5B6B88}
+@media (max-width:760px){.qrbox{display:none}.stores{gap:10px;margin-top:22px}.stores .appstore{min-width:0}.hero-cta .btn-ghost{display:none}}
+</style>
+</head>
+<body>
+
+<!-- logo sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="340 180 345 440">
+    <path d="M640 382 L512 205 L393 360 A146 146 0 1 0 657 462" fill="none" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill="#22B866" d="M518 437 H560 V483 H518 A23 23 0 0 1 518 437 Z"/>
+    <rect fill="#FFC531" x="567" y="437" width="41" height="46"/>
+    <path fill="#FF515B" d="M615 437 H657 A23 23 0 0 1 657 483 H615 Z"/>
+  </symbol>
+  <symbol id="gplay" viewBox="0 0 24 24"><path fill="currentColor" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></symbol>
+  <symbol id="apple" viewBox="0 0 24 24"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="GasolCitys, inicio"><svg><use href="#logo"/></svg><span><b>Gasol</b><span>Citys</span></span></a>
+    <nav class="nav-links">
+      <a href="#app">La app</a>
+      <a href="#ventajas">Ventajas</a>
+      <a href="#tu-coche">Tu coche</a>
+      <a href="estadisticas.html">Estadísticas</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#descargar">Descargar</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="hero-copy wrap" id="heroCopy">
+      <p class="eyebrow rv">Mediante datos oficiales</p>
+      <h1 class="h-xl rv d1">Tu coche merece<br><span class="grad">saberlo todo</span></h1>
+      <p class="lead rv d2">Gasolineras de confianza, el combustible que de verdad necesita tu coche y la normativa antes que nadie.</p>
+      <div class="hero-cta rv d3">
+        <a class="btn btn-primary" href="https://apps.apple.com/es/app/id6823373113" target="_blank" rel="noopener"><svg width="16" height="16"><use href="#apple"/></svg>App Store</a>
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.gasolcity.app" target="_blank" rel="noopener"><svg width="15" height="15"><use href="#gplay"/></svg>Google Play</a>
+        <a class="btn btn-ghost" href="#app">Descubre cómo funciona</a>
+      </div>
+    </div>
+    <div class="hero-foot"><div class="scroll-hint"><i></i>Desliza</div></div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto light" id="manifesto">
+    <div class="manifesto-sticky">
+      <div class="wrap"><p id="words">Cada día, millones de conductores repostan a ciegas. Sin saber si es el combustible que su coche necesita, si la gasolinera es de fiar o si podrán entrar al centro. *Hoy *eso *cambia.</p></div>
+      <span class="q" data-x="8" data-y="18">¿95 o 98?</span>
+      <span class="q" data-x="72" data-y="14">¿Es de fiar esta gasolinera?</span>
+      <span class="q" data-x="76" data-y="80">¿Puedo entrar al centro?</span>
+      <span class="q" data-x="10" data-y="82">¿Aquí hay AdBlue?</span>
+    </div>
+  </section>
+
+  <!-- STORY / PHONE: recorrido por las pantallas reales de la app -->
+  <section class="story" id="app">
+    <div class="story-sticky">
+      <div class="story-copy">
+        <p class="eyebrow">Así funciona la app</p>
+        <div class="steps">
+          <div class="step on"><h3><span class="k" style="color:var(--green);background:var(--green)"></span>Mapa</h3><p class="lead">Tu provincia o «Cerca de mí», con un semáforo en cada gasolinera: verde, amarillo o rojo frente a las de su zona. Toca cualquiera para ver su ficha y cómo llegar.</p></div>
+          <div class="step"><h3><span class="k" style="color:var(--yellow);background:var(--yellow)"></span>Planea tu viaje</h3><p class="lead">De un sitio a otro: todas las gasolineras de tu ruta en el mapa, listas para compartir en Google Maps o Waze.</p></div>
+          <div class="step"><h3><span class="k" style="color:var(--red);background:var(--red)"></span>Ranking</h3><p class="lead">Las gasolineras de tu zona, en orden y con todo el contexto: horario, cómo está frente a la media y qué hará mañana. Marca tus favoritas con ★.</p></div>
+          <div class="step"><h3><span class="k" style="color:var(--green);background:var(--green)"></span>Previsiones</h3><p class="lead">Los próximos 7 días y los próximos meses de cada gasolinera, su mejor día de la semana y el momento ideal para repostar.</p></div>
+          <div class="step"><h3><span class="k" style="color:var(--red);background:var(--red)"></span>Estadísticas</h3><p class="lead">Todo el mercado en una pantalla: el precio medio de cada combustible, el mapa de las <span class="js-st">11.000</span> gasolineras de España y el ranking de provincias. Datos oficiales cada 30 minutos.</p><a class="more" href="estadisticas.html">Ver todas las estadísticas →</a></div>
+          <div class="step"><h3><span class="k" style="color:var(--yellow);background:var(--yellow)"></span>Tu cuenta</h3><p class="lead">Tu vehículo, tus gasolineras favoritas y tus alertas. GasolCitys te avisa cuando toca, sin que tengas que mirar.</p></div>
+        </div>
+        <div class="dots"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+      </div>
+      <div class="phone-stage">
+        <div class="phone" id="phone">
+          <div class="screen" id="screen">
+            <div class="island"></div>
+
+            <div class="scr on" data-tab="0">
+              <div class="ah"><div class="sb2"><span>9:41</span><span>5G ▮</span></div><small>Comunidad de Madrid · Hoy</small><h5>Mapa de precios</h5></div>
+              <img class="fill" src="img/mapa.jpg" alt="Mapa de gasolineras de Madrid con precios y colores de semáforo" loading="lazy">
+            </div>
+
+            <div class="scr" data-tab="0"><img class="fill" src="img/viaje.jpg" alt="Ruta de Madrid a Sevilla con todas las gasolineras del camino" loading="lazy"></div>
+
+            <div class="scr" data-tab="1">
+              <div class="ah"><div class="sb2"><span>9:41</span><span>5G ▮</span></div><small>Provincia de Badajoz · Hoy</small><h5>Ranking</h5></div>
+              <div class="pills"><span>Gasolina 95</span><span class="a">Diésel</span><span>Abiertas</span></div>
+              <img src="img/ranking.jpg" alt="Ranking de gasolineras con precio, horario 24 h y previsión para mañana" loading="lazy">
+              <div class="rk"><div><b>Estación Vegas Altas</b><em>Avenida de Extremadura, 12 · 064…</em><span class="h24">6:00 – 22:00</span></div><div class="pr"><strong>1,724</strong><i>−17,3 c</i><u>mañana ↓ 1,721</u></div></div>
+              <div class="rk"><div><b>Carburantes La Serena</b><em>Carretera EX-104 Km. 3 · 0642…</em><span class="h24">24 h</span></div><div class="pr"><strong>1,729</strong><i>−16,8 c</i><u>mañana = 1,729</u></div></div>
+            </div>
+
+            <div class="scr" data-tab="2">
+              <div class="ah"><div class="sb2"><span>9:41</span><span>5G ▮</span></div><small>Ávila · Gasolina 95</small><h5>Previsión</h5></div>
+              <img class="fill" src="img/prevision.jpg" alt="Previsión de precios de los próximos 7 días y previsión mensual de una gasolinera" loading="lazy">
+            </div>
+
+            <div class="scr" data-tab="3">
+              <div class="ah"><div class="sb2"><span>9:41</span><span>5G ▮</span></div><small>España · Datos oficiales</small><h5>Estadísticas</h5><p class="lv"><i></i><span id="phLive">Se actualiza cada 30 minutos</span></p></div>
+              <div class="ph-tiles" id="phTiles"></div>
+              <div class="ph-map"><canvas id="phMap"></canvas></div>
+              <div class="ph-top"><h6>Provincias más económicas · Gasolina 95</h6><div id="phTop"></div></div>
+            </div>
+
+            <div class="scr" data-tab="4">
+              <div class="ah"><div class="sb2"><span>9:41</span><span>5G ▮</span></div><small>Tu espacio</small><h5>Cuenta</h5></div>
+              <div class="acc">
+                <div class="box"><h6>Tu vehículo</h6><div class="r">Diésel <span>favorito</span></div><div class="r">Turismo · 50 litros <span>editar</span></div></div>
+                <div class="box"><h6>Tus favoritas</h6><div class="r">Noroil <span>1,710 <b class="st">★</b></span></div><div class="r">Cooperativa Olivarera <span>1,720 <b class="st">★</b></span></div></div>
+                <div class="box hi"><h6>Alertas</h6><div class="r">Avísame si baja de 1,700 <i class="tog"></i></div><div class="r">Mejor día de la semana <i class="tog"></i></div></div>
+                <div class="bellbtn">🔔 Crear alerta</div>
+              </div>
+            </div>
+
+            <nav class="tabbar" id="tabbar" aria-hidden="true">
+              <a class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg>Mapa</a>
+              <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 6h11M10 12h11M10 18h11M4 5l1-1v4M3.5 14.5c0-.8.7-1.5 1.5-1.5s1.5.6 1.5 1.3c0 1.2-3 1.7-3 3.7h3"/></svg>Ranking</a>
+              <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>Previsión</a>
+              <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Datos</a>
+              <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Cuenta</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIO -->
+  <section class="trio light" aria-label="Valores"><div class="wrap">
+    <div class="trio-row" style="--c:var(--green)"><span class="lamp"></span><h3>Fiable</h3><p>Datos oficiales, no rumores ni opiniones. Lo que ves es lo que hay.</p></div>
+    <div class="trio-row" style="--c:var(--yellow)"><span class="lamp"></span><h3>Al día</h3><p>Normativa, ZBE y etiquetas antes que nadie, para que nada te pille por sorpresa.</p></div>
+    <div class="trio-row" style="--c:var(--red)"><span class="lamp"></span><h3>Para tu coche</h3><p>El combustible y los servicios que necesita el tuyo, no el de los demás.</p></div>
+  </div></section>
+
+  <!-- BENTO -->
+  <section class="bento-sec light" id="ventajas"><div class="wrap">
+    <div class="bento-head">
+      <p class="eyebrow rv">Ventajas</p>
+      <h2 class="h-l rv d1">Todo lo que tu coche<br>necesita saber</h2>
+      <p class="lead rv d2">Una sola app. Información clara, rápida y sencilla, para decidir bien en cada repostaje.</p>
+    </div>
+    <div class="bento">
+      <article class="card w4 blue rv tilt"><div class="in3d">
+        <span class="live"><i></i>En tiempo real</span>
+        <div class="big-n">Datos oficiales</div>
+        <h3 style="margin-top:18px">Directamente de la fuente</h3>
+        <p>Cada gasolinera, cada combustible y cada horario salen de registros oficiales. Nada de valoraciones inventadas.</p>
+      </div></article>
+      <article class="card w2 rv d1 tilt"><div class="in3d">
+        <div class="ico" style="background:rgba(34,184,102,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#22B866" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7 5.6 11a7 7 0 1 0 12.8 0z"/><path d="m9 14 2 2 4-4"/></svg></div>
+        <h3>El combustible correcto</h3>
+        <p>E5, E10, 98, diésel o GLP: sabrás cuál le sienta bien a tu motor.</p>
+      </div></article>
+      <article class="card w2 half rv tilt"><div class="in3d">
+        <div class="ico" style="background:rgba(255,197,49,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#FFC531" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>ZBE y etiquetas</h3>
+        <p>Entra al centro sin miedo a multas.</p>
+      </div></article>
+      <article class="card w2 half rv d1 tilt"><div class="in3d">
+        <div class="ico" style="background:rgba(255,81,91,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#FF515B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Abierta o cerrada</h3>
+        <p>Horarios reales y estaciones 24 h, antes de desviarte.</p>
+      </div></article>
+      <article class="card w2 rv d2 tilt"><div class="in3d">
+        <div class="ico" style="background:rgba(47,111,214,.18)"><svg viewBox="0 0 24 24" fill="none" stroke="#7FA8F0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M10 14 20 4M20 14v6H4V4h6"/></svg></div>
+        <h3>Servicios a la vista</h3>
+        <p>AdBlue, lavado, tienda, aire y agua en cada estación.</p>
+      </div></article>
+      <article class="card w3 rv tilt"><div class="in3d">
+        <h4 class="eyebrow" style="margin-bottom:18px">Combustibles</h4>
+        <div class="fuels"><span>Gasolina 95 E5</span><span>Gasolina 95 E10</span><span>Gasolina 98</span><span>Diésel</span><span>Diésel+</span><span>GLP</span><span>GNC</span><span>AdBlue</span></div>
+        <h3>Cada motor, su combustible</h3>
+        <p>Filtra por lo que lleva tu coche y olvídate de dudar en el surtidor.</p>
+      </div></article>
+      <article class="card w3 rv d1 tilt"><div class="in3d">
+        <h4 class="eyebrow" style="margin-bottom:18px">Siempre contigo</h4>
+        <div class="big-n">100% <span class="grad">gratis</span></div>
+        <h3 style="margin-top:18px">Sin letra pequeña</h3>
+        <p>Descárgala y úsala desde tu próximo repostaje.</p>
+      </div></article>
+    </div>
+  </div></section>
+
+  <!-- CHECKER -->
+  <section class="check-sec" id="tu-coche"><div class="wrap">
+    <div class="bento-head" style="margin-bottom:0">
+      <p class="eyebrow rv">Pruébalo ahora</p>
+      <h2 class="h-l rv d1">¿Qué necesita<br>tu coche?</h2>
+      <p class="lead rv d2">Dinos qué motor tiene y de qué año es. En dos segundos sabrás su etiqueta, su combustible y si puede entrar en una ZBE.</p>
+    </div>
+    <div class="checker">
+      <div class="panel rv">
+        <h4>Motor</h4>
+        <div class="seg" id="engine">
+          <button aria-pressed="true" data-v="gas">Gasolina</button>
+          <button aria-pressed="false" data-v="diesel">Diésel</button>
+          <button aria-pressed="false" data-v="hev">Híbrido</button>
+          <button aria-pressed="false" data-v="phev">Híbrido enchufable</button>
+          <button aria-pressed="false" data-v="glp">GLP / GNC</button>
+          <button aria-pressed="false" data-v="ev">Eléctrico</button>
+        </div>
+        <div id="yearBox">
+          <div class="year"><h4 style="margin:0">Año de matriculación</h4><output id="yearOut">2014</output></div>
+          <input type="range" id="year" min="1995" max="2026" value="2014" aria-label="Año de matriculación">
+        </div>
+      </div>
+      <div class="panel result rv d1" aria-live="polite">
+        <div class="badge-wrap"><div class="badge c" id="badge">C</div><div><div class="res-t" id="resT">Etiqueta C</div><div class="res-s" id="resS">Gasolina · 2014</div></div></div>
+        <div class="facts" id="facts"></div>
+        <p class="disc">Orientativo. La etiqueta real depende de la homologación Euro de tu vehículo y cada ciudad fija sus propias reglas de ZBE. Consulta siempre la normativa oficial de tu ciudad.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- STATS -->
+  <section class="light"><div class="wrap stats">
+    <div class="stat rv"><div class="n"><span class="count" id="liveStations" data-to="11000">0</span></div><p>gasolineras en toda España</p></div>
+    <div class="stat rv d1"><div class="n"><span class="count" data-to="100">0</span>%</div><p>datos de fuentes oficiales</p></div>
+    <div class="stat rv d2"><div class="n"><span class="count" data-to="30">0</span> min</div><p>entre cada actualización</p></div>
+    <div class="stats-more rv"><a class="btn btn-blue" href="estadisticas.html">Ver todas las estadísticas en directo →</a></div>
+  </div></section>
+
+  <!-- FINAL -->
+  <section class="final" id="descargar">
+    <div class="wrap">
+      <svg class="logo-xl" viewBox="340 180 345 440"><use href="#logo"/></svg>
+      <p class="eyebrow rv" style="color:#BFD3F5">Disponible ya</p>
+      <h2 class="h-xl rv d1">Descárgala hoy</h2>
+      <p class="lead rv d2">Y elige lo mejor para tu coche desde tu próximo repostaje.</p>
+      <div class="stores rv d3">
+        <div class="store"><a class="appstore" href="https://apps.apple.com/es/app/id6823373113" target="_blank" rel="noopener"><svg><use href="#apple"/></svg><span><small>Descárgalo en el</small><b>App Store</b></span></a><div class="qrbox"><svg viewBox="0 0 100 100" width="132" height="132" aria-hidden="true"><svg x="0" y="0" width="100" height="100" viewBox="0 0 45 45" shape-rendering="crispEdges"><rect width="45" height="45" fill="#fff"/><path d="M4 4h7v1h-7zM13 4h3v1h-3zM19 4h2v1h-2zM22 4h1v1h-1zM24 4h2v1h-2zM27 4h1v1h-1zM29 4h3v1h-3zM34 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h4v1h-4zM17 5h2v1h-2zM23 5h5v1h-5zM29 5h2v1h-2zM32 5h1v1h-1zM34 5h1v1h-1zM40 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM13 6h1v1h-1zM16 6h3v1h-3zM21 6h1v1h-1zM23 6h1v1h-1zM25 6h1v1h-1zM28 6h1v1h-1zM31 6h1v1h-1zM34 6h1v1h-1zM36 6h3v1h-3zM40 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM13 7h3v1h-3zM18 7h2v1h-2zM21 7h3v1h-3zM25 7h3v1h-3zM29 7h1v1h-1zM31 7h2v1h-2zM34 7h1v1h-1zM36 7h3v1h-3zM40 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM13 8h1v1h-1zM15 8h1v1h-1zM19 8h2v1h-2zM23 8h1v1h-1zM27 8h1v1h-1zM30 8h2v1h-2zM34 8h1v1h-1zM36 8h3v1h-3zM40 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM14 9h1v1h-1zM17 9h2v1h-2zM21 9h3v1h-3zM26 9h3v1h-3zM32 9h1v1h-1zM34 9h1v1h-1zM40 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM32 10h1v1h-1zM34 10h7v1h-7zM12 11h4v1h-4zM18 11h2v1h-2zM21 11h9v1h-9zM8 12h4v1h-4zM14 12h1v1h-1zM19 12h3v1h-3zM23 12h3v1h-3zM27 12h1v1h-1zM29 12h1v1h-1zM31 12h2v1h-2zM34 12h2v1h-2zM39 12h1v1h-1zM5 13h2v1h-2zM8 13h1v1h-1zM12 13h1v1h-1zM14 13h1v1h-1zM19 13h1v1h-1zM21 13h1v1h-1zM24 13h4v1h-4zM30 13h1v1h-1zM33 13h1v1h-1zM36 13h1v1h-1zM38 13h1v1h-1zM4 14h1v1h-1zM7 14h4v1h-4zM12 14h1v1h-1zM15 14h3v1h-3zM20 14h1v1h-1zM22 14h1v1h-1zM25 14h1v1h-1zM27 14h1v1h-1zM29 14h3v1h-3zM33 14h1v1h-1zM35 14h3v1h-3zM39 14h1v1h-1zM7 15h2v1h-2zM11 15h2v1h-2zM15 15h1v1h-1zM17 15h6v1h-6zM24 15h5v1h-5zM30 15h4v1h-4zM37 15h1v1h-1zM5 16h1v1h-1zM7 16h1v1h-1zM10 16h6v1h-6zM18 16h10v1h-10zM32 16h4v1h-4zM38 16h2v1h-2zM4 17h5v1h-5zM11 17h2v1h-2zM15 17h2v1h-2zM18 17h3v1h-3zM22 17h1v1h-1zM24 17h1v1h-1zM26 17h3v1h-3zM30 17h4v1h-4zM35 17h2v1h-2zM38 17h2v1h-2zM4 18h4v1h-4zM9 18h4v1h-4zM14 18h2v1h-2zM17 18h3v1h-3zM23 18h2v1h-2zM26 18h1v1h-1zM29 18h5v1h-5zM35 18h4v1h-4zM4 19h3v1h-3zM9 19h1v1h-1zM11 19h4v1h-4zM16 19h2v1h-2zM20 19h1v1h-1zM22 19h1v1h-1zM26 19h1v1h-1zM31 19h3v1h-3zM38 19h2v1h-2zM5 20h1v1h-1zM10 20h1v1h-1zM13 20h2v1h-2zM16 20h1v1h-1zM18 20h1v1h-1zM20 20h3v1h-3zM24 20h1v1h-1zM33 20h2v1h-2zM37 20h2v1h-2zM40 20h1v1h-1zM4 21h4v1h-4zM11 21h3v1h-3zM15 21h1v1h-1zM17 21h1v1h-1zM19 21h1v1h-1zM21 21h2v1h-2zM25 21h3v1h-3zM30 21h4v1h-4zM36 21h1v1h-1zM7 22h1v1h-1zM9 22h2v1h-2zM17 22h2v1h-2zM21 22h1v1h-1zM25 22h1v1h-1zM28 22h5v1h-5zM34 22h2v1h-2zM4 23h2v1h-2zM12 23h2v1h-2zM17 23h7v1h-7zM30 23h2v1h-2zM34 23h1v1h-1zM37 23h3v1h-3zM5 24h1v1h-1zM7 24h4v1h-4zM13 24h1v1h-1zM15 24h1v1h-1zM17 24h4v1h-4zM22 24h3v1h-3zM26 24h1v1h-1zM28 24h1v1h-1zM31 24h1v1h-1zM33 24h2v1h-2zM38 24h1v1h-1zM40 24h1v1h-1zM9 25h1v1h-1zM15 25h2v1h-2zM18 25h2v1h-2zM21 25h2v1h-2zM25 25h1v1h-1zM27 25h1v1h-1zM29 25h3v1h-3zM36 25h3v1h-3zM4 26h2v1h-2zM10 26h3v1h-3zM14 26h1v1h-1zM16 26h5v1h-5zM22 26h2v1h-2zM25 26h3v1h-3zM31 26h3v1h-3zM39 26h1v1h-1zM6 27h3v1h-3zM11 27h1v1h-1zM13 27h1v1h-1zM15 27h1v1h-1zM17 27h1v1h-1zM20 27h9v1h-9zM30 27h1v1h-1zM32 27h1v1h-1zM34 27h2v1h-2zM38 27h2v1h-2zM4 28h2v1h-2zM9 28h2v1h-2zM12 28h8v1h-8zM23 28h3v1h-3zM27 28h1v1h-1zM29 28h3v1h-3zM34 28h1v1h-1zM36 28h1v1h-1zM38 28h1v1h-1zM40 28h1v1h-1zM4 29h1v1h-1zM8 29h2v1h-2zM14 29h4v1h-4zM20 29h2v1h-2zM24 29h1v1h-1zM28 29h2v1h-2zM32 29h1v1h-1zM34 29h1v1h-1zM36 29h1v1h-1zM38 29h1v1h-1zM6 30h2v1h-2zM9 30h2v1h-2zM13 30h5v1h-5zM19 30h2v1h-2zM22 30h1v1h-1zM24 30h5v1h-5zM32 30h2v1h-2zM37 30h1v1h-1zM7 31h2v1h-2zM11 31h4v1h-4zM18 31h2v1h-2zM23 31h1v1h-1zM25 31h1v1h-1zM27 31h1v1h-1zM30 31h1v1h-1zM34 31h2v1h-2zM38 31h1v1h-1zM40 31h1v1h-1zM4 32h4v1h-4zM9 32h6v1h-6zM17 32h1v1h-1zM20 32h4v1h-4zM31 32h7v1h-7zM39 32h1v1h-1zM12 33h1v1h-1zM16 33h1v1h-1zM19 33h1v1h-1zM22 33h1v1h-1zM24 33h3v1h-3zM28 33h2v1h-2zM31 33h2v1h-2zM36 33h2v1h-2zM39 33h1v1h-1zM4 34h7v1h-7zM12 34h1v1h-1zM14 34h1v1h-1zM18 34h3v1h-3zM22 34h1v1h-1zM25 34h1v1h-1zM27 34h1v1h-1zM29 34h1v1h-1zM32 34h1v1h-1zM34 34h1v1h-1zM36 34h3v1h-3zM4 35h1v1h-1zM10 35h1v1h-1zM12 35h6v1h-6zM21 35h8v1h-8zM30 35h1v1h-1zM32 35h1v1h-1zM36 35h1v1h-1zM38 35h2v1h-2zM4 36h1v1h-1zM6 36h3v1h-3zM10 36h1v1h-1zM12 36h1v1h-1zM15 36h1v1h-1zM17 36h1v1h-1zM19 36h2v1h-2zM23 36h1v1h-1zM26 36h1v1h-1zM28 36h1v1h-1zM32 36h7v1h-7zM40 36h1v1h-1zM4 37h1v1h-1zM6 37h3v1h-3zM10 37h1v1h-1zM13 37h2v1h-2zM16 37h3v1h-3zM21 37h1v1h-1zM24 37h2v1h-2zM30 37h2v1h-2zM34 37h1v1h-1zM37 37h2v1h-2zM4 38h1v1h-1zM6 38h3v1h-3zM10 38h1v1h-1zM13 38h1v1h-1zM17 38h1v1h-1zM20 38h1v1h-1zM22 38h1v1h-1zM24 38h1v1h-1zM31 38h2v1h-2zM34 38h2v1h-2zM37 38h1v1h-1zM39 38h1v1h-1zM4 39h1v1h-1zM10 39h1v1h-1zM14 39h3v1h-3zM19 39h1v1h-1zM24 39h1v1h-1zM28 39h1v1h-1zM30 39h2v1h-2zM33 39h1v1h-1zM35 39h1v1h-1zM38 39h2v1h-2zM4 40h7v1h-7zM13 40h1v1h-1zM19 40h6v1h-6zM27 40h2v1h-2zM31 40h1v1h-1zM34 40h1v1h-1zM36 40h1v1h-1zM38 40h3v1h-3z" fill="#000"/></svg></svg><span>iPhone y iPad</span></div></div>
+        <div class="store"><a class="appstore" href="https://play.google.com/store/apps/details?id=com.gasolcity.app" target="_blank" rel="noopener"><svg><use href="#gplay"/></svg><span><small>Disponible en</small><b>Google Play</b></span></a><div class="qrbox"><svg viewBox="0 0 100 100" width="132" height="132" aria-hidden="true"><svg x="0" y="0" width="100" height="100" viewBox="0 0 53 53" shape-rendering="crispEdges"><rect width="53" height="53" fill="#fff"/><path d="M4 4h7v1h-7zM13 4h2v1h-2zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h3v1h-3zM24 4h3v1h-3zM28 4h2v1h-2zM32 4h1v1h-1zM34 4h1v1h-1zM36 4h2v1h-2zM40 4h1v1h-1zM42 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM13 5h3v1h-3zM19 5h1v1h-1zM21 5h1v1h-1zM23 5h3v1h-3zM28 5h2v1h-2zM33 5h1v1h-1zM35 5h2v1h-2zM39 5h1v1h-1zM42 5h1v1h-1zM48 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h1v1h-1zM17 6h1v1h-1zM19 6h3v1h-3zM23 6h1v1h-1zM29 6h1v1h-1zM32 6h2v1h-2zM36 6h2v1h-2zM39 6h1v1h-1zM42 6h1v1h-1zM44 6h3v1h-3zM48 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM12 7h1v1h-1zM17 7h3v1h-3zM21 7h2v1h-2zM25 7h1v1h-1zM28 7h1v1h-1zM30 7h2v1h-2zM33 7h1v1h-1zM35 7h3v1h-3zM39 7h2v1h-2zM42 7h1v1h-1zM44 7h3v1h-3zM48 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM13 8h2v1h-2zM16 8h3v1h-3zM20 8h1v1h-1zM23 8h6v1h-6zM34 8h1v1h-1zM36 8h1v1h-1zM38 8h3v1h-3zM42 8h1v1h-1zM44 8h3v1h-3zM48 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM16 9h1v1h-1zM20 9h1v1h-1zM22 9h3v1h-3zM28 9h1v1h-1zM30 9h1v1h-1zM32 9h1v1h-1zM37 9h1v1h-1zM42 9h1v1h-1zM48 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM32 10h1v1h-1zM34 10h1v1h-1zM36 10h1v1h-1zM38 10h1v1h-1zM40 10h1v1h-1zM42 10h7v1h-7zM13 11h1v1h-1zM16 11h6v1h-6zM24 11h1v1h-1zM28 11h3v1h-3zM33 11h3v1h-3zM37 11h4v1h-4zM7 12h2v1h-2zM10 12h2v1h-2zM13 12h4v1h-4zM18 12h1v1h-1zM20 12h9v1h-9zM31 12h5v1h-5zM39 12h1v1h-1zM45 12h2v1h-2zM4 13h1v1h-1zM6 13h2v1h-2zM13 13h6v1h-6zM20 13h1v1h-1zM25 13h1v1h-1zM30 13h1v1h-1zM33 13h4v1h-4zM38 13h1v1h-1zM40 13h3v1h-3zM44 13h1v1h-1zM46 13h1v1h-1zM5 14h2v1h-2zM9 14h4v1h-4zM15 14h1v1h-1zM17 14h1v1h-1zM20 14h1v1h-1zM22 14h7v1h-7zM31 14h1v1h-1zM35 14h1v1h-1zM37 14h4v1h-4zM44 14h1v1h-1zM46 14h3v1h-3zM5 15h3v1h-3zM9 15h1v1h-1zM12 15h6v1h-6zM19 15h1v1h-1zM22 15h2v1h-2zM25 15h6v1h-6zM36 15h2v1h-2zM40 15h1v1h-1zM43 15h1v1h-1zM46 15h2v1h-2zM6 16h2v1h-2zM10 16h5v1h-5zM18 16h3v1h-3zM28 16h1v1h-1zM32 16h2v1h-2zM36 16h2v1h-2zM41 16h4v1h-4zM47 16h2v1h-2zM5 17h1v1h-1zM8 17h1v1h-1zM12 17h1v1h-1zM15 17h1v1h-1zM18 17h1v1h-1zM20 17h2v1h-2zM25 17h4v1h-4zM31 17h7v1h-7zM39 17h2v1h-2zM42 17h3v1h-3zM47 17h1v1h-1zM10 18h2v1h-2zM13 18h3v1h-3zM18 18h1v1h-1zM20 18h1v1h-1zM37 18h1v1h-1zM40 18h1v1h-1zM42 18h3v1h-3zM46 18h1v1h-1zM4 19h1v1h-1zM8 19h1v1h-1zM15 19h2v1h-2zM18 19h1v1h-1zM20 19h2v1h-2zM29 19h2v1h-2zM34 19h1v1h-1zM38 19h1v1h-1zM40 19h3v1h-3zM45 19h2v1h-2zM48 19h1v1h-1zM5 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM12 20h1v1h-1zM14 20h1v1h-1zM16 20h2v1h-2zM19 20h2v1h-2zM22 20h2v1h-2zM27 20h1v1h-1zM31 20h1v1h-1zM33 20h2v1h-2zM36 20h2v1h-2zM39 20h1v1h-1zM41 20h1v1h-1zM43 20h1v1h-1zM47 20h2v1h-2zM6 21h1v1h-1zM8 21h2v1h-2zM11 21h1v1h-1zM14 21h4v1h-4zM19 21h1v1h-1zM22 21h1v1h-1zM25 21h1v1h-1zM28 21h8v1h-8zM37 21h5v1h-5zM43 21h2v1h-2zM46 21h1v1h-1zM48 21h1v1h-1zM4 22h1v1h-1zM7 22h2v1h-2zM10 22h2v1h-2zM16 22h4v1h-4zM21 22h1v1h-1zM23 22h5v1h-5zM29 22h1v1h-1zM31 22h4v1h-4zM40 22h2v1h-2zM44 22h1v1h-1zM48 22h1v1h-1zM4 23h2v1h-2zM8 23h2v1h-2zM11 23h1v1h-1zM15 23h1v1h-1zM17 23h3v1h-3zM22 23h3v1h-3zM26 23h1v1h-1zM29 23h5v1h-5zM35 23h1v1h-1zM37 23h4v1h-4zM44 23h4v1h-4zM4 24h1v1h-1zM8 24h5v1h-5zM14 24h3v1h-3zM20 24h1v1h-1zM22 24h7v1h-7zM32 24h1v1h-1zM38 24h1v1h-1zM40 24h5v1h-5zM48 24h1v1h-1zM4 25h3v1h-3zM8 25h1v1h-1zM12 25h3v1h-3zM16 25h1v1h-1zM18 25h2v1h-2zM21 25h1v1h-1zM24 25h1v1h-1zM28 25h1v1h-1zM32 25h2v1h-2zM36 25h5v1h-5zM44 25h2v1h-2zM4 26h1v1h-1zM7 26h2v1h-2zM10 26h1v1h-1zM12 26h1v1h-1zM16 26h1v1h-1zM18 26h1v1h-1zM20 26h2v1h-2zM23 26h2v1h-2zM26 26h1v1h-1zM28 26h2v1h-2zM33 26h3v1h-3zM37 26h4v1h-4zM42 26h1v1h-1zM44 26h1v1h-1zM47 26h2v1h-2zM5 27h1v1h-1zM7 27h2v1h-2zM12 27h1v1h-1zM14 27h3v1h-3zM20 27h2v1h-2zM24 27h1v1h-1zM28 27h1v1h-1zM30 27h1v1h-1zM35 27h2v1h-2zM39 27h2v1h-2zM44 27h1v1h-1zM46 27h3v1h-3zM4 28h2v1h-2zM8 28h6v1h-6zM17 28h2v1h-2zM20 28h1v1h-1zM22 28h1v1h-1zM24 28h11v1h-11zM36 28h1v1h-1zM38 28h7v1h-7zM5 29h3v1h-3zM9 29h1v1h-1zM11 29h2v1h-2zM15 29h3v1h-3zM20 29h1v1h-1zM22 29h2v1h-2zM27 29h2v1h-2zM30 29h3v1h-3zM34 29h1v1h-1zM36 29h1v1h-1zM39 29h2v1h-2zM43 29h1v1h-1zM47 29h1v1h-1zM5 30h1v1h-1zM7 30h1v1h-1zM10 30h1v1h-1zM12 30h1v1h-1zM15 30h1v1h-1zM18 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM27 30h1v1h-1zM29 30h5v1h-5zM35 30h1v1h-1zM37 30h1v1h-1zM39 30h1v1h-1zM45 30h2v1h-2zM5 31h2v1h-2zM11 31h1v1h-1zM14 31h1v1h-1zM17 31h1v1h-1zM19 31h1v1h-1zM21 31h3v1h-3zM25 31h2v1h-2zM30 31h1v1h-1zM32 31h1v1h-1zM37 31h1v1h-1zM39 31h1v1h-1zM43 31h1v1h-1zM45 31h3v1h-3zM4 32h1v1h-1zM8 32h4v1h-4zM17 32h2v1h-2zM29 32h1v1h-1zM33 32h4v1h-4zM38 32h2v1h-2zM41 32h1v1h-1zM44 32h2v1h-2zM47 32h2v1h-2zM4 33h2v1h-2zM7 33h2v1h-2zM12 33h3v1h-3zM16 33h1v1h-1zM21 33h3v1h-3zM25 33h1v1h-1zM29 33h5v1h-5zM35 33h12v1h-12zM48 33h1v1h-1zM8 34h1v1h-1zM10 34h4v1h-4zM15 34h1v1h-1zM18 34h1v1h-1zM21 34h7v1h-7zM31 34h3v1h-3zM40 34h1v1h-1zM42 34h3v1h-3zM48 34h1v1h-1zM4 35h3v1h-3zM8 35h1v1h-1zM11 35h3v1h-3zM15 35h3v1h-3zM20 35h2v1h-2zM24 35h1v1h-1zM27 35h2v1h-2zM31 35h1v1h-1zM33 35h3v1h-3zM39 35h1v1h-1zM41 35h1v1h-1zM43 35h1v1h-1zM45 35h4v1h-4zM5 36h1v1h-1zM7 36h1v1h-1zM9 36h2v1h-2zM13 36h6v1h-6zM21 36h1v1h-1zM23 36h1v1h-1zM25 36h1v1h-1zM29 36h2v1h-2zM34 36h1v1h-1zM41 36h1v1h-1zM43 36h1v1h-1zM4 37h2v1h-2zM8 37h1v1h-1zM11 37h2v1h-2zM14 37h1v1h-1zM17 37h3v1h-3zM22 37h2v1h-2zM26 37h1v1h-1zM28 37h1v1h-1zM30 37h2v1h-2zM33 37h3v1h-3zM37 37h2v1h-2zM40 37h2v1h-2zM43 37h5v1h-5zM8 38h1v1h-1zM10 38h1v1h-1zM12 38h2v1h-2zM16 38h1v1h-1zM18 38h2v1h-2zM24 38h4v1h-4zM30 38h1v1h-1zM32 38h1v1h-1zM35 38h1v1h-1zM37 38h2v1h-2zM41 38h2v1h-2zM44 38h5v1h-5zM5 39h4v1h-4zM11 39h1v1h-1zM16 39h1v1h-1zM18 39h2v1h-2zM23 39h2v1h-2zM27 39h1v1h-1zM29 39h4v1h-4zM36 39h1v1h-1zM38 39h1v1h-1zM42 39h2v1h-2zM46 39h3v1h-3zM4 40h1v1h-1zM7 40h2v1h-2zM10 40h2v1h-2zM13 40h2v1h-2zM17 40h1v1h-1zM19 40h2v1h-2zM22 40h1v1h-1zM24 40h5v1h-5zM30 40h1v1h-1zM32 40h3v1h-3zM36 40h1v1h-1zM39 40h6v1h-6zM47 40h2v1h-2zM12 41h1v1h-1zM16 41h1v1h-1zM20 41h3v1h-3zM24 41h1v1h-1zM28 41h1v1h-1zM30 41h1v1h-1zM32 41h2v1h-2zM39 41h2v1h-2zM44 41h2v1h-2zM47 41h1v1h-1zM4 42h7v1h-7zM12 42h4v1h-4zM19 42h3v1h-3zM24 42h1v1h-1zM26 42h1v1h-1zM28 42h2v1h-2zM34 42h1v1h-1zM36 42h2v1h-2zM40 42h1v1h-1zM42 42h1v1h-1zM44 42h2v1h-2zM47 42h1v1h-1zM4 43h1v1h-1zM10 43h1v1h-1zM13 43h1v1h-1zM18 43h3v1h-3zM24 43h1v1h-1zM28 43h1v1h-1zM30 43h1v1h-1zM38 43h1v1h-1zM40 43h1v1h-1zM44 43h5v1h-5zM4 44h1v1h-1zM6 44h3v1h-3zM10 44h1v1h-1zM12 44h1v1h-1zM18 44h11v1h-11zM32 44h1v1h-1zM35 44h2v1h-2zM38 44h8v1h-8zM4 45h1v1h-1zM6 45h3v1h-3zM10 45h1v1h-1zM12 45h1v1h-1zM14 45h2v1h-2zM18 45h1v1h-1zM20 45h2v1h-2zM25 45h2v1h-2zM29 45h3v1h-3zM34 45h1v1h-1zM37 45h3v1h-3zM43 45h1v1h-1zM45 45h4v1h-4zM4 46h1v1h-1zM6 46h3v1h-3zM10 46h1v1h-1zM13 46h3v1h-3zM17 46h1v1h-1zM19 46h7v1h-7zM28 46h1v1h-1zM30 46h2v1h-2zM35 46h3v1h-3zM40 46h1v1h-1zM44 46h2v1h-2zM47 46h2v1h-2zM4 47h1v1h-1zM10 47h1v1h-1zM13 47h1v1h-1zM17 47h2v1h-2zM20 47h1v1h-1zM22 47h1v1h-1zM24 47h2v1h-2zM27 47h2v1h-2zM33 47h1v1h-1zM35 47h1v1h-1zM37 47h2v1h-2zM40 47h3v1h-3zM45 47h4v1h-4zM4 48h7v1h-7zM14 48h2v1h-2zM17 48h2v1h-2zM21 48h4v1h-4zM26 48h3v1h-3zM30 48h2v1h-2zM34 48h1v1h-1zM37 48h1v1h-1zM39 48h1v1h-1zM42 48h1v1h-1z" fill="#000"/></svg></svg><span>Android</span></div></div>
+      </div>
+      <span class="free">Gratis</span>
+      <div class="bar"><i style="background:var(--green)"></i><i style="background:var(--yellow)"></i><i style="background:var(--red)"></i></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="brand"><svg><use href="#logo"/></svg><span><b>Gasol</b><span>Citys</span></span></a>
+    <span>Mediante datos oficiales · © <span id="yr"></span> GasolCitys</span>
+    <span class="contact"><a href="https://www.instagram.com/gasolcitys/" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-3px;margin-right:6px"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@gasolcitys</a><a href="mailto:doappsbyc@gmail.com">✉️ doappsbyc@gmail.com</a></span>
+  </div>
+</footer>
+
+<script>
+/* ===== Ajustes: pon aquí tus enlaces reales ===== */
+const CONFIG = {
+  appStoreUrl: 'https://apps.apple.com/es/app/id6823373113',
+  playUrl: 'https://play.google.com/store/apps/details?id=com.gasolcity.app',
+  instagramUrl: 'https://www.instagram.com/gasolcitys/'
+};
+document.querySelectorAll('.js-store').forEach(a => { a.href = CONFIG.appStoreUrl; a.target = '_blank'; a.rel = 'noopener'; });
+document.querySelectorAll('.js-ig').forEach(a => { a.href = CONFIG.instagramUrl; a.target = '_blank'; a.rel = 'noopener'; });
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+
+/* nav */
+const nav = document.getElementById('nav');
+
+/* reveal */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0, rootMargin: '0px 0px -6% 0px' });
+document.querySelectorAll('.rv, .trio-row').forEach(el => io.observe(el));
+
+/* manifesto words */
+const wordsEl = document.getElementById('words');
+wordsEl.innerHTML = wordsEl.textContent.split(' ').map(w => w.startsWith('*') ? `<span class="w hl">${w.slice(1)}</span>` : `<span class="w">${w}</span>`).join(' ');
+const words = [...wordsEl.querySelectorAll('.w')];
+const qs = [...document.querySelectorAll('.q')];
+qs.forEach(q => { q.style.left = q.dataset.x + '%'; q.style.top = q.dataset.y + '%'; });
+
+/* story */
+const story = document.getElementById('app');
+const steps = [...document.querySelectorAll('.step')];
+const dotBars = [...document.querySelectorAll('.dots b')];
+const phone = document.getElementById('phone');
+const screens = [...document.querySelectorAll('.scr')];
+const tabs = [...document.querySelectorAll('#tabbar a')];
+const tabbar = document.getElementById('tabbar');
+const N = steps.length;
+const manifesto = document.getElementById('manifesto');
+const heroCopy = document.getElementById('heroCopy');
+
+function sectionProgress(el) {
+  const r = el.getBoundingClientRect();
+  return clamp(-r.top / (r.height - innerHeight));
+}
+
+let lastStep = -1;
+function onScroll() {
+  const y = scrollY;
+  nav.classList.toggle('scrolled', y > 20);
+  heroCopy.style.opacity = 1 - clamp(y / (innerHeight * .55));
+  heroCopy.style.transform = `translateY(${y * -.25}px) scale(${1 - clamp(y / innerHeight) * .06})`;
+
+  const mp = sectionProgress(manifesto);
+  const lit = Math.floor(clamp((mp - .05) / .7) * words.length);
+  words.forEach((w, i) => w.classList.toggle('on', i < lit));
+  qs.forEach((q, i) => {
+    const t = clamp((mp - i * .08) / .35);
+    const out = clamp((mp - .7) / .2);
+    q.style.opacity = Math.sin(t * Math.PI / 2) * (1 - out);
+    q.style.transform = `translate3d(0,${(1 - t) * 60 - mp * 80}px,0) scale(${.9 + t * .1})`;
+    q.style.filter = `blur(${out * 8}px)`;
+  });
+
+  const sp = sectionProgress(story);
+  const s = Math.min(N - 1, Math.floor(sp * N));
+  if (s !== lastStep) {
+    steps.forEach((el, i) => el.classList.toggle('on', i === s));
+    screens.forEach((el, i) => { el.classList.toggle('on', i === s); el.classList.toggle('out', i < s); });
+    const t = +screens[s].dataset.tab;
+    tabs.forEach((el, i) => el.classList.toggle('on', i === t));
+    tabbar.style.setProperty('--tl', t * 20 + '%');
+    lastStep = s;
+  }
+  dotBars.forEach((b, i) => b.style.transform = `scaleX(${clamp(sp * N - i)})`);
+  phone.style.setProperty('--ry', lerp(-18, 16, sp) + 'deg');
+  phone.style.setProperty('--rx', lerp(10, 4, sp) + 'deg');
+
+  window.__heroScroll = clamp(y / innerHeight);
+}
+let ticking = false;
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false; }); } }, { passive: true });
+addEventListener('resize', onScroll);
+onScroll();
+
+/* tilt cards */
+if (!reduce && matchMedia('(hover:hover)').matches) {
+  document.querySelectorAll('.tilt').forEach(c => {
+    c.addEventListener('pointermove', e => {
+      const r = c.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      c.style.transform = `perspective(900px) rotateX(${(.5 - py) * 8}deg) rotateY(${(px - .5) * 10}deg) translateY(-4px)`;
+      c.style.setProperty('--mx', px * 100 + '%'); c.style.setProperty('--my', py * 100 + '%');
+    });
+    c.addEventListener('pointerleave', () => { c.style.transform = ''; });
+  });
+}
+
+/* counters */
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, to = +el.dataset.to, t0 = performance.now(), dur = 1600;
+  const fmt = n => n.toLocaleString('es-ES');
+  (function step(t) {
+    const k = clamp((t - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - k, 3)));
+    el.textContent = fmt(v);
+    if (k < 1) requestAnimationFrame(step);
+  })(t0);
+  cio.unobserve(el);
+}), { threshold: .6 });
+fetch('data/stats.json', { cache: 'no-store' }).then(r => r.json()).then(d => {
+  const el = document.getElementById('liveStations'); if (el) el.dataset.to = d.totals.stations;
+  renderPhoneStats(d);
+}).catch(() => {}).finally(() => document.querySelectorAll('.count').forEach(el => cio.observe(el)));
+
+/* pantalla Estadísticas del móvil, con los datos oficiales */
+function renderPhoneStats(d) {
+  const f3 = v => v.toLocaleString('es-ES', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+  document.querySelectorAll('.js-st').forEach(e => e.textContent = d.totals.stations.toLocaleString('es-ES'));
+  const m = d.official.match(/(\d+:\d+)/);
+  document.getElementById('phLive').textContent = 'Actualizado ' + (m ? 'a las ' + m[1] : '') + ' · cada 30 min';
+  document.getElementById('phTiles').innerHTML = [['g95', 'Gasolina 95'], ['diesel', 'Diésel'], ['g98', 'Gasolina 98'], ['dieselp', 'Diésel Prem.'], ['glp', 'GLP'], ['adblue', 'AdBlue']]
+    .map(([k, n]) => '<div><small>' + n + '</small><b>' + f3(d.fuels[k].avg) + '</b></div>').join('');
+  document.getElementById('phTop').innerHTML = d.provinces.filter(p => p.g95).sort((a, b) => a.g95.avg - b.g95.avg).slice(0, 3)
+    .map((p, i) => '<div class="r"><div><span>' + (i + 1) + '</span>' + p.name + '</div><b>' + f3(p.g95.avg) + '</b></div>').join('');
+  const cv = document.getElementById('phMap'), ctx = cv.getContext('2d');
+  const draw = () => {
+    const W = cv.clientWidth, H = cv.clientHeight; if (!W) return;
+    const dpr = Math.min(devicePixelRatio || 1, 2); cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const f = d.fuels.g95, P = d.points, k = Math.cos(40 * Math.PI / 180), B = { x0: -9.6, x1: 4.6, y0: 35.8, y1: 44 };
+    const sc = Math.min(W / ((B.x1 - B.x0) * k), H / (B.y1 - B.y0)), ox = (W - (B.x1 - B.x0) * k * sc) / 2;
+    const pts = [];
+    for (let i = 0; i < P.g95.length; i++) { const v = P.g95[i] / 1000, la = P.lat[i] / 100; if (v && la > 35.8) pts.push([ox + (P.lon[i] / 100 - B.x0) * k * sc, (B.y1 - la) * sc, v]); }
+    pts.sort((a, b) => b[2] - a[2]);
+    for (const [x, y, v] of pts) { ctx.fillStyle = v <= f.p33 ? '#22B866' : v >= f.p67 ? '#FF515B' : '#FFC531'; ctx.fillRect(x - .9, y - .9, 1.8, 1.8); }
+  };
+  draw(); addEventListener('resize', draw);
+}
+
+/* checker */
+const C = { green: '#22B866', yellow: '#FFC531', red: '#FF515B', blue: '#CFE0FA' };
+const engineBtns = [...document.querySelectorAll('#engine button')];
+const yearIn = document.getElementById('year'), yearOut = document.getElementById('yearOut'), yearBox = document.getElementById('yearBox');
+const badge = document.getElementById('badge'), resT = document.getElementById('resT'), resS = document.getElementById('resS'), facts = document.getElementById('facts');
+let engine = 'gas';
+const names = { gas: 'Gasolina', diesel: 'Diésel', hev: 'Híbrido', phev: 'Híbrido enchufable', glp: 'GLP / GNC', ev: 'Eléctrico' };
+
+function evaluate(eng, yr) {
+  let label, fuel, extra = null;
+  if (eng === 'ev') { label = 'cero'; fuel = ['Electricidad', 'Busca puntos de recarga cerca de tu ruta.']; }
+  else if (eng === 'phev') { label = 'cero'; fuel = ['Gasolina 95 + recarga', 'CERO si su autonomía eléctrica supera los 40 km; si no, ECO.']; }
+  else if (eng === 'hev') { label = 'eco'; fuel = ['Gasolina 95', 'Revisa en la tapa del depósito si admite E10.']; }
+  else if (eng === 'glp') { label = 'eco'; fuel = ['GLP o GNC', 'No todas las gasolineras lo tienen: filtra antes de salir.']; }
+  else if (eng === 'gas') {
+    label = yr >= 2006 ? 'c' : yr >= 2001 ? 'b' : 'none';
+    fuel = yr >= 2011
+      ? ['Gasolina 95 E5 o E10', 'Casi todos los coches desde 2011 admiten E10. Confírmalo en la tapa del depósito.']
+      : ['Gasolina 95 E5', 'Evita E10 salvo que el fabricante lo indique. 98 solo si lo pide tu manual.'];
+  } else {
+    label = yr >= 2015 ? 'c' : yr >= 2006 ? 'b' : 'none';
+    fuel = ['Diésel', 'Diésel+ solo aporta si tu manual lo recomienda.'];
+    if (yr >= 2015) extra = ['Puede necesitar AdBlue', 'Muchos diésel Euro 6 lo usan. Encuéntralo en la app.'];
+  }
+  const zbe = {
+    cero: [C.blue, 'Acceso libre a las ZBE', 'Y ventajas de aparcamiento en muchas ciudades.'],
+    eco: [C.green, 'Acceso libre a la mayoría de ZBE', 'Algunas ciudades limitan el aparcamiento.'],
+    c: [C.green, 'Puedes entrar en las ZBE', 'Con limitaciones en episodios de alta contaminación.'],
+    b: [C.yellow, 'Acceso con restricciones', 'Cada vez más ciudades limitan la etiqueta B.'],
+    none: [C.red, 'Sin acceso a muchas ZBE', 'Consulta la normativa de tu ciudad antes de ir al centro.']
+  }[label];
+  return { label, fuel, extra, zbe };
+}
+
+function render(pop) {
+  const yr = +yearIn.value;
+  const needsYear = engine === 'gas' || engine === 'diesel';
+  yearBox.style.display = needsYear ? '' : 'none';
+  yearOut.textContent = yr;
+  yearIn.style.setProperty('--p', ((yr - 1995) / (2026 - 1995) * 100) + '%');
+  const r = evaluate(engine, yr);
+  const txt = { cero: '0', eco: 'ECO', c: 'C', b: 'B', none: 'Sin<br>etiqueta' }[r.label];
+  const prev = badge.className;
+  badge.className = 'badge ' + r.label;
+  badge.innerHTML = txt;
+  if (pop || prev !== badge.className) { badge.classList.remove('pop'); void badge.offsetWidth; badge.classList.add('pop'); }
+  resT.textContent = r.label === 'none' ? 'Sin etiqueta DGT' : 'Etiqueta ' + (r.label === 'cero' ? 'CERO' : r.label.toUpperCase());
+  resS.textContent = names[engine] + (needsYear ? ' · ' + yr : '');
+  const rows = [[C.green, r.fuel[0], r.fuel[1]], [r.zbe[0], r.zbe[1], r.zbe[2]]];
+  if (r.extra) rows.push([C.blue, r.extra[0], r.extra[1]]);
+  facts.innerHTML = rows.map(([c, b, s]) => `<div class="fact"><i style="background:${c};box-shadow:0 0 12px ${c}"></i><div><b>${b}</b><span>${s}</span></div></div>`).join('');
+}
+engineBtns.forEach(b => b.addEventListener('click', () => {
+  engine = b.dataset.v;
+  engineBtns.forEach(x => x.setAttribute('aria-pressed', x === b));
+  render(true);
+}));
+yearIn.addEventListener('input', () => render(false));
+render(false);
+</script>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const canvas = document.getElementById('gl');
+const hero = document.getElementById('hero');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), .04).texture;
+
+const camera = new THREE.PerspectiveCamera(32, 1, .1, 100);
+
+// --- logo built from the brand SVG path: M640 382 L512 205 L393 360 A146 146 0 1 0 657 462
+const S = 100, OX = 512, OY = 420;
+const P = (x, y) => new THREE.Vector3((x - OX) / S, -(y - OY) / S, 0);
+class Arc extends THREE.Curve {
+  constructor(cx, cy, r, a0, a1) { super(); Object.assign(this, { cx, cy, r, a0, a1 }); }
+  getPoint(t, target = new THREE.Vector3()) {
+    const a = this.a0 + (this.a1 - this.a0) * t;
+    return target.copy(P(this.cx + this.r * Math.cos(a), this.cy + this.r * Math.sin(a)));
+  }
+}
+const R = .23;
+const white = new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .05, roughness: .12, clearcoat: 1, clearcoatRoughness: .04, sheen: .3, sheenColor: new THREE.Color(0x9dbdf5) });
+const logo = new THREE.Group();
+const curves = [
+  new THREE.LineCurve3(P(640, 382), P(512, 205)),
+  new THREE.LineCurve3(P(512, 205), P(393, 360)),
+  new Arc(512, 445, 146, Math.atan2(360 - 445, 393 - 512) + Math.PI * 2, Math.atan2(462 - 445, 657 - 512))
+];
+curves.forEach((c, i) => logo.add(new THREE.Mesh(new THREE.TubeGeometry(c, i === 2 ? 220 : 40, R, 48, false), white)));
+[[640, 382], [512, 205], [393, 360], [657, 462]].forEach(([x, y]) => {
+  const s = new THREE.Mesh(new THREE.SphereGeometry(R, 48, 32), white); s.position.copy(P(x, y)); logo.add(s);
+});
+const lightDefs = [[0x22B866, 539, .42], [0xFFC531, 587.5, .41], [0xFF515B, 636, .42]];
+const lamps = lightDefs.map(([col, x, w]) => {
+  const m = new THREE.MeshPhysicalMaterial({ color: col, emissive: col, emissiveIntensity: 0, roughness: .3, clearcoat: 1, clearcoatRoughness: .1, toneMapped: false, envMapIntensity: .25 });
+  const b = new THREE.Mesh(new RoundedBoxGeometry(w, .46, .56, 6, .1), m);
+  b.position.copy(P(x, 460));
+  logo.add(b);
+  const pl = new THREE.PointLight(col, 0, 4, 2); pl.position.copy(P(x, 460)).add(new THREE.Vector3(0, 0, .7)); logo.add(pl);
+  return { m, pl };
+});
+const root = new THREE.Group(); root.add(logo); scene.add(root);
+
+const key = new THREE.DirectionalLight(0xffffff, 1.2); key.position.set(3, 4, 5); scene.add(key);
+const rim = new THREE.DirectionalLight(0xcfe0fa, 2.5); rim.position.set(-4, 1, -3); scene.add(rim);
+
+// particles
+const N = 700, pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+const palette = [new THREE.Color(0xffffff), new THREE.Color(0xcfe0fa), new THREE.Color(0xa9c6f5), new THREE.Color(0x22b866), new THREE.Color(0xffc531), new THREE.Color(0xff515b)];
+for (let i = 0; i < N; i++) {
+  const r = 3 + Math.random() * 9, th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+  pos.set([r * Math.sin(ph) * Math.cos(th), r * Math.sin(ph) * Math.sin(th) * .6, r * Math.cos(ph) - 3], i * 3);
+  const c = palette[Math.random() < .8 ? (Math.random() * 3) | 0 : 3 + ((Math.random() * 3) | 0)];
+  col.set([c.r, c.g, c.b], i * 3);
+}
+const pg = new THREE.BufferGeometry();
+pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+pg.setAttribute('color', new THREE.BufferAttribute(col, 3));
+const dot = document.createElement('canvas'); dot.width = dot.height = 64;
+const g = dot.getContext('2d'), grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+grd.addColorStop(0, 'rgba(255,255,255,1)'); grd.addColorStop(.4, 'rgba(255,255,255,.35)'); grd.addColorStop(1, 'rgba(255,255,255,0)');
+g.fillStyle = grd; g.fillRect(0, 0, 64, 64);
+const stars = new THREE.Points(pg, new THREE.PointsMaterial({ size: .07, map: new THREE.CanvasTexture(dot), vertexColors: true, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: .8 }));
+scene.add(stars);
+
+let baseY = -.75, baseX = 0;
+function resize() {
+  const w = hero.clientWidth, h = hero.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  const tan = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const zW = (camera.aspect < .8 ? 6.4 : 4.6) / (2 * tan * camera.aspect), zH = 7.4 / (2 * tan);
+  camera.position.set(0, 0, Math.max(zW, zH));
+  const wide = camera.aspect > 1.1 && w >= 900;
+  if (wide) camera.position.z = 6.4 / (2 * tan);
+  const visW = 2 * tan * camera.position.z * camera.aspect;
+  baseX = wide ? visW * .25 : 0;
+  baseY = wide ? -.2 : camera.aspect < .8 ? -2.45 : -1.1;
+  camera.updateProjectionMatrix();
+}
+resize(); addEventListener('resize', resize);
+
+// pointer / drag
+let tx = 0, ty = 0, drag = false, lastX = 0, spin = 0, spinV = 0;
+addEventListener('pointermove', e => {
+  tx = (e.clientX / innerWidth - .5) * 2; ty = (e.clientY / innerHeight - .5) * 2;
+  if (drag) { spinV = (e.clientX - lastX) * .012; spin += spinV; lastX = e.clientX; }
+});
+canvas.style.touchAction = 'pan-y';
+canvas.addEventListener('pointerdown', e => { drag = true; lastX = e.clientX; canvas.style.cursor = 'grabbing'; });
+addEventListener('pointerup', () => { drag = false; canvas.style.cursor = 'grab'; });
+canvas.style.cursor = 'grab';
+
+let visible = true;
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(hero);
+
+const clock = new THREE.Clock();
+let rx = 0, ry = 0;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function frame() {
+  requestAnimationFrame(frame);
+  if (!visible) return;
+  const t = clock.getElapsedTime();
+  const sc = window.__heroScroll || 0;
+  if (!drag) { spinV *= .95; spin += spinV; }
+  rx += ((ty * .25) - rx) * .05;
+  ry += ((tx * .45) - ry) * .05;
+  const idle = reduce ? 0 : Math.sin(t * .6) * .18;
+  logo.rotation.set(rx + Math.sin(t * .8) * .04, ry + idle + spin + sc * Math.PI * 1.2, Math.sin(t * .5) * .03);
+  root.position.y = baseY + Math.sin(t * 1.1) * .07 + sc * 2.2;
+  root.position.x = baseX;
+  root.scale.setScalar(1 - sc * .25);
+  // traffic light boot sequence, then a soft breathing glow
+  lamps.forEach((l, i) => {
+    const on = clamp01((t - .8 - i * .35) * 4);
+    const pulse = .85 + Math.sin(t * 2 + i * 1.3) * .15;
+    l.m.emissiveIntensity = on * .45 * pulse;
+    l.pl.intensity = on * 3 * pulse;
+  });
+  stars.rotation.y = t * .02 + tx * .05;
+  stars.rotation.x = ty * .03;
+  renderer.render(scene, camera);
+}
+const clamp01 = v => Math.min(1, Math.max(0, v));
+frame();
+</script>
+</body>
+</html>

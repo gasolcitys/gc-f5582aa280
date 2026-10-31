@@ -1,0 +1,30 @@
+name: Datos oficiales cada 30 minutos
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stats
+  cancel-in-progress: false
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Descargar precios oficiales y calcular estadísticas
+        run: node scripts/build-stats.mjs
+      - name: Publicar si hay datos nuevos
+        run: |
+          git config user.name "gasolcitys-bot"
+          git config user.email "gasolcitys-bot@users.noreply.github.com"
+          git add data/stats.json
+          git diff --cached --quiet || (git commit -m "Datos oficiales $(TZ=Europe/Madrid date '+%d/%m/%Y %H:%M')" && git pull --rebase -q && git push)
