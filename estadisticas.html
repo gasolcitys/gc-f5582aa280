@@ -670,6 +670,7 @@ setInterval(() => load(false), 5 * 60 * 1000);
 setInterval(updateLive, 30 * 1000);
 let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (S) { renderDive(); renderMap(); renderHistory(); } }, 150); });
 </script>
+<script src="campanas.js"></script>
 <!-- Contador de visitas (GoatCounter): sin cookies ni datos personales -->
 <script data-goatcounter="https://gasolcitys.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
