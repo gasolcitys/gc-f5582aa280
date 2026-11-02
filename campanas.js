@@ -1,7 +1,7 @@
 /* ===== Campañas: lleva el origen de cada visita hasta los enlaces de las tiendas ===== */
 (function () {
   /* Token de proveedor de App Store Connect (el valor de pt= de un enlace de campaña). Vacío: el App Store queda sin etiquetar */
-  const APPLE_PT = '';
+  const APPLE_PT = '129624813';
   const APPLE_ID = '6823373113';
   const CLAVE = 'gc-origen';
   const REDES = { google: /google\./, bing: /bing\./, instagram: /instagram/, facebook: /facebook|fb\.(com|me)/, tiktok: /tiktok/, youtube: /youtube|youtu\.be/, reddit: /reddit/, x: /^t\.co$|^(www\.)?x\.com$|twitter/, whatsapp: /whatsapp/, telegram: /telegram|^t\.me$/, linkedin: /linkedin|lnkd\.in/, pinterest: /pinterest/ };
