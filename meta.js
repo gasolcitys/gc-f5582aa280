@@ -1,0 +1,80 @@
+/* ===== Píxel de Meta: solo para quien llega desde un anuncio y lo acepta =====
+   Sin aceptar no se carga nada de Meta ni se escribe ninguna cookie (art. 22.2 LSSI).
+   Las visitas y los clics se cuentan igual en GoatCounter, que no usa cookies. */
+(function () {
+  /* Administrador de eventos de Meta → tu conjunto de datos (píxel) → Identificador. Vacío: la web sigue como antes, sin aviso ni píxel */
+  const PIXEL_ID = '1672274640949475';
+  const CLAVE = 'gc-cookies-meta';
+  if (!PIXEL_ID) return;
+
+  function eleccion() { try { return localStorage.getItem(CLAVE); } catch (e) { return null; } }
+  function guardar(v) { try { localStorage.setItem(CLAVE, v); } catch (e) {} }
+  let origen = {};
+  try { origen = JSON.parse(sessionStorage.getItem('gc-origen')) || {}; } catch (e) {}
+
+  let activo = false;
+  function activar() {
+    if (activo) return;
+    activo = true;
+    /* código oficial de Meta */
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+      t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    /* sin rastreo automático de botones ni de los datos de la página: solo lo que se envía aquí */
+    fbq('set', 'autoConfig', false, PIXEL_ID);
+    fbq('init', PIXEL_ID);
+    fbq('track', 'PageView');
+    document.addEventListener('click', e => {
+      const a = e.target.closest && e.target.closest('a[href*="apps.apple.com/"], a[href*="play.google.com/store/"]');
+      if (!a) return;
+      fbq('trackCustom', 'ClicTienda', { tienda: a.href.includes('apple') ? 'iphone' : 'android', anuncio: origen.content || '' });
+    }, true);
+  }
+
+  function borrarCookies() {
+    ['_fbp', '_fbc'].forEach(n => ['', ';domain=' + location.hostname, ';domain=.' + location.hostname.replace(/^www\./, '')].forEach(d => {
+      document.cookie = n + '=;path=/;max-age=0' + d;
+    }));
+  }
+
+  function contar(path, title) {
+    const gc = window.goatcounter;
+    if (gc && gc.count) gc.count({ path, title, event: true, referrer: origen.source || 'web' });
+  }
+
+  function mostrarAviso() {
+    if (document.getElementById('gc-cookies')) return;
+    const css = document.createElement('style');
+    css.textContent = '#gc-cookies{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:9999;max-width:520px;margin:0 auto;padding:14px 16px;border-radius:16px;background:#fff;color:#10233f;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.35)}'
+      + '#gc-cookies p{margin:0 0 10px}#gc-cookies a{color:#1F4F9C;text-decoration:underline}'
+      + '#gc-cookies div{display:flex;gap:8px}#gc-cookies button{flex:1;padding:11px 8px;border:2px solid #1F4F9C;border-radius:10px;background:#fff;color:#1F4F9C;font:600 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;cursor:pointer}';
+    const aviso = document.createElement('div');
+    aviso.id = 'gc-cookies';
+    aviso.setAttribute('role', 'dialog');
+    aviso.setAttribute('aria-label', 'Cookies de publicidad');
+    aviso.innerHTML = '<p>¿Aceptas las cookies de Meta? Nos sirven para saber si nuestros anuncios funcionan y para mostrarte publicidad de GasolCitys en Facebook e Instagram. <a href="/privacidad.html#cookies">Más información</a></p><div><button type="button" data-v="no">Rechazar</button><button type="button" data-v="si">Aceptar</button></div>';
+    aviso.addEventListener('click', e => {
+      const v = e.target.dataset && e.target.dataset.v;
+      if (!v) return;
+      const antes = eleccion();
+      guardar(v);
+      aviso.remove();
+      css.remove();
+      contar('anuncio-cookies-' + (v === 'si' ? 'acepta' : 'rechaza'), 'Anuncio · cookies · ' + (v === 'si' ? 'acepta' : 'rechaza'));
+      if (v === 'si') activar();
+      else { borrarCookies(); if (antes === 'si') location.reload(); }
+    });
+    document.head.appendChild(css);
+    document.body.appendChild(aviso);
+  }
+
+  const elegido = eleccion();
+  if (elegido === 'si') activar();
+  else if (!elegido && origen.source === 'meta') mostrarAviso();
+
+  /* botón «Cambiar mi elección» de la política de privacidad */
+  const cambiar = document.getElementById('gc-cookies-cambiar');
+  if (cambiar) { cambiar.hidden = false; cambiar.addEventListener('click', mostrarAviso); }
+})();
