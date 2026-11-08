@@ -7,7 +7,9 @@
    ir-estadisticas-*   desde qué botón pasa a la página de estadísticas
    boton-* / menu-* / pie-*   resto de botones y enlaces
    tiempo-*            cuánto se queda con la página a la vista
-   estad-*             lo mismo, pero en la página de estadísticas */
+   estad-*             lo mismo, pero en la página de estadísticas
+   qr-*                copia de todo lo anterior, solo de quienes entraron por el código QR
+                       (qr-0-escaneo son los escaneos; qr-descarga-* los botones de descarga) */
 (function () {
   const ESTAD = /estadisticas/.test(location.pathname);
   const P = ESTAD ? 'estad-' : '';
@@ -17,12 +19,31 @@
   const slug = t => t.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
   const $$ = s => document.querySelectorAll(s);
 
+  /* Visitas del código QR: además del evento general sale una copia «qr-», para verlas aparte en GoatCounter.
+     Son el doble de envíos y GoatCounter solo admite 4 por segundo, así que salen en fila */
+  const DESDE_QR = origen === 'qr';
+  const fila = [];
+  let filaOcupada = false, esperas = 0;
+  function avanzarFila() {
+    if (filaOcupada || !fila.length) return;
+    const gc = window.goatcounter, listo = gc && gc.count;
+    if (!listo && esperas++ >= 20) return;
+    if (listo) gc.count(fila.shift());
+    filaOcupada = true;
+    setTimeout(() => { filaOcupada = false; avanzarFila(); }, listo ? 400 : 500);
+  }
+  function aFila(...datos) { fila.push(...datos); avanzarFila(); }
+  function vaciarFila() { const gc = window.goatcounter; if (gc && gc.count) while (fila.length) gc.count(fila.shift()); }
+  const copiaQR = (path, title) => ({ path: 'qr-' + path, title: 'QR · ' + title, event: true, referrer: 'qr' });
+
   /* cada evento se cuenta una sola vez por visita; espera a que cargue el contador */
   function enviar(path, title, intentos = 0) {
     if (enviados.has(path) && !intentos) return;
     enviados.add(path);
+    const evento = { path, title, event: true, referrer: origen || 'web' };
+    if (DESDE_QR) return aFila(evento, copiaQR(path, title));
     const gc = window.goatcounter;
-    if (gc && gc.count) gc.count({ path, title, event: true, referrer: origen || 'web' });
+    if (gc && gc.count) gc.count(evento);
     else if (intentos < 20) setTimeout(() => enviar(path, title, intentos + 1), 500);
   }
   function alPulsar(sel, path, title) { $$(sel).forEach(a => a.addEventListener('click', () => enviar(path, title))); }
@@ -40,6 +61,24 @@
     el.dataset.gcTitulo = title;
     el.gcAlVer = extra;
     io.observe(el);
+  }
+
+  /* ---------- Entrada por el código QR ---------- */
+  if (DESDE_QR) {
+    /* un escaneo por sesión, aunque recargue la portada */
+    try {
+      if (new URLSearchParams(location.search).get('utm_source') === 'qr' && !sessionStorage.getItem('gc-qr-escaneo')) {
+        sessionStorage.setItem('gc-qr-escaneo', '1');
+        aFila(copiaQR('0-escaneo', 'Escaneo'));
+      }
+    } catch (e) {}
+    /* GoatCounter ya cuenta estos botones por su cuenta; aquí va su copia, sin fila porque la página puede cerrarse al instante */
+    $$('[data-goatcounter-click]').forEach(a => a.addEventListener('click', () => {
+      const gc = window.goatcounter;
+      if (gc && gc.count) gc.count(copiaQR(a.dataset.goatcounterClick, 'Botón · ' + a.dataset.goatcounterClick));
+    }));
+    addEventListener('pagehide', vaciarFila);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') vaciarFila(); });
   }
 
   /* ---------- Portada ---------- */
