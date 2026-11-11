@@ -29,7 +29,9 @@
     document.addEventListener('click', e => {
       const a = e.target.closest && e.target.closest('a[href*="apps.apple.com/"], a[href*="play.google.com/store/"]');
       if (!a) return;
-      fbq('trackCustom', 'ClicTienda', { tienda: a.href.includes('apple') ? 'iphone' : 'android', anuncio: origen.content || '' });
+      /* tienda: iphone | android · boton: dónde estaba (barra, inicio, final…) · anuncio: el anuncio del que vino */
+      const lugar = ((a.dataset && a.dataset.goatcounterClick) || '').split('-')[1] || 'otro';
+      fbq('trackCustom', 'ClicTienda', { tienda: a.href.includes('apple') ? 'iphone' : 'android', boton: lugar, anuncio: origen.content || '' });
     }, true);
   }
 
@@ -57,7 +59,7 @@
     aviso.id = 'gc-cookies';
     aviso.setAttribute('role', 'dialog');
     aviso.setAttribute('aria-label', 'Cookies de publicidad');
-    aviso.innerHTML = '<p><b>¿Aceptas las cookies de Meta?</b> Las usamos para medir nuestros anuncios y mostrarte publicidad de GasolCitys. <a href="/privacidad.html#cookies">Más información</a></p><div><button type="button" data-v="no">Rechazar</button><button type="button" data-v="si">Aceptar</button></div>';
+    aviso.innerHTML = '<p>🍪 Usamos cookies de Meta para medir y personalizar nuestros anuncios. <a href="/privacidad.html#cookies">Más info</a></p><div><button type="button" data-v="no">Rechazar</button><button type="button" data-v="si">Aceptar</button></div>';
     aviso.addEventListener('click', e => {
       const v = e.target.dataset && e.target.dataset.v;
       if (!v) return;
