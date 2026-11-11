@@ -46,15 +46,18 @@
 
   function mostrarAviso() {
     if (document.getElementById('gc-cookies')) return;
+    /* compacto y encima de la barra de descarga si la hay. «Aceptar» y «Rechazar» con el mismo peso (exigencia de la AEPD) */
+    const sobreBarra = document.getElementById('gc-barra') ? '84px' : '12px';
     const css = document.createElement('style');
-    css.textContent = '#gc-cookies{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:9999;max-width:520px;margin:0 auto;padding:14px 16px;border-radius:16px;background:#fff;color:#10233f;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.35)}'
-      + '#gc-cookies p{margin:0 0 10px}#gc-cookies a{color:#1F4F9C;text-decoration:underline}'
-      + '#gc-cookies div{display:flex;gap:8px}#gc-cookies button{flex:1;padding:11px 8px;border:2px solid #1F4F9C;border-radius:10px;background:#fff;color:#1F4F9C;font:600 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;cursor:pointer}';
+    css.textContent = '#gc-cookies{position:fixed;left:10px;right:10px;bottom:calc(' + sobreBarra + ' + env(safe-area-inset-bottom));z-index:9999;max-width:460px;margin:0 auto;padding:10px 12px;border-radius:14px;background:#fff;color:#10233f;border:2px solid #1F4F9C;font:13px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35);animation:gcSube .35s ease-out}'
+      + '@keyframes gcSube{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}'
+      + '#gc-cookies p{margin:0 0 8px}#gc-cookies a{color:#1F4F9C;text-decoration:underline}'
+      + '#gc-cookies div{display:flex;gap:8px}#gc-cookies button{flex:1;padding:8px 6px;border:0;border-radius:9px;background:#1F4F9C;color:#fff;font:600 14px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;cursor:pointer}';
     const aviso = document.createElement('div');
     aviso.id = 'gc-cookies';
     aviso.setAttribute('role', 'dialog');
     aviso.setAttribute('aria-label', 'Cookies de publicidad');
-    aviso.innerHTML = '<p>¿Aceptas las cookies de Meta? Nos sirven para saber si nuestros anuncios funcionan y para mostrarte publicidad de GasolCitys en Facebook e Instagram. <a href="/privacidad.html#cookies">Más información</a></p><div><button type="button" data-v="no">Rechazar</button><button type="button" data-v="si">Aceptar</button></div>';
+    aviso.innerHTML = '<p><b>¿Aceptas las cookies de Meta?</b> Las usamos para medir nuestros anuncios y mostrarte publicidad de GasolCitys. <a href="/privacidad.html#cookies">Más información</a></p><div><button type="button" data-v="no">Rechazar</button><button type="button" data-v="si">Aceptar</button></div>';
     aviso.addEventListener('click', e => {
       const v = e.target.dataset && e.target.dataset.v;
       if (!v) return;
