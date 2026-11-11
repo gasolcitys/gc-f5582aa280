@@ -59,7 +59,7 @@
     aviso.id = 'gc-cookies';
     aviso.setAttribute('role', 'dialog');
     aviso.setAttribute('aria-label', 'Cookies de publicidad');
-    aviso.innerHTML = '<p>🍪 Usamos cookies de Meta para medir y personalizar nuestros anuncios. <a href="/privacidad.html#cookies">Más info</a></p><div><button type="button" data-v="no">Rechazar</button><button type="button" data-v="si">Aceptar</button></div>';
+    aviso.innerHTML = '<p>🍪 Usamos cookies para mejorar tu experiencia y personalizar el contenido y los anuncios que ves. <a href="/privacidad.html#cookies">Más info</a></p><div><button type="button" data-v="no">Solo necesarias</button><button type="button" data-v="si">Aceptar todas</button></div>';
     aviso.addEventListener('click', e => {
       const v = e.target.dataset && e.target.dataset.v;
       if (!v) return;
