@@ -20,11 +20,25 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - name: Descargar precios oficiales y calcular estadísticas
-        run: node scripts/build-stats.mjs
+      # Se descarga una sola vez y lo usan los dos scripts (si falla, cada script lo intenta por su cuenta)
+      - name: Descargar precios oficiales
+        run: |
+          curl -sSf --retry 4 --retry-delay 10 --max-time 240 -H 'Accept: application/json' \
+            -o "$RUNNER_TEMP/oficial.json" \
+            'https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/' \
+            || rm -f "$RUNNER_TEMP/oficial.json"
+      - name: Calcular estadísticas
+        run: node scripts/build-stats.mjs $( [ -s "$RUNNER_TEMP/oficial.json" ] && echo "$RUNNER_TEMP/oficial.json" )
+      # Páginas «Precio de la gasolina hoy en…» + sitemap + aviso a Bing/DuckDuckGo/Yandex (IndexNow).
+      # Si fallara, las estadísticas se publican igual.
+      - name: Páginas de precios por provincia y municipio
+        continue-on-error: true
+        env:
+          INDEXNOW: '1'
+        run: node scripts/build-seo.mjs $( [ -s "$RUNNER_TEMP/oficial.json" ] && echo "$RUNNER_TEMP/oficial.json" )
       - name: Publicar si hay datos nuevos
         run: |
           git config user.name "gasolcitys-bot"
           git config user.email "gasolcitys-bot@users.noreply.github.com"
-          git add data/stats.json
+          git add data/stats.json data/seo-estado.json data/seo-historico.json precio-gasolina sitemap.xml
           git diff --cached --quiet || (git commit -m "Datos oficiales $(TZ=Europe/Madrid date '+%d/%m/%Y %H:%M')" && git pull --rebase -q && git push)
