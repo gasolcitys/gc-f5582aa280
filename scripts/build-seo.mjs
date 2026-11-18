@@ -398,7 +398,8 @@ function ldLista(nombreLista, lista, id) {
         address: { '@type': 'PostalAddress', streetAddress: s.dir, postalCode: s.cp, addressLocality: s.loc, addressRegion: PROVM.get(s.prov).name, addressCountry: 'ES' },
         geo: { '@type': 'GeoCoordinates', latitude: s.lat, longitude: s.lon },
         ...(s.h24 ? { openingHours: 'Mo-Su 00:00-23:59' } : {}),
-        makesOffer: { '@type': 'Offer', itemOffered: { '@type': 'Product', name: FUELS.find(x => x[0] === id)[1] }, price: s.p[id].toFixed(3), priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: s.p[id].toFixed(3), priceCurrency: 'EUR', unitText: 'litro' } }
+        // el precio va como texto: con Offer/Product, Google lo trata como ficha de producto y pide reseñas, imagen…
+        description: `${FUELS.find(x => x[0] === id)[1]} a ${eur(s.p[id])} €/l (${FECHA})`
       }
     }))
   };
