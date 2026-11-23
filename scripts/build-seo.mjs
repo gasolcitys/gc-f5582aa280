@@ -258,6 +258,12 @@ function stores(lugar) {
 function ctaGrande(donde) {
   return `<div class="cta"><div><h2>Gasolineras baratas en ${esc(donde)}, siempre a mano</h2><p>GasolCitys te enseña en el mapa las gasolineras de ${esc(donde)} con un semáforo de precios, las que están abiertas ahora y las de tu ruta, y te avisa del mejor día para repostar. Gratis, con los precios oficiales.</p></div>${stores('precios')}</div>`;
 }
+// Botón de arriba, con el nombre de la ciudad. En Android avisa cuando baja el precio (alertas); en iPhone, el aviso
+// semanal del mejor día para repostar. Cada móvil ve solo su tienda (clases ios / and en <html>); en ordenador, las dos.
+function ctaHero(donde) {
+  const d = esc(donde);
+  return `<div class="cta-hero"><p><span class="t-gen">🔔 Avisos de precio en ${d}: cuándo baja y qué día repostar</span><span class="t-and">🔔 Recibe un aviso cuando baje la gasolina en ${d}</span><span class="t-ios">🔔 Que te avise del mejor día para repostar en ${d}</span></p><div class="btns"><a class="b-ios" href="${IOS}" data-goatcounter-click="descarga-hero-iphone">${APPLE}<span class="l-pc">App Store</span><span class="l-mv">Descargar GasolCitys</span></a><a class="b-and" href="${ANDROID}" data-goatcounter-click="descarga-hero-android">${PLAY}<span class="l-pc">Google Play</span><span class="l-mv">Descargar GasolCitys</span></a></div></div>`;
+}
 function ctaMini() {
   return `<p class="cta-mini">📍 ¿Vas en el coche? En la app <b>GasolCitys</b> ves estas gasolineras en el mapa, con semáforo de precios y cómo llegar. <a href="${IOS}" data-goatcounter-click="descarga-precios-iphone">iPhone</a> · <a href="${ANDROID}" data-goatcounter-click="descarga-precios-android">Android</a></p>`;
 }
@@ -367,6 +373,7 @@ function pagina({ url, title, desc, crumbs, h1, sub, hero, body, ld, ogTitle }) 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/${BASE}/estilo.css">
+<script>(function(u,h){h.className+=/iPhone|iPad|iPod/.test(u)||navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1?' ios':/Android/.test(u)?' and':''})(navigator.userAgent,document.documentElement)</script>
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')}</script>
 </head>
 <body>
@@ -452,7 +459,7 @@ for (const m of conPagina) {
   const P = m.prov, r = m.r;
   const enDonde = m.label;
   const g = r.f.g95, d = r.f.diesel;
-  const titleT = `Precio gasolina hoy en ${enDonde} (${FECHA_CORTA}): gasolineras más baratas`;
+  const titleT = g ? `Gasolina más barata en ${enDonde} hoy: desde ${eur(g.min)} €` : d ? `Diésel más barato en ${enDonde} hoy: desde ${eur(d.min)} €` : `Precio gasolina hoy en ${enDonde} (${FECHA_CORTA}): gasolineras más baratas`;
   const desc = `${FECHA_CORTA[0].toUpperCase() + FECHA_CORTA.slice(1)}: ${g ? `gasolina 95 a ${eur(g.avg)} €/l de media` : ''}${g && d ? ' y ' : ''}${d ? `diésel a ${eur(d.avg)} €/l` : ''} en ${enDonde}.${g ? ` La más barata, ${nombre(g.baratas[0])} (${sitio(g.baratas[0])}), a ${eur(g.min)} €.` : ''} ${r.n} gasolineras con precios oficiales.`;
   const cerca = cercanos(m);
   const extra = [];
@@ -475,7 +482,7 @@ ${cerca.length ? `<section><h2>Gasolina en municipios cercanos a ${esc(enDonde)}
       crumbs: [['/', 'GasolCitys'], [`/${BASE}/`, 'Precio de la gasolina hoy'], [P.url, P.name], [m.url, m.name]],
       h1: `Precio de la gasolina hoy en ${esc(enDonde)}`,
       sub: `Gasolina 95, diésel y el resto de combustibles en las <b>${r.n} gasolineras de ${esc(enDonde)}</b>${P.tipo === 2 ? '' : ` (${esc(P.name)})`}, de la más barata a la más cara.`,
-      hero: kpis(r, P.r), body,
+      hero: kpis(r, P.r) + ctaHero(enDonde), body,
       ld: [ldFAQ(preguntas), ...(g ? [ldLista(`Gasolineras con la gasolina 95 más barata de ${enDonde}`, g.baratas.slice(0, 5), 'g95')] : [])]
     })
   });
@@ -494,7 +501,7 @@ for (const P of provincias) {
   if (pos) extra.push([`¿${P.tipo === 2 ? P.name : `La provincia de ${P.name}`} es de las más baratas para repostar?`, `Hoy ocupa el puesto ${pos} de ${rank.length} en precio medio de la gasolina 95 (1 es la más barata): ${eur(g.avg)} €/l frente a ${eur(ES.f.g95.avg)} €/l de media en España.`]);
   if (mBarato.length > 2) extra.push([`¿En qué municipio de ${enDonde} está más barata la gasolina?`, `De los municipios con varias gasolineras, hoy el más barato es ${mBarato[0].name} (${eur(mBarato[0].r.f.g95.avg)} €/l de media en gasolina 95) y el más caro, ${mBarato.at(-1).name} (${eur(mBarato.at(-1).r.f.g95.avg)} €/l).`]);
   const preguntas = preguntasZona(enDonde, r, extra);
-  const titleT = `Precio gasolina hoy en ${P.tipo ? P.name : `${P.name} (provincia)`}, ${FECHA_CORTA}: las más baratas`;
+  const titleT = `Gasolina más barata en ${P.tipo ? P.name : `la provincia de ${P.name}`} hoy: desde ${eur(g.min)} €`;
   const desc = `Precio de la gasolina hoy, ${FECHA_CORTA}, en ${enDonde}: gasolina 95 a ${eur(g.avg)} €/l y diésel a ${eur(d.avg)} €/l de media. Las gasolineras más baratas de cada municipio, con precios oficiales.`;
   const body = `
 <section><h2>Las gasolineras más baratas de ${esc(enDonde)} hoy</h2><p class="intro">Las 10 con el litro más barato de toda ${P.tipo ? esc(P.name) : 'la provincia'}, con los datos oficiales del ${FECHA}.</p><div class="grid2">${ranking(r, 'g95', true)}${ranking(r, 'diesel', true)}</div>${ctaMini()}</section>
@@ -511,7 +518,7 @@ ${vecinas.length ? `<section><h2>Provincias cercanas</h2>${enlaces(vecinas.map((
       crumbs: [['/', 'GasolCitys'], [`/${BASE}/`, 'Precio de la gasolina hoy'], [P.url, P.name]],
       h1: `Precio de la gasolina hoy en ${esc(enDonde)}`,
       sub: `Las <b>${miles(r.n)} gasolineras de ${esc(enDonde)}</b>${P.alt ? ` (${esc(P.alt)})` : ''} con su precio de hoy: las más baratas, el precio por municipios y la evolución.`,
-      hero: kpis(r, ES), body,
+      hero: kpis(r, ES) + ctaHero(P.name), body,
       ld: [ldFAQ(preguntas), ldLista(`Gasolineras con la gasolina 95 más barata de ${enDonde}`, g.baratas.slice(0, 5), 'g95')]
     })
   });
@@ -548,7 +555,7 @@ ${serie('es').length >= 3 ? `<section><h2>Evolución del precio en España</h2>$
       crumbs: [['/', 'GasolCitys'], [`/${BASE}/`, 'Precio de la gasolina hoy']],
       h1: 'Precio de la gasolina hoy en España',
       sub: `Gasolina 95, diésel y el resto de combustibles en las <b>${miles(r.n)} gasolineras de España</b>: las más baratas, por provincias y en ${conPagina.length} ciudades y pueblos.`,
-      hero: kpis(r), body,
+      hero: kpis(r) + ctaHero('tu zona'), body,
       ld: [ldFAQ(preguntas), ldLista('Gasolineras con la gasolina 95 más barata de España', g.baratas.slice(0, 5), 'g95')]
     })
   });

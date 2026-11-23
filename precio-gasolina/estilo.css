@@ -130,3 +130,18 @@ footer .provs a:hover{color:#fff;text-decoration:underline}
 footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
 footer .legal a{color:#fff}
 @media (max-width:600px){.hero{padding:16px 0 26px}.kpis{grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.kpi{padding:10px 12px;border-radius:14px}.kpi strong{font-size:1.4rem}.kpi p{font-size:.72rem}.live{font-size:.76rem}main section{padding:30px 0}.card{padding:14px}}
+
+/* botón de descarga de la cabecera (ctaHero): cada móvil ve solo su tienda y su texto */
+.cta-hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 18px;margin-top:16px;padding:14px 16px 14px 20px;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 10px 30px rgba(8,25,60,.25)}
+.cta-hero p{font-weight:700;font-size:clamp(.98rem,1.6vw,1.08rem);line-height:1.3;flex:1 1 260px}
+.cta-hero .btns{display:flex;flex-wrap:wrap;gap:8px}
+.cta-hero .btns a{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-weight:700;font-size:.92rem;text-decoration:none;padding:11px 18px;border-radius:999px;white-space:nowrap}
+.cta-hero .btns a:hover{filter:brightness(1.05)}
+.cta-hero .btns svg{width:18px;height:18px}
+.cta-hero .t-and,.cta-hero .t-ios{display:none}
+html.and .cta-hero .t-gen,html.ios .cta-hero .t-gen,html.and .cta-hero .b-ios,html.ios .cta-hero .b-and{display:none}
+html.and .cta-hero .t-and,html.ios .cta-hero .t-ios{display:inline}
+html.and .cta-hero .btns a,html.ios .cta-hero .btns a{flex:1;justify-content:center;font-size:1rem;padding:13px 18px}
+@media (max-width:640px){.cta-hero{padding:14px}.cta-hero .btns{width:100%}.cta-hero .btns a{flex:1;justify-content:center}}
+.cta-hero .l-mv,html.and .cta-hero .l-pc,html.ios .cta-hero .l-pc{display:none}
+html.and .cta-hero .l-mv,html.ios .cta-hero .l-mv{display:inline}
