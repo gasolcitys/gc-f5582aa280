@@ -1,5 +1,5 @@
 // Publica en Telegram, en el canal de cada comunidad autónoma, las 3 gasolineras más baratas
-// de cada provincia para los combustibles más repostados, con los precios oficiales del Ministerio.
+// de cada provincia para los combustibles más repostados. Los mensajes no citan la fuente de los datos (lo pidió el usuario).
 // Se publica solo en el canal de cada comunidad (data/telegram-canales.json); su grupo lo recibe como grupo de debate enlazado.
 //
 // Uso: node scripts/telegram-ccaa.mjs [--json ruta-oficial] [--prueba] [--ccaa 13,08] [--horas 7,19] [--a @destino]
@@ -135,9 +135,8 @@ function mensajesComunidad(idCcaa, estaciones, fecha) {
   const hora = fecha.split(' ')[1].slice(0, 5);
   const dia = new Date(Date.UTC(a, m - 1, d, 12));
   const cabecera = `⛽ <b>Gasolineras más baratas · ${esc(CCAA[idCcaa])}</b>\n` +
-    `📅 ${DIAS[dia.getUTCDay()]} ${d} de ${MESES[m - 1]} · precios oficiales de las ${hora}`;
-  const pie = `📲 La más barata cerca de ti, con <a href="${WEB}/">GasolCitys</a>\n` +
-    `<i>Fuente: Ministerio para la Transición Ecológica. Toca el nombre para abrir el mapa.</i>`;
+    `📅 ${DIAS[dia.getUTCDay()]} ${d} de ${MESES[m - 1]} · precios de las ${hora}`;
+  const pie = `📈 <a href="${WEB}/">Previsión de precio para la próxima semana en GasolCitys</a>`;
 
   // Se agrupan provincias enteras en cada mensaje sin pasar de los límites de Telegram
   const partes = [];

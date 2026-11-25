@@ -15,6 +15,10 @@ on:
       ccaa:
         description: 'Solo estas comunidades (IDCCAA separados por comas, p. ej. 13,08). Vacío = todas'
         required: false
+      borrar:
+        description: 'Borrar antes los mensajes de los canales (solo los de menos de 48 horas)'
+        type: boolean
+        default: false
 
 concurrency:
   group: telegram
@@ -28,6 +32,15 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+      - name: Borrar los mensajes de los canales
+        if: ${{ inputs.borrar }}
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.AVISO_PRECIOS_BOT }}
+          CCAA: ${{ inputs.ccaa }}
+        run: |
+          set --
+          [ -n "$CCAA" ] && set -- "$@" --ccaa "$CCAA"
+          node scripts/telegram-borrar.mjs "$@"
       - name: Publicar en los canales
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.AVISO_PRECIOS_BOT }}
