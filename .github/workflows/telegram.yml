@@ -30,7 +30,7 @@ jobs:
           node-version: 22
       - name: Publicar en los canales
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.AVISO_PRECIOS_BOT }}
           DESTINO: ${{ inputs.destino }}
           CCAA: ${{ inputs.ccaa }}
         run: |
