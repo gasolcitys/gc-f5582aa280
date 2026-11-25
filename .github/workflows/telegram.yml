@@ -1,12 +1,11 @@
 name: Telegram · gasolineras más baratas por comunidad
 
-# 7:30 y 19:30 hora de Madrid. GitHub usa UTC, así que se programa para invierno (UTC+1) y verano (UTC+2)
-# y el script solo publica en la ejecución que cae a las 7 o a las 19 en Madrid.
+# Se envía a las 7:30 y a las 19:30 (hora de Madrid). Lo dispara cron-job.org a las 7:28 y a las 19:28
+# llamando a la API de GitHub (workflow_dispatch): el cron de GitHub ("schedule") se retrasa horas o
+# no llega a ejecutarse en este repositorio, así que no se usa.
 # 7:30: los precios cambian sobre todo entre las 0:00 y las 3:00 y de 4:00 a 6:00 apenas se mueven.
 # 19:30: recoge los ajustes que se hacen durante el día (10:00-19:00).
 on:
-  schedule:
-    - cron: '25 5,6,17,18 * * *'
   workflow_dispatch:
     inputs:
       destino:
@@ -48,7 +47,6 @@ jobs:
           CCAA: ${{ inputs.ccaa }}
         run: |
           set --
-          [ "${{ github.event_name }}" = "schedule" ] && set -- "$@" --horas 7,19
           [ -n "$DESTINO" ] && set -- "$@" --a "$DESTINO"
           [ -n "$CCAA" ] && set -- "$@" --ccaa "$CCAA"
           node scripts/telegram-ccaa.mjs "$@"
