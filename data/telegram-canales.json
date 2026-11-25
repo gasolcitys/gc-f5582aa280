@@ -1,7 +1,7 @@
 {
   "nota": "Canal de Telegram de cada comunidad (IDCCAA del Ministerio). «canal» es el @usuario del canal (o su número, -100…, si es privado: lo da scripts/telegram-chats.mjs) donde publica el bot; «grupo» es el grupo de la comunidad (@usuario o número), el bot no publica en ellos: les llega lo del canal porque están enlazados como grupo de debate.",
   "canales": {
-    "01": { "nombre": "Andalucía", "canal": "-1005614539585", "grupo": "-1005643908840" },
+    "01": { "nombre": "Andalucía", "canal": "-1005614539585", "grupo": "@Precio_Gasolina_Andalucia" },
     "02": { "nombre": "Aragón", "canal": "-1006065601071", "grupo": "" },
     "03": { "nombre": "Asturias", "canal": "-1005646803337", "grupo": "" },
     "04": { "nombre": "Illes Balears", "canal": "-1006079207576", "grupo": "" },
@@ -9,14 +9,14 @@
     "06": { "nombre": "Cantabria", "canal": "-1006029046750", "grupo": "" },
     "07": { "nombre": "Castilla-La Mancha", "canal": "-1006057266576", "grupo": "@Precio_Gasolina_CastillaLaMancha" },
     "08": { "nombre": "Castilla y León", "canal": "-1005843681183", "grupo": "@Precio_Gasolina_Castilla_y_Leon" },
-    "09": { "nombre": "Cataluña", "canal": "-1005608033901", "grupo": "-1006013258811" },
+    "09": { "nombre": "Cataluña", "canal": "-1005608033901", "grupo": "@Precio_Gasolina_Cataluna" },
     "10": { "nombre": "Comunitat Valenciana", "canal": "-1005639428816", "grupo": "@Precio_Gasolina_Valenciana" },
     "11": { "nombre": "Extremadura", "canal": "-1005975856204", "grupo": "" },
     "12": { "nombre": "Galicia", "canal": "-1005723446875", "grupo": "@Precio_Gasolina_Galicia" },
     "13": { "nombre": "Comunidad de Madrid", "canal": "-1005932200144", "grupo": "@Precio_Gasolina_Comunidad_Madrid" },
-    "14": { "nombre": "Región de Murcia", "canal": "-1006019585215", "grupo": "-1005825196238" },
+    "14": { "nombre": "Región de Murcia", "canal": "-1006019585215", "grupo": "@Precio_Gasolina_Region_Murcia" },
     "15": { "nombre": "Navarra", "canal": "", "grupo": "" },
-    "16": { "nombre": "País Vasco", "canal": "-1005656956396", "grupo": "-1005742935434" },
+    "16": { "nombre": "País Vasco", "canal": "-1005656956396", "grupo": "@Precio_Gasolina_Pais_Vasco" },
     "17": { "nombre": "La Rioja", "canal": "", "grupo": "" },
     "18": { "nombre": "Ceuta", "canal": "", "grupo": "" },
     "19": { "nombre": "Melilla", "canal": "", "grupo": "" }
