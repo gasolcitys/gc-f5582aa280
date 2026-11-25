@@ -24,15 +24,29 @@ async function api(metodo, datos) {
   throw new Error(`${metodo}: demasiados reintentos`);
 }
 
+// Telegram rechaza el lote entero si un mensaje no se puede borrar (p. ej. avisos de más de 48 horas):
+// entonces se parte el lote en dos hasta aislar esos mensajes, que se dejan.
+let noBorrables = 0;
+async function borrar(canal, ids) {
+  try { await api('deleteMessages', { chat_id: canal, message_ids: ids }); }
+  catch (e) {
+    if (!/can't be deleted|MESSAGE_DELETE_FORBIDDEN/i.test(e.message)) throw e;
+    if (ids.length === 1) { noBorrables++; return; }
+    const mitad = Math.ceil(ids.length / 2);
+    await borrar(canal, ids.slice(0, mitad));
+    await borrar(canal, ids.slice(mitad));
+  }
+}
+
 let fallos = 0;
 for (const [id, { nombre, canal }] of Object.entries(canales)) {
   if (!canal || (SOLO.length && !SOLO.includes(id))) continue;
+  noBorrables = 0;
   try {
     for (let desde = 1; desde <= HASTA; desde += 100) {
-      const ids = Array.from({ length: Math.min(100, HASTA - desde + 1) }, (_, i) => desde + i);
-      await api('deleteMessages', { chat_id: canal, message_ids: ids });
+      await borrar(canal, Array.from({ length: Math.min(100, HASTA - desde + 1) }, (_, i) => desde + i));
     }
-    console.log(`✓ ${nombre}: mensajes borrados`);
+    console.log(`✓ ${nombre}: mensajes borrados${noBorrables ? ` (${noBorrables} no se pueden borrar)` : ''}`);
   } catch (e) { fallos++; console.error(`✗ ${nombre}: ${e.message}`); }
 }
 if (fallos) process.exit(1);
