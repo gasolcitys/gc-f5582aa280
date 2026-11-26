@@ -147,8 +147,14 @@ function mensajesComunidad(idCcaa, estaciones, fecha) {
     `📅 ${DIAS[dia.getUTCDay()]} ${d} de ${MESES[m - 1]} · precios de las ${hora}`;
   // El fin de los grupos es que se descarguen la app: /tg/ lleva a la tienda según el móvil y lo cuenta por comunidad.
   // Sin prometer avisos con la app cerrada (en iPhone no llegan).
+  // Para crecer: invitar a reenviar el mensaje (el reenvío lleva el nombre del grupo, que se puede tocar) y
+  // hashtags que Telegram y los buscadores de Telegram (TGStat, Lyzem…) indexan.
+  const grupo = canales[idCcaa]?.grupo?.startsWith('@') ? canales[idCcaa].grupo.slice(1) : '';
+  const etiqueta = CCAA[idCcaa].normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/^(Comunidad de|Region de|Comunitat|Illes)\s+/i, '').replace(/[^A-Za-z]/g, '');
   const pie = `📲 <b>Todas las gasolineras en el mapa y la previsión de la semana</b>, en la app gratis → ` +
-    `<a href="${WEB}/tg/?c=${SLUG[idCcaa]}">Descargar GasolCitys</a>`;
+    `<a href="${WEB}/tg/?c=${SLUG[idCcaa]}">Descargar GasolCitys</a>` +
+    (grupo ? `\n👥 ¿Conoces a alguien que reposte en ${esc((/^(Comunidad|Región|Comunitat)/.test(CCAA[idCcaa]) ? 'la ' : /^País/.test(CCAA[idCcaa]) ? 'el ' : '') + CCAA[idCcaa])}? Reenvíale este mensaje o pásale t.me/${grupo}` : '') +
+    `\n#gasolina #diesel #Gasolina${etiqueta} #GasolinerasBaratas`;
 
   // Se agrupan provincias enteras en cada mensaje sin pasar de los límites de Telegram
   const partes = [];
@@ -161,7 +167,7 @@ function mensajesComunidad(idCcaa, estaciones, fecha) {
     } else actual = { texto: junto, entidades: actual.entidades + b.entidades };
   }
   const conPie = actual.texto + '\n\n' + pie;
-  if (visible(conPie) > MAX_CHARS || actual.entidades + 3 > 100) partes.push(actual.texto, pie);
+  if (visible(conPie) > MAX_CHARS || actual.entidades + 10 > 100) partes.push(actual.texto, pie);
   else partes.push(conPie);
   if (partes.length > 1) partes.forEach((t, i) => { partes[i] = t + `\n\n<i>(${i + 1}/${partes.length})</i>`; });
   return partes;
