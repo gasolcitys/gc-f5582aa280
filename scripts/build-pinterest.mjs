@@ -203,9 +203,12 @@ hoyToca.forEach((x, i) => {
 for (const n of nuevos) await writeFile(path.join(carpeta, n.id + '.png'), n.png);
 
 const limite = new Date(Date.parse(datos.dia + 'T12:00:00Z') - (DIAS_FEED - 1) * 864e5).toISOString().slice(0, 10);
+// si el mismo día se genera dos veces, las entradas que ya estaban se quedan tal cual (mismo guid = Pinterest no repite)
+const previos = estado.items.filter(it => it.dia >= limite);
+const yaEstan = new Set(previos.map(it => it.guid));
 const items = [
-  ...estado.items.filter(it => it.dia >= limite && it.dia !== datos.dia),
-  ...nuevos.map(n => ({
+  ...previos,
+  ...nuevos.filter(n => !yaEstan.has(`${n.id}-${datos.dia}`)).map(n => ({
     guid: `${n.id}-${datos.dia}`, dia: datos.dia, fecha: ahoraISO, ccaa: n.x.ccaa, titulo: n.titulo, desc: n.desc,
     link: `${SITE}${n.x.url}?utm_source=pinterest&utm_medium=pin&utm_campaign=${n.id}`,
     img: `${IMG_BASE}/${datos.dia}/${n.id}.png`, bytes: n.png.length
