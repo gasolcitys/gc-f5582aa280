@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+<title>Precio de la gasolina hoy en Aragón · GasolCitys</title>
+<link>https://gasolcitys.com/precio-gasolina/</link>
+<atom:link href="https://gasolcitys.com/pinterest/aragon.xml" rel="self" type="application/rss+xml"/>
+<description>Las gasolineras más baratas de Aragón, cada día, con los precios oficiales del Ministerio.</description>
+<language>es-ES</language>
+<lastBuildDate>Thu, 26 Nov 2026 09:30:54 GMT</lastBuildDate>
+<item>
+  <title>Dónde repostar más barato en la provincia de Huesca hoy (26 de noviembre)</title>
+  <link>https://gasolcitys.com/precio-gasolina/huesca/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=huesca</link>
+  <guid isPermaLink="false">huesca-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Huesca está a 1,235 €/l en Bonarea (Poligono Sub 7 Bis, Antigua Nii, s/n, Fraga), frente a una media de 1,508 €/l; el diésel más barato, a 1,498 €/l (media 1,743 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 13,65 € frente a la media. Mira las 123 gasolineras de la provincia de Huesca con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/huesca.png" length="234392" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/huesca.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+<item>
+  <title>Precio de la gasolina hoy en la provincia de Teruel, 26 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/teruel/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=teruel</link>
+  <guid isPermaLink="false">teruel-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Teruel está a 1,241 €/l en Bonarea (Avenida Zaragoza, 75, Alcañiz), frente a una media de 1,509 €/l; el diésel más barato, a 1,505 €/l (media 1,769 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 13,40 € frente a la media. Mira las 70 gasolineras de la provincia de Teruel con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/teruel.png" length="228327" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/teruel.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+<item>
+  <title>Gasolina más barata hoy en la provincia de Zaragoza: 1,238 €/l</title>
+  <link>https://gasolcitys.com/precio-gasolina/zaragoza/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=zaragoza</link>
+  <guid isPermaLink="false">zaragoza-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Zaragoza está a 1,238 €/l en Bonarea (Ctra. de Sastago, s/n, Bujaraloz), frente a una media de 1,502 €/l; el diésel más barato, a 1,499 €/l (media 1,739 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 13,20 € frente a la media. Mira las 233 gasolineras de la provincia de Zaragoza con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/zaragoza.png" length="236534" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/zaragoza.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+<title>Precio de la gasolina hoy en Comunidad Valenciana · GasolCitys</title>
+<link>https://gasolcitys.com/precio-gasolina/</link>
+<atom:link href="https://gasolcitys.com/pinterest/comunidad-valenciana.xml" rel="self" type="application/rss+xml"/>
+<description>Las gasolineras más baratas de Comunidad Valenciana, cada día, con los precios oficiales del Ministerio.</description>
+<language>es-ES</language>
+<lastBuildDate>Thu, 26 Nov 2026 09:30:54 GMT</lastBuildDate>
+<item>
+  <title>Gasolina más barata hoy en la provincia de Alicante: 1,199 €/l</title>
+  <link>https://gasolcitys.com/precio-gasolina/alicante/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=alicante</link>
+  <guid isPermaLink="false">alicante-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Alicante está a 1,199 €/l en Ballenoil (Avenida Marina Baixa, 106, Nucia (La), La Nucia), frente a una media de 1,538 €/l; el diésel más barato, a 1,499 €/l (media 1,747 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 16,95 € frente a la media. Mira las 478 gasolineras de la provincia de Alicante con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/alicante.png" length="236901" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/alicante.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+<item>
+  <title>Gasolineras más baratas de la provincia de Castellón · 26 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/castellon/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=castellon</link>
+  <guid isPermaLink="false">castellon-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Castellón está a 1,199 €/l en Ballenoil (Avenida Pais Valencia, 34, Onda), frente a una media de 1,528 €/l; el diésel más barato, a 1,489 €/l (media 1,732 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 16,45 € frente a la media. Mira las 196 gasolineras de la provincia de Castellón con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/castellon.png" length="235841" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/castellon.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+<item>
+  <title>Gasolina más barata hoy en la provincia de Valencia: 1,199 €/l</title>
+  <link>https://gasolcitys.com/precio-gasolina/valencia/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=valencia</link>
+  <guid isPermaLink="false">valencia-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Valencia está a 1,199 €/l en Ballenoil (Poligono Manzana A, P.I. de Castilla, s/n, Cheste), frente a una media de 1,496 €/l; el diésel más barato, a 1,489 €/l (media 1,706 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 14,85 € frente a la media. Mira las 645 gasolineras de la provincia de Valencia con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/valencia.png" length="236893" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/valencia.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+</channel>
+</rss>

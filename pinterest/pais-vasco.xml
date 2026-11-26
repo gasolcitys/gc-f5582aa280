@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+<title>Precio de la gasolina hoy en País Vasco · GasolCitys</title>
+<link>https://gasolcitys.com/precio-gasolina/</link>
+<atom:link href="https://gasolcitys.com/pinterest/pais-vasco.xml" rel="self" type="application/rss+xml"/>
+<description>Las gasolineras más baratas de País Vasco, cada día, con los precios oficiales del Ministerio.</description>
+<language>es-ES</language>
+<lastBuildDate>Thu, 26 Nov 2026 09:30:54 GMT</lastBuildDate>
+<item>
+  <title>Precio de la gasolina hoy en la provincia de Álava, 26 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/alava/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=alava</link>
+  <guid isPermaLink="false">alava-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Álava está a 1,369 €/l en Eurocam (Calle Tratado de Paris, 6, Nanclares de la Oca, Iruña Oka), frente a una media de 1,537 €/l; el diésel más barato, a 1,498 €/l (media 1,766 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 8,40 € frente a la media. Mira las 73 gasolineras de la provincia de Álava con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/alava.png" length="234937" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/alava.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+<item>
+  <title>Gasolineras más baratas de la provincia de Guipúzcoa · 26 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/guipuzcoa/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=guipuzcoa</link>
+  <guid isPermaLink="false">guipuzcoa-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Guipúzcoa está a 1,199 €/l en Ballenoil (Calle Asua Erreka, 11, Eibar), frente a una media de 1,537 €/l; el diésel más barato, a 1,499 €/l (media 1,772 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 16,90 € frente a la media. Mira las 146 gasolineras de la provincia de Guipúzcoa con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/guipuzcoa.png" length="233627" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/guipuzcoa.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+<item>
+  <title>Precio de la gasolina hoy en la provincia de Vizcaya, 26 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/vizcaya/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=vizcaya</link>
+  <guid isPermaLink="false">vizcaya-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Vizcaya está a 1,199 €/l en Ballenoil (Carretera N-634 km. 76,4, Berriz-Olakueta, Berriz), frente a una media de 1,511 €/l; el diésel más barato, a 1,499 €/l (media 1,754 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 15,60 € frente a la media. Mira las 131 gasolineras de la provincia de Vizcaya con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/vizcaya.png" length="237397" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/vizcaya.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+</channel>
+</rss>

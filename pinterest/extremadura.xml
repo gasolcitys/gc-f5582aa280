@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+<title>Precio de la gasolina hoy en Extremadura · GasolCitys</title>
+<link>https://gasolcitys.com/precio-gasolina/</link>
+<atom:link href="https://gasolcitys.com/pinterest/extremadura.xml" rel="self" type="application/rss+xml"/>
+<description>Las gasolineras más baratas de Extremadura, cada día, con los precios oficiales del Ministerio.</description>
+<language>es-ES</language>
+<lastBuildDate>Thu, 26 Nov 2026 09:30:54 GMT</lastBuildDate>
+<item>
+  <title>Gasolina más barata hoy en la provincia de Badajoz: 1,229 €/l</title>
+  <link>https://gasolcitys.com/precio-gasolina/badajoz/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=badajoz</link>
+  <guid isPermaLink="false">badajoz-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Badajoz está a 1,229 €/l en Ballenoil (Avenida Extremadura, 76, Calamonte), frente a una media de 1,532 €/l; el diésel más barato, a 1,519 €/l (media 1,778 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 15,15 € frente a la media. Mira las 282 gasolineras de la provincia de Badajoz con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/badajoz.png" length="235085" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/badajoz.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+<item>
+  <title>Gasolina más barata hoy en la provincia de Cáceres: 1,279 €/l</title>
+  <link>https://gasolcitys.com/precio-gasolina/caceres/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=caceres</link>
+  <guid isPermaLink="false">caceres-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de la provincia de Cáceres está a 1,279 €/l en E.S. LA Central (Carretera Pozuelo km. 75, Montehermoso), frente a una media de 1,532 €/l; el diésel más barato, a 1,550 €/l (media 1,798 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 12,65 € frente a la media. Mira las 158 gasolineras de la provincia de Cáceres con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/caceres.png" length="237032" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/caceres.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+</channel>
+</rss>

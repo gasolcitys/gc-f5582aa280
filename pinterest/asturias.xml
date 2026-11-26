@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+<title>Precio de la gasolina hoy en Asturias · GasolCitys</title>
+<link>https://gasolcitys.com/precio-gasolina/</link>
+<atom:link href="https://gasolcitys.com/pinterest/asturias.xml" rel="self" type="application/rss+xml"/>
+<description>Las gasolineras más baratas de Asturias, cada día, con los precios oficiales del Ministerio.</description>
+<language>es-ES</language>
+<lastBuildDate>Thu, 26 Nov 2026 09:30:54 GMT</lastBuildDate>
+<item>
+  <title>Precio de la gasolina hoy en Asturias, 26 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/asturias/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=asturias</link>
+  <guid isPermaLink="false">asturias-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de Asturias está a 1,408 €/l en GF (Avenida Campon El, 16, Salinas, Castrillón), frente a una media de 1,585 €/l; el diésel más barato, a 1,609 €/l (media 1,807 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 8,85 € frente a la media. Mira las 241 gasolineras de Asturias con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/asturias.png" length="237209" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/asturias.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+</channel>
+</rss>

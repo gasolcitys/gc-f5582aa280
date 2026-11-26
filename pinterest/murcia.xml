@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+<title>Precio de la gasolina hoy en Región de Murcia · GasolCitys</title>
+<link>https://gasolcitys.com/precio-gasolina/</link>
+<atom:link href="https://gasolcitys.com/pinterest/murcia.xml" rel="self" type="application/rss+xml"/>
+<description>Las gasolineras más baratas de Región de Murcia, cada día, con los precios oficiales del Ministerio.</description>
+<language>es-ES</language>
+<lastBuildDate>Thu, 26 Nov 2026 09:30:54 GMT</lastBuildDate>
+<item>
+  <title>Gasolineras más baratas de Murcia · 26 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/murcia/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=murcia</link>
+  <guid isPermaLink="false">murcia-2026-11-26</guid>
+  <pubDate>Thu, 26 Nov 2026 09:30:54 GMT</pubDate>
+  <description>Jueves 26 de noviembre: la gasolina 95 más barata de Murcia está a 1,239 €/l en Ciezagas (Ctra B19 km 2, Cieza), frente a una media de 1,503 €/l; el diésel más barato, a 1,489 €/l (media 1,726 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 13,20 € frente a la media. Mira las 463 gasolineras de Murcia con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/murcia.png" length="230998" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-26/murcia.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+</channel>
+</rss>
