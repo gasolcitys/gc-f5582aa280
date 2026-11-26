@@ -35,10 +35,46 @@ jobs:
         continue-on-error: true
         env:
           INDEXNOW: '1'
+          PIN_DATOS: ${{ runner.temp }}/pin-datos.json
         run: node scripts/build-seo.mjs $( [ -s "$RUNNER_TEMP/oficial.json" ] && echo "$RUNNER_TEMP/oficial.json" )
+      # Pines de Pinterest: una vez al día (la primera ejecución desde las 8:00 de Madrid) crea las imágenes de las
+      # provincias y municipios que tocan, las sube a la rama «pinterest-img» (un único commit con los últimos 7 días,
+      # para no engordar el repositorio) y actualiza los feeds gasolcitys.com/pinterest/<comunidad>.xml, que Pinterest
+      # lee solo. Si algo falla, se deshace y se reintenta en la siguiente ejecución.
+      - name: Pines de Pinterest (una vez al día)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -s "$RUNNER_TEMP/pin-datos.json" ] || exit 0
+          node scripts/build-pinterest.mjs --toca || { echo "Pinterest: hoy no toca"; exit 0; }
+          deshacer() { cd "$GITHUB_WORKSPACE"; git checkout -q -- data/pinterest-estado.json pinterest 2>/dev/null || true; git clean -fdq -- data/pinterest-estado.json pinterest; }
+          trap 'deshacer' ERR
+          npm i -s --no-save --no-package-lock --prefix "$RUNNER_TEMP/resvg" @resvg/resvg-js@2.6.2
+          RESVG_DIR="$RUNNER_TEMP/resvg" node scripts/build-pinterest.mjs "$RUNNER_TEMP/pin-datos.json" "$RUNNER_TEMP/pin-img"
+          [ -d "$RUNNER_TEMP/pin-img" ] || exit 0
+          URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          VIEJA="$RUNNER_TEMP/pin-vieja"; NUEVA="$RUNNER_TEMP/pin-nueva"
+          rm -rf "$VIEJA" "$NUEVA"; mkdir -p "$NUEVA"
+          if git clone -q --depth 1 --branch pinterest-img "$URL" "$VIEJA" 2>/dev/null; then
+            LIMITE=$(date -u -d '-7 days' +%F)
+            for d in "$VIEJA"/20*/; do
+              [ -d "$d" ] || continue
+              n=$(basename "$d")
+              if [[ ! "$n" < "$LIMITE" ]]; then cp -r "$d" "$NUEVA/"; fi
+            done
+          fi
+          cp -r "$RUNNER_TEMP/pin-img/." "$NUEVA/"
+          cd "$NUEVA"
+          git init -q -b pinterest-img
+          git add -A
+          git -c user.name="gasolcitys-bot" -c user.email="gasolcitys-bot@users.noreply.github.com" commit -qm "Imágenes de Pinterest $(TZ=Europe/Madrid date +%F)"
+          git push -qf "$URL" pinterest-img
+          echo "Imágenes subidas: $(ls "$NUEVA" | tr '\n' ' ')"
       - name: Publicar si hay datos nuevos
         run: |
           git config user.name "gasolcitys-bot"
           git config user.email "gasolcitys-bot@users.noreply.github.com"
           git add data/stats.json data/seo-estado.json data/seo-historico.json precio-gasolina sitemap.xml
+          [ -f data/pinterest-estado.json ] && git add data/pinterest-estado.json pinterest
           git diff --cached --quiet || (git commit -m "Datos oficiales $(TZ=Europe/Madrid date '+%d/%m/%Y %H:%M')" && git pull --rebase -q && git push)

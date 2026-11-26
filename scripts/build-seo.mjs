@@ -602,6 +602,19 @@ if (process.env.INDEXNOW === '1') {
   }
 }
 
+/* ---------- datos para los pines de Pinterest (scripts/build-pinterest.mjs) ---------- */
+if (process.env.PIN_DATOS) {
+  const ccaaDe = {};
+  for (const e of L) if (e.IDProvincia && e.IDCCAA) ccaaDe[e.IDProvincia] = e.IDCCAA;
+  const est1 = s => s && { marca: nombre(s), dir: sitio(s), mun: s.munName || '' };
+  const zona = r => Object.fromEntries(MAIN.filter(f => r.f[f]).map(f => [f, { min: r.f[f].min, avg: r.f[f].avg, max: r.f[f].max, est: est1(r.f[f].baratas[0]) }]));
+  const lugares = [
+    ...provincias.map(P => ({ url: P.url, tipo: ['provincia', 'comunidad', 'ciudad'][P.tipo], nombre: P.name, prov: P.name, ccaa: ccaaDe[P.id], n: P.r.n, f: zona(P.r) })),
+    ...conPagina.map(m => ({ url: m.url, tipo: 'municipio', nombre: m.name, prov: m.prov.name, capital: m.capital, ccaa: ccaaDe[m.prov.id], n: m.r.n, f: zona(m.r) }))
+  ].filter(x => x.f.g95 || x.f.diesel);
+  await writeFile(process.env.PIN_DATOS, JSON.stringify({ dia: DIA, fecha: FECHA_CORTA, diaSemana, oficial: raw.Fecha, lugares }));
+}
+
 await writeFile(F_ESTADO, JSON.stringify(estado));
 await writeFile(F_HIST, JSON.stringify(hist));
 console.log(`páginas: ${paginas.length} (${provincias.length} provincias, ${conPagina.length} municipios) · cambiadas ${cambiadas.length} · ${raw.Fecha}`);
