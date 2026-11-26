@@ -1,6 +1,7 @@
-// Publica en Telegram, en el canal de cada comunidad autónoma, las 3 gasolineras más baratas
+// Publica en Telegram, en el grupo de cada comunidad autónoma, las 3 gasolineras más baratas
 // de cada provincia para los combustibles más repostados. Los mensajes no citan la fuente de los datos (lo pidió el usuario).
-// Se publica solo en el canal de cada comunidad (data/telegram-canales.json); su grupo lo recibe como grupo de debate enlazado.
+// Se publica en el grupo de cada comunidad (data/telegram-canales.json), donde el bot es administrador;
+// si la comunidad aún no tiene grupo, en su canal.
 //
 // Uso: node scripts/telegram-ccaa.mjs [--json ruta-oficial] [--prueba] [--ccaa 13,08] [--horas 7,19] [--a @destino]
 //   --prueba      no envía nada: escribe los mensajes en la consola
@@ -181,9 +182,8 @@ const fallos = [];
 let enviados = 0;
 for (const id of Object.keys(CCAA).sort()) {
   if (SOLO && !SOLO.includes(id)) continue;
-  // Solo se publica en el canal: los grupos tienen FANZ100bot, que no admite otros bots.
-  // Los grupos reciben las publicaciones al enlazarlos al canal como «grupo de debate».
-  const chats = DESTINO ? [DESTINO] : [canales[id]?.canal].filter(Boolean);
+  // Se publica directamente en el grupo (el bot es administrador); las comunidades sin grupo, en su canal.
+  const chats = DESTINO ? [DESTINO] : [canales[id]?.grupo || canales[id]?.canal].filter(Boolean);
   const mensajes = mensajesComunidad(id, publicas.filter(e => e.IDCCAA === id), oficial.Fecha);
   if (PRUEBA) {
     console.log(`\n==================== ${CCAA[id]} → ${chats.join(' + ') || '(sin canal ni grupo)'} · ${mensajes.length} mensaje(s)`);

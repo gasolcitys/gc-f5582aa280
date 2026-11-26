@@ -1,5 +1,5 @@
 {
-  "nota": "Canal de Telegram de cada comunidad (IDCCAA del Ministerio). «canal» es el @usuario del canal (o su número, -100…, si es privado: lo da scripts/telegram-chats.mjs) donde publica el bot; «grupo» es el grupo de la comunidad (@usuario o número), el bot no publica en ellos: les llega lo del canal porque están enlazados como grupo de debate.",
+  "nota": "Telegram de cada comunidad (IDCCAA del Ministerio). El bot publica en «grupo» (@usuario del grupo público, donde el bot es administrador); si la comunidad no tiene grupo, publica en «canal» (número -100… del canal privado; lo da scripts/telegram-chats.mjs).",
   "canales": {
     "01": { "nombre": "Andalucía", "canal": "-1005614539585", "grupo": "@Precio_Gasolina_Andalucia" },
     "02": { "nombre": "Aragón", "canal": "-1006065601071", "grupo": "" },

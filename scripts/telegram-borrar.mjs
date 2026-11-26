@@ -39,7 +39,8 @@ async function borrar(canal, ids) {
 }
 
 let fallos = 0;
-for (const [id, { nombre, canal }] of Object.entries(canales)) {
+for (const [id, { nombre, canal: soloCanal, grupo }] of Object.entries(canales)) {
+  const canal = grupo || soloCanal; // se borra donde se publica: el grupo, o el canal si no hay grupo
   if (!canal || (SOLO.length && !SOLO.includes(id))) continue;
   noBorrables = 0;
   try {
