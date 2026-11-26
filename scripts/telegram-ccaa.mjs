@@ -37,6 +37,14 @@ const CCAA = {
   '17': 'La Rioja', '18': 'Ceuta', '19': 'Melilla'
 };
 
+// IDCCAA -> nombre corto del enlace de descarga (gasolcitys.com/tg/?c=...), para medir cada grupo en GoatCounter
+const SLUG = {
+  '01': 'andalucia', '02': 'aragon', '03': 'asturias', '04': 'baleares', '05': 'canarias', '06': 'cantabria',
+  '07': 'castilla-la-mancha', '08': 'castilla-y-leon', '09': 'cataluna', '10': 'valenciana', '11': 'extremadura',
+  '12': 'galicia', '13': 'madrid', '14': 'murcia', '15': 'navarra', '16': 'pais-vasco', '17': 'la-rioja',
+  '18': 'ceuta', '19': 'melilla'
+};
+
 // IDProvincia -> [nombre, ruta de su página en la web]
 const PROV = {
   '01': ['Álava', 'alava'], '02': ['Albacete', 'albacete'], '03': ['Alicante', 'alicante'], '04': ['Almería', 'almeria'],
@@ -137,7 +145,10 @@ function mensajesComunidad(idCcaa, estaciones, fecha) {
   const dia = new Date(Date.UTC(a, m - 1, d, 12));
   const cabecera = `⛽ <b>Gasolineras más baratas · ${esc(CCAA[idCcaa])}</b>\n` +
     `📅 ${DIAS[dia.getUTCDay()]} ${d} de ${MESES[m - 1]} · precios de las ${hora}`;
-  const pie = `📈 <a href="${WEB}/">Previsión de precio para la próxima semana en GasolCitys</a>`;
+  // El fin de los grupos es que se descarguen la app: /tg/ lleva a la tienda según el móvil y lo cuenta por comunidad.
+  // Sin prometer avisos con la app cerrada (en iPhone no llegan).
+  const pie = `📲 <b>Todas las gasolineras en el mapa y la previsión de la semana</b>, en la app gratis → ` +
+    `<a href="${WEB}/tg/?c=${SLUG[idCcaa]}">Descargar GasolCitys</a>`;
 
   // Se agrupan provincias enteras en cada mensaje sin pasar de los límites de Telegram
   const partes = [];

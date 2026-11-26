@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Descargar GasolCitys</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://gasolcitys.com/">
+<!--
+  Enlace de descarga de los grupos de Telegram por comunidad: gasolcitys.com/tg/?c=andalucia
+  - Cuenta la visita en GoatCounter como /tg/<comunidad> (sin cookies ni datos personales).
+  - iPhone/iPad -> App Store; Android -> Google Play con la marca utm_source=telegram (sale en Play Console);
+    ordenador -> portada, apartado de descarga.
+-->
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0f172a;color:#e2e8f0;
+       display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;text-align:center}
+  a{color:#fbbf24;display:block;margin:.6em 0;font-size:1.1em}
+</style>
+</head>
+<body>
+<main>
+  <p>Abriendo la tienda para descargar GasolCitys…</p>
+  <a id="ios" href="https://apps.apple.com/es/app/id6823373113">Descargar en el App Store (iPhone)</a>
+  <a id="android" href="https://play.google.com/store/apps/details?id=com.gasolcity.app&amp;referrer=utm_source%3Dtelegram%26utm_medium%3Dgrupo">Descargar en Google Play (Android)</a>
+</main>
+<script>
+(function () {
+  var c = (new URLSearchParams(location.search).get('c') || 'sin-comunidad').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 40) || 'sin-comunidad';
+  var ua = navigator.userAgent || '';
+  var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var android = /Android/.test(ua);
+  var plataforma = ios ? 'iphone' : android ? 'android' : 'ordenador';
+
+  var appStore = 'https://apps.apple.com/es/app/id6823373113';
+  var play = 'https://play.google.com/store/apps/details?id=com.gasolcity.app&referrer=' +
+    encodeURIComponent('utm_source=telegram&utm_medium=grupo&utm_campaign=' + c);
+  var web = '/?utm_source=telegram&utm_campaign=' + encodeURIComponent(c) + '#descargar';
+  document.getElementById('android').href = play;
+
+  var destino = ios ? appStore : android ? play : web;
+  var ido = false;
+  function ir() { if (!ido) { ido = true; location.replace(destino); } }
+
+  // Una visita por comunidad (/tg/andalucia) y un evento por plataforma (tg-andalucia-iphone)
+  function contar(params) {
+    var img = new Image();
+    img.src = 'https://gasolcitys.goatcounter.com/count?' + params + '&rnd=' + Math.random().toString(36).slice(2);
+    return img;
+  }
+  var q = encodeURIComponent('?utm_source=telegram&utm_campaign=' + c);
+  var visita = contar('p=' + encodeURIComponent('/tg/' + c) + '&t=' + encodeURIComponent('Telegram ' + c) + '&q=' + q + '&r=' + encodeURIComponent(document.referrer));
+  contar('e=true&p=' + encodeURIComponent('tg-' + c + '-' + plataforma) + '&t=' + encodeURIComponent('Descarga desde Telegram'));
+  visita.onload = visita.onerror = function () { setTimeout(ir, 150); };
+  setTimeout(ir, 900);
+})();
+</script>
+</body>
+</html>
