@@ -6,7 +6,16 @@
 <atom:link href="https://gasolcitys.com/pinterest/castilla-y-leon.xml" rel="self" type="application/rss+xml"/>
 <description>Las gasolineras más baratas de Castilla y León, cada día, con los precios oficiales del Ministerio.</description>
 <language>es-ES</language>
-<lastBuildDate>Thu, 26 Nov 2026 17:48:47 GMT</lastBuildDate>
+<lastBuildDate>Fri, 27 Nov 2026 07:15:56 GMT</lastBuildDate>
+<item>
+  <title>Gasolineras más baratas de la provincia de León · 27 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/leon/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=leon</link>
+  <guid isPermaLink="false">leon-2026-11-27</guid>
+  <pubDate>Fri, 27 Nov 2026 07:15:56 GMT</pubDate>
+  <description>Viernes 27 de noviembre: la gasolina 95 más barata de la provincia de León está a 1,299 €/l en Beroil (Carretera Le-311 km. 7, Villaquilambre), frente a una media de 1,512 €/l; el diésel más barato, a 1,499 €/l (media 1,744 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 10,65 € frente a la media. Mira las 165 gasolineras de la provincia de León con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-27/leon.png" length="231059" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-27/leon.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
 <item>
   <title>Gasolineras más baratas de la provincia de Ávila · 26 de noviembre</title>
   <link>https://gasolcitys.com/precio-gasolina/avila/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=avila</link>

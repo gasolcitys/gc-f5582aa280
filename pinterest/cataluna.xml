@@ -6,7 +6,25 @@
 <atom:link href="https://gasolcitys.com/pinterest/cataluna.xml" rel="self" type="application/rss+xml"/>
 <description>Las gasolineras más baratas de Cataluña, cada día, con los precios oficiales del Ministerio.</description>
 <language>es-ES</language>
-<lastBuildDate>Thu, 26 Nov 2026 17:48:47 GMT</lastBuildDate>
+<lastBuildDate>Fri, 27 Nov 2026 07:15:56 GMT</lastBuildDate>
+<item>
+  <title>Precio de la gasolina hoy en la provincia de Girona, 27 de noviembre</title>
+  <link>https://gasolcitys.com/precio-gasolina/girona/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=girona</link>
+  <guid isPermaLink="false">girona-2026-11-27</guid>
+  <pubDate>Fri, 27 Nov 2026 07:15:56 GMT</pubDate>
+  <description>Viernes 27 de noviembre: la gasolina 95 más barata de la provincia de Girona está a 1,182 €/l en Bonarea (Poligono Pont Cremat, 2, Arbúcies), frente a una media de 1,469 €/l; el diésel más barato, a 1,415 €/l (media 1,730 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 14,35 € frente a la media. Mira las 272 gasolineras de la provincia de Girona con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-27/girona.png" length="231310" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-27/girona.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
+<item>
+  <title>Gasolina más barata hoy en la provincia de Lleida: 1,179 €/l</title>
+  <link>https://gasolcitys.com/precio-gasolina/lleida/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=lleida</link>
+  <guid isPermaLink="false">lleida-2026-11-27</guid>
+  <pubDate>Fri, 27 Nov 2026 07:15:56 GMT</pubDate>
+  <description>Viernes 27 de noviembre: la gasolina 95 más barata de la provincia de Lleida está a 1,179 €/l en Plenergy (Carretera Cr C-14 km. 156,5, Coll de Nargó), frente a una media de 1,449 €/l; el diésel más barato, a 1,413 €/l (media 1,685 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 13,50 € frente a la media. Mira las 180 gasolineras de la provincia de Lleida con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-27/lleida.png" length="229535" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-27/lleida.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
 <item>
   <title>Precio de la gasolina hoy en la provincia de Barcelona, 26 de noviembre</title>
   <link>https://gasolcitys.com/precio-gasolina/barcelona/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=barcelona</link>
