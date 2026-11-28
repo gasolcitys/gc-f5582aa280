@@ -42,6 +42,7 @@ jobs:
       # para no engordar el repositorio) y actualiza los feeds gasolcitys.com/pinterest/<comunidad>.xml, que Pinterest
       # lee solo. Si algo falla, se deshace y se reintenta en la siguiente ejecución.
       - name: Pines de Pinterest (una vez al día)
+        id: pines
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -78,3 +79,9 @@ jobs:
           git add data/stats.json data/seo-estado.json data/seo-historico.json precio-gasolina sitemap.xml
           [ -f data/pinterest-estado.json ] && git add data/pinterest-estado.json pinterest
           git diff --cached --quiet || (git commit -m "Datos oficiales $(TZ=Europe/Madrid date '+%d/%m/%Y %H:%M')" && git pull --rebase -q && git push)
+      # Los datos ya están publicados; si los pines fallaron, la ejecución acaba en rojo para que GitHub avise por correo.
+      - name: Aviso si fallaron los pines de Pinterest
+        if: steps.pines.outcome == 'failure'
+        run: |
+          echo "::error::Los pines de Pinterest de hoy no se han generado. Se reintenta en la siguiente ejecución; mira el paso «Pines de Pinterest»."
+          exit 1
