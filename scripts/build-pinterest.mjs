@@ -35,8 +35,16 @@ const CCAA = {
 };
 
 const RSS_HASTA = '2026-11-26';
-// IDCCAA -> id del tablero de Pinterest (lo usa Make para crear el pin)
-const TABLERO = {};
+// IDCCAA -> nombre exacto del tablero de Pinterest (el flujo de Pipedream busca el tablero por este nombre)
+const TABLERO = {
+  '01': 'Gasolineras baratas en Andalucía', '02': 'Gasolineras baratas en Aragón', '03': 'Gasolineras baratas en Asturias',
+  '04': 'Gasolineras baratas en Baleares', '05': 'Gasolineras baratas en Canarias', '06': 'Gasolineras baratas en Cantabria',
+  '07': 'Gasolineras baratas en Castilla-La Mancha', '08': 'Gasolineras baratas en Castilla y León', '09': 'Gasolineras baratas en Cataluña',
+  '10': 'Gasolineras baratas en la Comunidad Valenciana', '11': 'Gasolineras baratas en Extremadura', '12': 'Gasolineras baratas en Galicia',
+  '13': 'Gasolineras baratas en Madrid', '14': 'Gasolineras baratas en la Región de Murcia', '15': 'Gasolineras baratas en Navarra',
+  '16': 'Gasolineras baratas en el País Vasco', '17': 'Gasolineras baratas en La Rioja', '18': 'Gasolineras baratas en Ceuta y Melilla',
+  '19': 'Gasolineras baratas en Ceuta y Melilla'
+};
 
 const leerJSON = async (f, d) => { try { return JSON.parse(await readFile(f, 'utf8')); } catch { return d; } };
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -225,8 +233,8 @@ const items = [
   }))
 ];
 
-/* ---------- pines de hoy para Make (publica en Pinterest con su integración oficial) ---------- */
-// Make lee gasolcitys.com/pinterest/hoy.json a diario y crea cada pin en su tablero. El RSS de Pinterest dejó de
+/* ---------- pines de hoy (los publica en Pinterest un flujo de Pipedream con la integración oficial) ---------- */
+// Pipedream lee gasolcitys.com/pinterest/hoy.json a diario y crea cada pin en su tablero. El RSS de Pinterest dejó de
 // publicar a partir del 27-nov-2026 (descarta entradas sin avisar), así que los feeds se quedan congelados.
 await mkdir(DIR_FEEDS, { recursive: true });
 await writeFile(new URL('hoy.json', DIR_FEEDS), JSON.stringify({
