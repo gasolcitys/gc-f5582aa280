@@ -44,6 +44,7 @@
   function contar(path, title) {
     const gc = window.goatcounter;
     if (gc && gc.count) gc.count({ path, title, event: true, referrer: origen.source || 'web' });
+    else if (!contar.esperando) { contar.esperando = true; window.addEventListener('load', () => setTimeout(() => { contar.esperando = false; const g = window.goatcounter; if (g && g.count) g.count({ path, title, event: true, referrer: origen.source || 'web' }); }, 500)); }
   }
 
   function mostrarAviso() {
@@ -51,15 +52,17 @@
     /* compacto y encima de la barra de descarga si la hay. «Aceptar» y «Rechazar» con el mismo peso (exigencia de la AEPD) */
     const sobreBarra = document.getElementById('gc-barra') ? '84px' : '12px';
     const css = document.createElement('style');
-    css.textContent = '#gc-cookies{position:fixed;left:10px;right:10px;bottom:calc(' + sobreBarra + ' + env(safe-area-inset-bottom));z-index:9999;max-width:460px;margin:0 auto;padding:10px 12px;border-radius:14px;background:#fff;color:#10233f;border:2px solid #1F4F9C;font:13px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35);animation:gcSube .35s ease-out}'
-      + '@keyframes gcSube{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}'
-      + '#gc-cookies p{margin:0 0 8px}#gc-cookies a{color:#1F4F9C;text-decoration:underline}'
-      + '#gc-cookies div{display:flex;gap:8px}#gc-cookies button{flex:1;padding:8px 6px;border:0;border-radius:9px;background:#1F4F9C;color:#fff;font:600 14px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;cursor:pointer}';
+    /* más visible (título, texto y botones grandes, aparece a los 0,6 s con un pequeño rebote), pero sin tapar la página ni bloquear nada */
+    css.textContent = '#gc-cookies{position:fixed;left:10px;right:10px;bottom:calc(' + sobreBarra + ' + env(safe-area-inset-bottom));z-index:9999;max-width:480px;margin:0 auto;padding:14px 16px;border-radius:16px;background:#fff;color:#10233f;border:3px solid #1F4F9C;font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.45);animation:gcSube .45s cubic-bezier(.2,1.4,.4,1) .6s both}'
+      + '@keyframes gcSube{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}'
+      + '#gc-cookies b{display:block;font-size:17px;margin:0 0 4px}#gc-cookies p{margin:0 0 10px}#gc-cookies a{color:#1F4F9C;text-decoration:underline}'
+      + '#gc-cookies div{display:flex;gap:10px}#gc-cookies button{flex:1;min-height:46px;padding:10px 8px;border:0;border-radius:11px;background:#1F4F9C;color:#fff;font:700 16px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;cursor:pointer}';
     const aviso = document.createElement('div');
     aviso.id = 'gc-cookies';
     aviso.setAttribute('role', 'dialog');
     aviso.setAttribute('aria-label', 'Cookies de publicidad');
-    aviso.innerHTML = '<p>🍪 Usamos cookies para mejorar tu experiencia y personalizar el contenido y los anuncios que ves. <a href="/privacidad.html#cookies">Más info</a></p><div><button type="button" data-v="no">Solo necesarias</button><button type="button" data-v="si">Aceptar todas</button></div>';
+    aviso.innerHTML = '<b>🍪 ¿Aceptas las cookies?</b><p>Las usamos para mejorar tu experiencia y personalizar el contenido y los anuncios que ves. Elijas lo que elijas, la web y la app funcionan igual. <a href="/privacidad.html#cookies">Más info</a></p><div><button type="button" data-v="no">Solo necesarias</button><button type="button" data-v="si">Aceptar todas</button></div>';
+    contar('anuncio-cookies-visto', 'Anuncio · cookies · aviso mostrado');
     aviso.addEventListener('click', e => {
       const v = e.target.dataset && e.target.dataset.v;
       if (!v) return;
