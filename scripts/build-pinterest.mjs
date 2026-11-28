@@ -208,9 +208,11 @@ const previos = estado.items.filter(it => it.dia >= limite);
 const yaEstan = new Set(previos.map(it => it.guid));
 const items = [
   ...previos,
-  ...nuevos.filter(n => !yaEstan.has(`${n.id}-${datos.dia}`)).map(n => ({
-    guid: `${n.id}-${datos.dia}`, dia: datos.dia, fecha: ahoraISO, ccaa: n.x.ccaa, titulo: n.titulo, desc: n.desc,
-    link: `${SITE}${n.x.url}?utm_source=pinterest&utm_medium=pin&utm_campaign=${n.id}`,
+  ...nuevos.filter(n => !yaEstan.has(`pin-${datos.dia}-${n.id}`)).map(n => ({
+    guid: `pin-${datos.dia}-${n.id}`, dia: datos.dia, fecha: ahoraISO, ccaa: n.x.ccaa, titulo: n.titulo, desc: n.desc,
+    // la fecha hace único el enlace de cada día: Pinterest no publica una entrada del RSS con un enlace que ya publicó
+    // (la página es la misma y su etiqueta canonical apunta a la URL limpia, así que no afecta al SEO)
+    link: `${SITE}${n.x.url}?utm_source=pinterest&utm_medium=pin&utm_campaign=${n.id}&utm_content=${datos.dia}`,
     img: `${IMG_BASE}/${datos.dia}/${n.id}.png`, bytes: n.png.length
   }))
 ];
