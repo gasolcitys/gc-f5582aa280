@@ -6,7 +6,16 @@
 <atom:link href="https://gasolcitys.com/pinterest/madrid.xml" rel="self" type="application/rss+xml"/>
 <description>Las gasolineras más baratas de Madrid, cada día, con los precios oficiales del Ministerio.</description>
 <language>es-ES</language>
-<lastBuildDate>Fri, 27 Nov 2026 07:15:56 GMT</lastBuildDate>
+<lastBuildDate>Sat, 28 Nov 2026 07:15:55 GMT</lastBuildDate>
+<item>
+  <title>Gasolina más barata hoy en Madrid: 1,185 €/l</title>
+  <link>https://gasolcitys.com/precio-gasolina/madrid/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=madrid</link>
+  <guid isPermaLink="false">madrid-2026-11-28</guid>
+  <pubDate>Sat, 28 Nov 2026 07:15:55 GMT</pubDate>
+  <description>Sábado 28 de noviembre: la gasolina 95 más barata de Madrid está a 1,185 €/l en Ballenoil (Calle Constitucion, 81, Fuenlabrada), frente a una media de 1,501 €/l; el diésel más barato, a 1,439 €/l (media 1,737 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 15,80 € frente a la media. Mira las 866 gasolineras de Madrid con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-28/madrid.png" length="235277" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-28/madrid.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
 <item>
   <title>Gasolina más barata hoy en Madrid: 1,184 €/l</title>
   <link>https://gasolcitys.com/precio-gasolina/madrid/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=madrid</link>

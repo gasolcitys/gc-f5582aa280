@@ -6,7 +6,16 @@
 <atom:link href="https://gasolcitys.com/pinterest/cataluna.xml" rel="self" type="application/rss+xml"/>
 <description>Las gasolineras más baratas de Cataluña, cada día, con los precios oficiales del Ministerio.</description>
 <language>es-ES</language>
-<lastBuildDate>Fri, 27 Nov 2026 07:15:56 GMT</lastBuildDate>
+<lastBuildDate>Sat, 28 Nov 2026 07:15:55 GMT</lastBuildDate>
+<item>
+  <title>Dónde repostar más barato en la provincia de Tarragona hoy (28 de noviembre)</title>
+  <link>https://gasolcitys.com/precio-gasolina/tarragona/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=tarragona</link>
+  <guid isPermaLink="false">tarragona-2026-11-28</guid>
+  <pubDate>Sat, 28 Nov 2026 07:15:55 GMT</pubDate>
+  <description>Sábado 28 de noviembre: la gasolina 95 más barata de la provincia de Tarragona está a 1,177 €/l en Bonarea (Poligono Industrial Francoli, 4), frente a una media de 1,467 €/l; el diésel más barato, a 1,409 €/l (media 1,686 €/l). Llenar un depósito de 50 litros de gasolina 95 en la más barata ahorra 14,50 € frente a la media. Mira las 230 gasolineras de la provincia de Tarragona con sus precios oficiales de hoy y descarga GasolCitys, la app con el semáforo de precios.</description>
+  <enclosure url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-28/tarragona.png" length="232183" type="image/png"/>
+  <media:content url="https://raw.githubusercontent.com/gasolcitys/gc-f5582aa280/pinterest-img/2026-11-28/tarragona.png" medium="image" type="image/png" width="1000" height="1500"/>
+</item>
 <item>
   <title>Precio de la gasolina hoy en la provincia de Girona, 27 de noviembre</title>
   <link>https://gasolcitys.com/precio-gasolina/girona/?utm_source=pinterest&amp;utm_medium=pin&amp;utm_campaign=girona</link>
