@@ -21,7 +21,8 @@ const FUENTES = new URL('scripts/fuentes/', ROOT);
 const HORA_MIN = 8;              // no antes de las 8:00 de Madrid (los precios del día ya están asentados)
 const DIAS_FEED = 4;             // días que se queda cada entrada en el feed: así ninguna comunidad se queda con el feed vacío
 const ARRANQUE = 14;             // días de arranque suave con la cuenta nueva
-const RITMO = { arranque: { prov: 15, mun: 0 }, normal: { prov: 26, mun: 14 } };
+// 25 pines al día como máximo: cabe en las 1.000 operaciones al mes del plan gratuito de Make (≈ pines + 2 por día)
+const RITMO = { arranque: { prov: 15, mun: 0 }, normal: { prov: 18, mun: 7 } };
 
 // IDCCAA del Ministerio -> [nombre del tablero, feed]. Ceuta y Melilla comparten tablero.
 const CCAA = {
@@ -32,6 +33,10 @@ const CCAA = {
   '15': ['Navarra', 'navarra'], '16': ['País Vasco', 'pais-vasco'], '17': ['La Rioja', 'la-rioja'],
   '18': ['Ceuta y Melilla', 'ceuta-y-melilla'], '19': ['Ceuta y Melilla', 'ceuta-y-melilla']
 };
+
+const RSS_HASTA = '2026-11-26';
+// IDCCAA -> id del tablero de Pinterest (lo usa Make para crear el pin)
+const TABLERO = {};
 
 const leerJSON = async (f, d) => { try { return JSON.parse(await readFile(f, 'utf8')); } catch { return d; } };
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -65,7 +70,10 @@ const ritmo = !estado.inicio ? { prov: 999, mun: 0 } : diasEntre(inicio, datos.d
 const provs = datos.lugares.filter(x => x.tipo !== 'municipio').sort((a, b) => a.url.localeCompare(b.url));
 const munis = datos.lugares.filter(x => x.tipo === 'municipio').sort((a, b) => b.n - a.n || a.url.localeCompare(b.url));
 const turno = (lista, desde, n) => Array.from({ length: Math.min(n, lista.length) }, (_, i) => lista[(desde + i) % lista.length]);
-const hoyToca = [...turno(provs, estado.ip, ritmo.prov), ...turno(munis, estado.im, ritmo.mun)];
+// si hoy ya se generó (repetición), se parte de los mismos contadores del día para no saltarse provincias
+const mismoDia = estado.dia === datos.dia && estado.ip0 != null;
+const ip0 = mismoDia ? estado.ip0 : estado.ip, im0 = mismoDia ? estado.im0 : estado.im;
+const hoyToca = [...turno(provs, ip0, ritmo.prov), ...turno(munis, im0, ritmo.mun)];
 
 /* ---------- textos del pin (van cambiando para no repetir siempre lo mismo) ---------- */
 const DIAS_CORTOS = { lunes: 'lun', martes: 'mar', miércoles: 'mié', jueves: 'jue', viernes: 'vie', sábado: 'sáb', domingo: 'dom' };
@@ -217,14 +225,23 @@ const items = [
   }))
 ];
 
-/* ---------- feeds por comunidad ---------- */
+/* ---------- pines de hoy para Make (publica en Pinterest con su integración oficial) ---------- */
+// Make lee gasolcitys.com/pinterest/hoy.json a diario y crea cada pin en su tablero. El RSS de Pinterest dejó de
+// publicar a partir del 27-nov-2026 (descarta entradas sin avisar), así que los feeds se quedan congelados.
+await mkdir(DIR_FEEDS, { recursive: true });
+await writeFile(new URL('hoy.json', DIR_FEEDS), JSON.stringify({
+  dia: datos.dia,
+  pines: items.filter(it => it.dia === datos.dia).map(it => ({ tablero: TABLERO[it.ccaa] || '', comunidad: CCAA[it.ccaa][0], titulo: it.titulo.slice(0, 100), descripcion: it.desc.slice(0, 500), enlace: it.link, imagen: it.img }))
+}, null, 1));
+
+/* ---------- feeds por comunidad (congelados: solo las entradas que ya publicó Pinterest) ---------- */
 await mkdir(DIR_FEEDS, { recursive: true });
 const feeds = new Map();
 for (const [id, [nombre, slugF]] of Object.entries(CCAA)) if (!feeds.has(slugF)) feeds.set(slugF, { nombre, ids: [] });
 for (const [id, [, slugF]] of Object.entries(CCAA)) feeds.get(slugF).ids.push(id);
 const rfc822 = iso => new Date(iso).toUTCString();
 for (const [slugF, { nombre, ids }] of feeds) {
-  const suyos = items.filter(it => ids.includes(it.ccaa)).sort((a, b) => b.fecha.localeCompare(a.fecha) || a.guid.localeCompare(b.guid));
+  const suyos = items.filter(it => it.dia <= RSS_HASTA && ids.includes(it.ccaa)).sort((a, b) => b.fecha.localeCompare(a.fecha) || a.guid.localeCompare(b.guid));
   await writeFile(new URL(`${slugF}.xml`, DIR_FEEDS), `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
@@ -250,8 +267,10 @@ ${suyos.map(it => `<item>
 
 estado.inicio = inicio;
 estado.dia = datos.dia;
-estado.ip = provs.length ? (estado.ip + Math.min(ritmo.prov, provs.length)) % provs.length : 0;
-estado.im = munis.length ? (estado.im + ritmo.mun) % munis.length : 0;
+estado.ip0 = ip0;
+estado.im0 = im0;
+estado.ip = provs.length ? (ip0 + Math.min(ritmo.prov, provs.length)) % provs.length : 0;
+estado.im = munis.length ? (im0 + ritmo.mun) % munis.length : 0;
 estado.items = items;
 await writeFile(F_ESTADO, JSON.stringify(estado, null, 1));
 console.log(`Pinterest ${datos.dia}: ${nuevos.length} pines (${nuevos.filter(n => n.x.tipo !== 'municipio').length} provincias + ${nuevos.filter(n => n.x.tipo === 'municipio').length} municipios) · ${feeds.size} feeds · ${items.length} entradas en total`);
